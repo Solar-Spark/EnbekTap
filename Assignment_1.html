@@ -1,0 +1,833 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment #1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="14b6e0d1-7843-81dc-9add-e97660885534" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">✅</span></div><h1 class="page-title">Assignment #1</h1><p class="page-description"></p></header><div class="page-body"><h3 id="14b6e0d1-7843-812d-842c-fe7e3460c940" class="">Important information:</h3><ol type="1" id="14b6e0d1-7843-81d8-b7c2-d3d71a29e469" class="numbered-list" start="1"><li>Form teams of <mark class="highlight-orange_background">1 to 3 people</mark> and choose a <mark class="highlight-orange_background">project</mark> that interests you. It could be something you&#x27;re already working on or have worked on in another programming language. This <mark class="highlight-orange_background">theme</mark> will be yours until the end of the trimester, and each new task will build on the <mark class="highlight-orange_background">previous</mark> one.</li></ol><ol type="1" id="14b6e0d1-7843-81f4-b3ba-cb1c554aa70e" class="numbered-list" start="2"><li>Create a single <mark class="highlight-orange_background">repository</mark> for your team and fill in the <mark class="highlight-orange_background">README.md:</mark><ol type="a" id="14b6e0d1-7843-8172-b45d-ebdbd77a0a6d" class="numbered-list" start="1"><li>State the name of your project. (Themes like ”Crud Operations”, ”Advanced Programming”, ”Project Golang” are not suitable)</li></ol><ol type="a" id="14b6e0d1-7843-813f-be69-c257f0bedc90" class="numbered-list" start="2"><li>Describe the project: its purpose, what it does, and who it targets.</li></ol><ol type="a" id="14b6e0d1-7843-812f-ab08-f27e13332d50" class="numbered-list" start="3"><li>List the names of all team members.</li></ol><ol type="a" id="14b6e0d1-7843-81f8-a2c1-f07d366c6216" class="numbered-list" start="4"><li>Add a screenshot of the main page of the website.</li></ol><ol type="a" id="14b6e0d1-7843-8187-a5c0-e91964b9d916" class="numbered-list" start="5"><li>Explain how to start your project step by step (server, webpage, etc.).</li></ol><ol type="a" id="14b6e0d1-7843-81f1-a07f-e62c0722b52a" class="numbered-list" start="6"><li>Mention the tools and resources you used.</li></ol><p id="14b6e0d1-7843-81cc-9baf-cc912d765309" class="">Make sure your repository includes everything needed, such as code, images, etc., and that it&#x27;s all accessible for viewing <mark class="highlight-orange_background">(public access)</mark>.</p><p id="1576e0d1-7843-80b6-9b70-e43cc7e8253e" class=""><mark class="highlight-orange_background">30 points</mark> will be allocated for organizational tasks.</p></li></ol><ol type="1" id="14b6e0d1-7843-8186-b76a-f758750da857" class="numbered-list" start="3"><li>It&#x27;s important to remember that tasks sometimes need to be <mark class="highlight-orange_background">adjusted</mark> to fit your unique project. If standard tasks don&#x27;t quite match, you can complete them separately or figure out how to integrate them into the main project.</li></ol><ol type="1" id="14b6e0d1-7843-8159-bc89-ee460b3b8c11" class="numbered-list" start="4"><li>Deadline — <mark class="highlight-orange_background">by 21:00 on 20 December 2024</mark>. If you encounter any issues with the Moodle system, submit your work through Teams. Don&#x27;t forget to include the names of your team members. One team — one link.</li></ol><ol type="1" id="14b6e0d1-7843-81ed-bd5c-f43980b096d3" class="numbered-list" start="5"><li>You can defend your project until the <mark class="highlight-orange_background">end of the 2th week</mark>. Presentations are not required, just show and tell us about your work. If you can&#x27;t make it for valid reasons, there&#x27;s an option to submit everything online. Contact me on Teams for more details.</li></ol><ol type="1" id="14b6e0d1-7843-81e0-999d-e8fb8159f8c7" class="numbered-list" start="6"><li>If the team does not attach the GitHub link in Moodle or send it through Teams, and also does not defend the project, unfortunately, that will result in <mark class="highlight-orange_background">0 points</mark>.</li></ol><ol type="1" id="1576e0d1-7843-806f-9e4b-c1d97abf37b5" class="numbered-list" start="7"><li>We will also have a penalty system. A delay of 1-2 days will result in a 5% deduction from the remaining amount, 3-7 days — a 15% deduction, up to 2 weeks — a 30% deduction, and over 2 weeks — a 50% deduction.</li></ol><p id="14b6e0d1-7843-81b7-81be-f43294f80e3f" class="">And so, let&#x27;s begin :)</p><h3 id="14b6e0d1-7843-8198-89ec-c10802c34f97" class="">Tasks:</h3><p id="14b6e0d1-7843-810f-93a0-f3dcfcd915f4" class="">In this assessment we will cover the following topics: </p><ul id="14b6e0d1-7843-8155-b0fb-fbbf1cb47dba" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Sending and Parsing JSON Responses/Requests </mark>(30 points)</summary><h2 id="14b6e0d1-7843-81c4-bf13-f9ed68e7a987" class=""><mark class="highlight-red_background">1. Sending and Parsing JSON Responses/Requests.</mark></h2><ol type="1" id="14b6e0d1-7843-81d1-bdaf-cd331fa92f9b" class="numbered-list" start="1"><li><a href="https://go.dev/doc/tutorial/getting-started">Install the Go programming language on your computer</a>.</li></ol><ol type="1" id="14b6e0d1-7843-81ac-909f-d280304fb5f0" class="numbered-list" start="2"><li>Develop a server in Golang to handle HTTP requests (POST, GET) featuring JSON data:<figure id="14b6e0d1-7843-8121-823a-cc5163282158" class="image" style="text-align:center"><a href="Assignment_1/Untitled.png"><img style="width:384px" src="Assignment_1/Untitled.png"/></a></figure><p id="14b6e0d1-7843-819e-a8db-f4e39fdfd7ee" class="">The server should perform the following steps:</p><ol type="1" id="14b6e0d1-7843-81d9-b937-cab3fc49c839" class="numbered-list" start="1"><li>Await incoming POST and GET requests on port 8080. Receive JSON data from the request body.</li></ol><ol type="1" id="14b6e0d1-7843-814c-a80b-c35dccee9e19" class="numbered-list" start="2"><li>Ensure that the JSON data contains the fields agreed upon between the server and the client. For example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81ba-861f-da5f39fdfd93" class="code"><code class="language-JSON">{
+  &quot;message&quot;: &quot;Hello, server! This is JSON data from Postman.&quot;
+}</code></pre><p id="14b6e0d1-7843-8198-b3d2-fe4e9078ddd5" class="">If the &quot;message&quot; field is <strong>present</strong>, display the message in the server console and send a JSON response with the message &quot;Data received successfully&quot; and a status of &quot;success.”</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8152-89cb-ff6976d956b0" class="code"><code class="language-JSON">{
+	&quot;status&quot;:  &quot;success&quot;,
+	&quot;message&quot;: &quot;Data successfully received&quot;,
+}</code></pre><p id="14b6e0d1-7843-8175-b67e-db0da41f0d82" class="">If the &quot;message&quot; field is <strong>missing</strong>, or <strong>altered</strong> (e.g., &quot;Message1&quot; instead of &quot;message&quot;), or has an incorrect data type (e.g., integer instead of string), then return a JSON response with the message &quot;Invalid JSON message&quot; and a status of &quot;fail.”</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-818e-a8c6-f1398f2f3ca0" class="code"><code class="language-JSON">{
+	&quot;status&quot;:  &quot;fail&quot;,
+	&quot;message&quot;: &quot;Invalid JSON message&quot;,
+}</code></pre></li></ol><ol type="1" id="14b6e0d1-7843-81dc-8caa-cc57719e6a80" class="numbered-list" start="3"><li>To send POST and GET requests with JSON data, use Postman. Optionally, you can create a simple HTML web page for convenient testing.</li></ol><ol type="1" id="14b6e0d1-7843-8128-91bb-eaa993e16855" class="numbered-list" start="4"><li>Ensure that in case of a request error, the response includes a JSON structure with answers rather than an error message like <code>Invalid JSON format</code> etc.</li></ol></li></ol></details></li></ul><ul id="14b6e0d1-7843-810d-b6e7-dc25903bc33e" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Migrations and Advanced Crud Operations</mark>. (40 points)</summary><h2 id="14b6e0d1-7843-8179-8bf1-f23128cd7111" class=""><mark class="highlight-yellow_background">2.Migrations and Advanced Crud Operations</mark></h2><ol type="1" id="14b6e0d1-7843-8133-bd81-de9abb5e3e5e" class="numbered-list" start="1"><li>Create a simple <mark class="highlight-yellow_background">HTML page</mark> and <mark class="highlight-yellow_background">connect</mark> it to your <mark class="highlight-yellow_background">Golang server</mark>. There&#x27;s no need to focus on design at this stage; just add a few buttons and a space to display server responses in a table format. All interface elements should <mark class="highlight-yellow_background">interact with the Golang server</mark>. If a request ends with an error, display an <mark class="highlight-yellow_background">error message</mark> with its code on the page, for example, in a small popup window.</li></ol><ol type="1" id="14b6e0d1-7843-81a9-b1a5-dfdbc0bd1ddc" class="numbered-list" start="2"><li><mark class="highlight-yellow_background"><strong>Choose an appropriate database</strong></mark>. In Golang, PostgreSQL, MySQL, and MongoDB are commonly used. Suppose we select PostgreSQL. Remember about deploying your project in the future, so make sure your database can be easily deployed again.<ol type="a" id="14b6e0d1-7843-8116-85a3-d63c6f6c2489" class="numbered-list" start="1"><li><a href="https://www.postgresql.org/download/">Install PostgreSQL</a>.</li></ol><ol type="a" id="14b6e0d1-7843-81aa-8cb5-e96c701ef096" class="numbered-list" start="2"><li><a href="https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04">Create a database and user in PostgreSQL for your project</a>.</li></ol><ol type="a" id="14b6e0d1-7843-8107-b0ab-e899e6a1bc22" class="numbered-list" start="3"><li>Create the tables needed for your project. For example, for a <code>users</code> table, add fields: <code>id</code> (serial primary key), <code>name</code> (varchar), <code>email</code> (varchar), <code>created_at</code> (timestamp), <code>updated_at</code> (timestamp).</li></ol></li></ol><ol type="1" id="14b6e0d1-7843-8170-9629-ef0a05c7987b" class="numbered-list" start="3"><li><mark class="highlight-yellow_background"><strong>Connect to the database in Golang</strong></mark><strong>.</strong> To connect to the database in Golang, use the <code>database/sql</code> package and a driver for your database, such as <code>pq</code> for PostgreSQL:<ol type="a" id="14b6e0d1-7843-8162-9611-f36ada5bd75f" class="numbered-list" start="1"><li>Connect to PostgreSQL using <code>database/sql</code> and <code>pq</code>.</li></ol><ol type="a" id="14b6e0d1-7843-815e-9999-d8b959e8daa1" class="numbered-list" start="2"><li>After connecting, verify the connection&#x27;s success and print a message about the successful connection to the console.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-810f-896e-f8d130408c67" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">package main
+
+import (
+	&quot;database/sql&quot;
+	&quot;fmt&quot;
+	&quot;log&quot;
+	_ &quot;github.com/lib/pq&quot;
+)
+
+func main() {
+	connStr := &quot;user=username dbname=mydb sslmode=disable&quot;
+	db, err := sql.Open(&quot;postgres&quot;, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(&quot;Successfully connected to the database&quot;)
+	defer db.Close()
+}</code></pre></li></ol></li></ol><ol type="1" id="14b6e0d1-7843-8104-83a6-d736adf64347" class="numbered-list" start="4"><li><mark class="highlight-yellow_background"><strong>Create a migration</strong></mark>. (<em>This step is optional</em>) Migrations are used to manage changes to the database schema. <a href="https://github.com/golang-migrate/migrate">golang-migrate</a> is a popular library for creating and managing migrations in Golang.<ol type="a" id="14b6e0d1-7843-81b0-bf55-e6916eafd43b" class="numbered-list" start="1"><li>Install golang-migrate to manage migrations.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8191-a917-f026d5fd4359" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">go get -tags &#x27;postgres&#x27; -u github.com/golang-migrate/migrate/cmd/migrate</code></pre></li></ol><ol type="a" id="14b6e0d1-7843-8110-aa60-c3c275c0cb40" class="numbered-list" start="2"><li>Use the following commands to create and apply migrations:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81a3-9ff8-d1f3d5d37b9e" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all"># Create new migration
+migrate create -ext sql -dir db/migrations -seq name_of_migration
+
+# Use migration
+migrate -path db/migrations -database &quot;postgres://username:password@localhost:5432/mydb?sslmode=disable&quot; up</code></pre></li></ol></li></ol><ol type="1" id="14b6e0d1-7843-8152-bd44-e8addaff38ec" class="numbered-list" start="5"><li><mark class="highlight-yellow_background"><strong>Add CRUD operations.</strong></mark> Now you have a connection to the database and have set up migrations, it&#x27;s time to create data models and implement CRUD operations. To facilitate working with the database, you can use an ORM (Object-Relational Mapping). One of the popular ORMs for Golang is <a href="https://gorm.io/">Gorm</a>.<ol type="a" id="14b6e0d1-7843-813d-ab2c-da8016a3dcc9" class="numbered-list" start="1"><li>Use Gorm to interact with the database.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81ec-8959-e312c300ed38" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all"># Install Gorm
+go get -u gorm.io/gorm</code></pre></li></ol><ol type="a" id="14b6e0d1-7843-81f8-9cc2-e433864ab90f" class="numbered-list" start="2"><li>Create a model, for example <code>User</code>, to work with the <code>users</code> table.</li></ol><ol type="a" id="14b6e0d1-7843-81ba-849f-f2f66c1ab326" class="numbered-list" start="3"><li>Write functions to perform the <a href="https://www.honeybadger.io/blog/how-to-create-crud-application-with-golang-and-mysql/">following CRUD operations</a>:<ul id="14b6e0d1-7843-81ce-b32c-ff040c710ac9" class="bulleted-list"><li style="list-style-type:disc">Create a new record, for example a new user.</li></ul><ul id="14b6e0d1-7843-8126-b4b4-fafd71bc2f22" class="bulleted-list"><li style="list-style-type:disc">Get a record by ID.</li></ul><ul id="14b6e0d1-7843-81e2-af6e-f1dbd7257ccb" class="bulleted-list"><li style="list-style-type:disc">Update a record by ID.</li></ul><ul id="14b6e0d1-7843-81f6-8427-e6b225222909" class="bulleted-list"><li style="list-style-type:disc">Delete a record by ID.</li></ul><ul id="14b6e0d1-7843-8137-a41a-f174cb70d53b" class="bulleted-list"><li style="list-style-type:disc">Get a list of all records.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8129-abac-ca6ab69fd415" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">// Usage example Gorm
+package main
+
+import (
+	&quot;gorm.io/driver/postgres&quot;
+	&quot;gorm.io/gorm&quot;
+	&quot;log&quot;
+)
+
+type User struct {
+	gorm.Model
+	Name  string
+	Email string
+}
+
+func main() {
+	dsn := &quot;user=username dbname=mydb sslmode=disable&quot;
+	db, err := gorm.Open(postgres.Open(dsn), &amp;gorm.Config{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Auto Migrate
+	db.AutoMigrate(&amp;User{})
+
+	// Create
+	db.Create(&amp;User{Name: &quot;John Doe&quot;, Email: &quot;john@example.com&quot;})
+
+	// Read
+	var user User
+	db.First(&amp;user, 1)
+	log.Println(user)
+
+	// Update
+	db.Model(&amp;user).Update(&quot;Name&quot;, &quot;Doe John&quot;)
+
+	// Delete
+	db.Delete(&amp;user, 1)
+}</code></pre></li></ol></li></ol></details></li></ul><p id="14b6e0d1-7843-8191-af3c-fdf26e31e0b9" class="">
+</p><hr id="14b6e0d1-7843-815c-8db8-d5502ba60d22"/><h3 id="14b6e0d1-7843-81a1-bb27-eb2a3cbf3c8d" class="">Важная информация:</h3><ol type="1" id="14b6e0d1-7843-8163-9f15-ccb4f2a195f0" class="numbered-list" start="1"><li>Соберитесь в команды от <mark class="highlight-orange_background">1 до 3 человек</mark> и выберите <mark class="highlight-orange_background">проект</mark>, который вам интересен. Может быть, это что-то, над чем вы уже работаете, или работали на другом языке программирования. Эта <mark class="highlight-orange_background">тема</mark> будет вашей до конца триместра, и каждое новое задание будет <mark class="highlight-orange_background">продолжением</mark> предыдущего.</li></ol><ol type="1" id="14b6e0d1-7843-8135-a268-c25fc7ad78de" class="numbered-list" start="2"><li>Создайте один <mark class="highlight-orange_background">репозиторий</mark> для всей команды и заполните <mark class="highlight-orange_background">README.md:</mark><ol type="a" id="14b6e0d1-7843-819b-9f46-cdb2e3d4c154" class="numbered-list" start="1"><li>Укажите название вашего проекта. (Названия по типу ”Crud Operations”, ”Advanced Programming”, ”Project Golang” не подходит)</li></ol><ol type="a" id="14b6e0d1-7843-819b-9e98-f7925bc11696" class="numbered-list" start="2"><li>В двух словах опишите проект: его цель, что он делает и кого целит.</li></ol><ol type="a" id="14b6e0d1-7843-8161-8956-f1ed6e8482a8" class="numbered-list" start="3"><li>Перечислите имена всех участников.</li></ol><ol type="a" id="14b6e0d1-7843-8110-be14-d993185f57c6" class="numbered-list" start="4"><li>Добавьте скриншот главной страницы сайта.</li></ol><ol type="a" id="14b6e0d1-7843-813f-8682-ef110d70b1c9" class="numbered-list" start="5"><li>Напишите, как запустить ваш проект шаг за шагом (сервер, веб-страницу и т.д.).</li></ol><ol type="a" id="14b6e0d1-7843-81fd-82d0-d8070b3633b6" class="numbered-list" start="6"><li>Укажите инструменты и ресурсы, которыми вы пользовались.</li></ol><p id="14b6e0d1-7843-812b-b90f-c234d5d1e847" class="">Проверьте, что в репозитории есть всё необходимое, включая код, картинки и так далее, и что всё это доступно для просмотра <mark class="highlight-orange_background">(public access)</mark>. </p><p id="1576e0d1-7843-8054-8178-e82c43627cff" class="">За организационные задачи будет выделено <mark class="highlight-default"><mark class="highlight-orange_background">30 баллов</mark></mark>.</p></li></ol><ol type="1" id="14b6e0d1-7843-8156-83b8-c2951806c83f" class="numbered-list" start="3"><li>Важно помнить, что задания иногда нужно <mark class="highlight-orange_background">подстроить</mark> под ваш уникальный проект. Если стандартные задачи не совсем подходят, можете выполнить их отдельно или придумать, как вписать в основной проект.</li></ol><ol type="1" id="14b6e0d1-7843-8117-958a-c3b40b14cc9a" class="numbered-list" start="4"><li>Дедлайн — <mark class="highlight-orange_background">до 21:00 20 декабря 2024 года</mark>. Если возникнут проблемы с системой мудл, отправьте работы через Teams. Не забудьте указать имена участников команды. Одна команда — одна ссылка.</li></ol><ol type="1" id="14b6e0d1-7843-81be-b9e9-ce7f3f9e8dd1" class="numbered-list" start="5"><li>Вы должны защищать проект <mark class="highlight-orange_background">до конца 2-й недели</mark>. Презентации не нужны, просто покажите и расскажите о вашей работе. Если не сможете прийти по объективным причинам, есть вариант сдать все онлайн. Пишите в Teams за для уточнения деталей.</li></ol><ol type="1" id="14b6e0d1-7843-817f-b5a0-cb5692ff794e" class="numbered-list" start="6"><li>Если команда не приложит ссылку на GitHub в Moodle или не отправит её через Teams, а также не защитит проект, то, к сожалению, это <mark class="highlight-orange_background">0 баллов</mark>. </li></ol><ol type="1" id="1576e0d1-7843-8021-bf22-c8af147a3512" class="numbered-list" start="7"><li>Также у нас будет система штрафов. За опоздание на 1-2 дня — штраф 5% от остатка, на 3-7 дней — 15% от остатка, на срок до 2 недель — 30% от остатка, свыше 2 недель — 50% от остатка.</li></ol><p id="14b6e0d1-7843-81a1-bb9c-c0c84e681306" class="">И так начнем :)</p><h3 id="14b6e0d1-7843-81fa-82c0-dbf709388f3a" class="">Задания:</h3><p id="14b6e0d1-7843-8158-9e55-d7fa13d50b9c" class="">В этом ассайнменте мы рассмотрим следующие темы.</p><ul id="14b6e0d1-7843-818a-8a45-ebaa249dd245" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Sending and Parsing JSON Responses/Requests </mark>(30 баллов)</summary><h2 id="14b6e0d1-7843-81af-a6e2-c0f1b9dceeab" class=""><mark class="highlight-red_background">1. Sending and Parsing JSON Responses/Requests.</mark></h2><ol type="1" id="14b6e0d1-7843-8140-9a66-d5e32321eaae" class="numbered-list" start="1"><li><a href="https://go.dev/doc/tutorial/getting-started">Установите язык программирования Go на свой компьютер</a>.</li></ol><ol type="1" id="14b6e0d1-7843-81fa-b593-e51f8a4a7bb6" class="numbered-list" start="2"><li>Разработайте сервер на Golang для обработки HTTP запросов (POST, GET) с JSON-данными.<figure id="14b6e0d1-7843-81c0-badb-c848421f350e" class="image" style="text-align:center"><a href="Assignment_1/Untitled.png"><img style="width:384px" src="Assignment_1/Untitled.png"/></a></figure><p id="14b6e0d1-7843-81a0-b355-caebc3c6b585" class="">Сервер должен выполнять следующие шаги:</p><ol type="1" id="14b6e0d1-7843-81fd-915d-f9f6c72ffd34" class="numbered-list" start="1"><li>Ожидать входящие POST и GET запросы на порту 8080. Принимать JSON-данные из тела запроса.</li></ol><ol type="1" id="14b6e0d1-7843-8199-ab4a-d43e86f700a7" class="numbered-list" start="2"><li>Убедитесь, что в JSON-данных есть договорённые поля между сервером и клиентом. Например: <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81c9-a8e0-fee48ee750cf" class="code"><code class="language-JSON">{
+  &quot;message&quot;: &quot;Привет, сервер! Это JSON-данные из Postman.&quot;
+}</code></pre><p id="14b6e0d1-7843-8160-8e13-cec62e250c0b" class="">Если поле &quot;message&quot; <strong>присутствует</strong>, вывести сообщение в консоль сервера и отправить JSON-ответ с сообщением &quot;Данные успешно приняты&quot; и статусом &quot;success&quot;.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81b3-84bc-c645f41673f3" class="code"><code class="language-JSON">{
+	&quot;status&quot;:  &quot;success&quot;,
+	&quot;message&quot;: &quot;Данные успешно приняты&quot;,
+}</code></pre><p id="14b6e0d1-7843-8180-82a9-db7bbb21bbf7" class="">Если поле &quot;message&quot; <strong>отсутствует</strong>, или преобразован (напр. Message1 вместо message) или имеет неподходящий тип данных (например, <code>integer</code> вместо <code>string</code>), то возвращать сообщение &quot;Некорректное JSON-сообщение&quot; со статусом “fail”.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81ea-9ffe-f36728529775" class="code"><code class="language-JSON">{
+	&quot;status&quot;:  &quot;fail&quot;,
+	&quot;message&quot;: &quot;Некорректное JSON-сообщение&quot;,
+}</code></pre><p id="14b6e0d1-7843-81c0-88d6-d4964be42be7" class="">Убедитесь что при ошибке запроса возвращается такой же JSON с ответами, а не встроенное error сообщение <code>Invalid JSON format</code> etc.</p></li></ol><ol type="1" id="14b6e0d1-7843-8156-ab64-f4dd389a6b8d" class="numbered-list" start="3"><li>Для отправки POST и GET запросов с JSON-данными используйте Postman. По желанию, вы можете создать простую веб-страницу HTML для удобства тестирования.</li></ol></li></ol></details></li></ul><ul id="14b6e0d1-7843-81c7-8da2-f4b60e293a34" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Migrations and Advanced Crud Operations </mark>(40 баллов)</summary><h2 id="14b6e0d1-7843-819e-9741-f39e42614614" class=""><mark class="highlight-yellow_background">2.Migrations and Advanced Crud Operations</mark></h2><ol type="1" id="14b6e0d1-7843-81db-9ca0-e04e9862cb10" class="numbered-list" start="1"><li>Создайте простую <mark class="highlight-yellow_background">HTML страницу</mark> и <mark class="highlight-yellow_background">подключите её к серверу</mark> на Golang. Сейчас не нужно заботиться о дизайне, достаточно добавить несколько кнопок и место для вывода ответов сервера в виде таблицы. Все элементы интерфейса должны <mark class="highlight-yellow_background">взаимодействовать с сервером</mark> на Golang. Если запрос завершается с ошибкой, покажите на странице сообщение об <mark class="highlight-yellow_background">ошибке с её кодом</mark>, например, в небольшом всплывающем окне.</li></ol><ol type="1" id="14b6e0d1-7843-8113-b29b-c1efe2eb3080" class="numbered-list" start="2"><li><mark class="highlight-yellow_background"><strong>Выберите подходящую базу данных</strong></mark>. В Golang часто используют PostgreSQL, MySQL, MongoDB. Допустим, выбираем PostgreSQL. Помните о деплое проекта в будущем, поэтому убедитесь, что вашу базу можно будет легко развернуть снова. <ol type="a" id="14b6e0d1-7843-8111-8a0e-e1866b01e189" class="numbered-list" start="1"><li><a href="https://www.postgresql.org/download/">Установите PostgreSQL</a>.</li></ol><ol type="a" id="14b6e0d1-7843-814e-9c37-c7c145e7a709" class="numbered-list" start="2"><li><a href="https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04">Создайте пользователя в PostgreSQL и базу данных</a>.</li></ol><ol type="a" id="14b6e0d1-7843-81f7-bd46-ee7417923aeb" class="numbered-list" start="3"><li>Создайте таблицы, которые нужны для вашего проекта. Например, для таблицы <code>users</code>, добавьте поля: <code>id</code> (serial primary key), <code>name</code> (varchar), <code>email</code> (varchar), <code>created_at</code> (timestamp), <code>updated_at</code> (timestamp).</li></ol></li></ol><ol type="1" id="14b6e0d1-7843-81fd-a250-e30b84ef1081" class="numbered-list" start="3"><li><mark class="highlight-yellow_background"><strong>Подключитесь к базе данных в Golang</strong></mark><strong>.</strong> Чтобы подключиться к базе данных в Golang, используйте пакет <code>database/sql</code> и драйвер для вашей БД, например <code>pq</code> для PostgreSQL:<ol type="a" id="14b6e0d1-7843-8143-84a9-f84d8ff3af60" class="numbered-list" start="1"><li>Подключитесь к PostgreSQL с помощью <code>database/sql</code> и <code>pq</code>.</li></ol><ol type="a" id="14b6e0d1-7843-81bd-8b16-f81e80f5e358" class="numbered-list" start="2"><li>После подключения проверьте его успешность и выведите в консоль сообщение о успешном соединении.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81e6-bdbf-f6d91cff4ad9" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">package main
+
+import (
+	&quot;database/sql&quot;
+	&quot;fmt&quot;
+	&quot;log&quot;
+	_ &quot;github.com/lib/pq&quot;
+)
+
+func main() {
+	connStr := &quot;user=username dbname=mydb sslmode=disable&quot;
+	db, err := sql.Open(&quot;postgres&quot;, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(&quot;Successfully connected to the database&quot;)
+	defer db.Close()
+}</code></pre></li></ol></li></ol><ol type="1" id="14b6e0d1-7843-8129-9fbd-ea6f7db5e5f9" class="numbered-list" start="4"><li><mark class="highlight-yellow_background"><strong>Создайте миграцию.</strong></mark> (<em>Данный пункт не обязательный</em>) Миграции используются для управления изменениями в схеме базы данных. <a href="https://github.com/golang-migrate/migrate">golang-migrate</a> - это популярная библиотека для создания и управления миграций в Golang.<ol type="a" id="14b6e0d1-7843-8137-a509-c84245070937" class="numbered-list" start="1"><li>Установите golang-migrate для управления миграциями.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8185-bb8c-ea7d03f51abf" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">go get -tags &#x27;postgres&#x27; -u github.com/golang-migrate/migrate/cmd/migrate</code></pre></li></ol><ol type="a" id="14b6e0d1-7843-818d-8a91-c321c1662f8c" class="numbered-list" start="2"><li>Используйте следующие команды для создания и применения миграций:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8191-b9aa-c82b423cccb5" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all"># Создание новой миграции
+migrate create -ext sql -dir db/migrations -seq name_of_migration
+
+# Применение миграций
+migrate -path db/migrations -database &quot;postgres://username:password@localhost:5432/mydb?sslmode=disable&quot; up</code></pre></li></ol></li></ol><ol type="1" id="14b6e0d1-7843-81d1-9106-e06962eba5cf" class="numbered-list" start="5"><li><mark class="highlight-yellow_background"><strong>Добавьте CRUD операции.</strong></mark> Теперь, когда у вас есть подключение к базе и <em>настроены миграции</em>, пора перейти к созданию моделей данных и реализации операций CRUD. Для облегчения работы с базой данных вы можете использовать ORM (Object-Relational Mapping). Одним из популярных ORM для Golang является <a href="https://gorm.io/">Gorm</a>.<ol type="a" id="14b6e0d1-7843-81f7-a7d1-fc4779d0d28b" class="numbered-list" start="1"><li>Используйте Gorm для работы с базой данных.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81fd-82d4-efe8340822fc" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all"># Установка Gorm
+go get -u gorm.io/gorm</code></pre></li></ol><ol type="a" id="14b6e0d1-7843-81f5-840a-ec011f157622" class="numbered-list" start="2"><li>Создайте модель, например <code>User</code> для работы с таблицей <code>users</code>.</li></ol><ol type="a" id="14b6e0d1-7843-816a-9df2-e69551b3e3c1" class="numbered-list" start="3"><li>Напишите функции для выполнения <a href="https://www.honeybadger.io/blog/how-to-create-crud-application-with-golang-and-mysql/">следующих CRUD операций</a>:<ul id="14b6e0d1-7843-81fd-b52f-ca0deaae8ec1" class="bulleted-list"><li style="list-style-type:disc">Создание новой записи, например новый пользователь.</li></ul><ul id="14b6e0d1-7843-8121-8dc9-e5f566a922b4" class="bulleted-list"><li style="list-style-type:disc">Получение записи по ID.</li></ul><ul id="14b6e0d1-7843-8177-b257-e3b808c0cf7d" class="bulleted-list"><li style="list-style-type:disc">Обновление записи по ID.</li></ul><ul id="14b6e0d1-7843-8184-b34d-fc3877758a03" class="bulleted-list"><li style="list-style-type:disc">Удаление записи по ID.</li></ul><ul id="14b6e0d1-7843-81bd-8bfd-d11aa188b51a" class="bulleted-list"><li style="list-style-type:disc">Получение списка всех записей.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8148-a27f-c20d8754974e" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">// Пример использования Gorm
+package main
+
+import (
+	&quot;gorm.io/driver/postgres&quot;
+	&quot;gorm.io/gorm&quot;
+	&quot;log&quot;
+)
+
+type User struct {
+	gorm.Model
+	Name  string
+	Email string
+}
+
+func main() {
+	dsn := &quot;user=username dbname=mydb sslmode=disable&quot;
+	db, err := gorm.Open(postgres.Open(dsn), &amp;gorm.Config{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Auto Migrate
+	db.AutoMigrate(&amp;User{})
+
+	// Create
+	db.Create(&amp;User{Name: &quot;John Doe&quot;, Email: &quot;john@example.com&quot;})
+
+	// Read
+	var user User
+	db.First(&amp;user, 1)
+	log.Println(user)
+
+	// Update
+	db.Model(&amp;user).Update(&quot;Name&quot;, &quot;Doe John&quot;)
+
+	// Delete
+	db.Delete(&amp;user, 1)
+}</code></pre></li></ol></li></ol></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
