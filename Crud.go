@@ -32,6 +32,7 @@ const (
 	user     = "postgres"
 	password = "aldiyar"
 	dbname   = "first_db"
+	//
 )
 
 func main() {
