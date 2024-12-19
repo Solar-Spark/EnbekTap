@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin: 5px 0;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+#jobCards {
+    margin-top: 20px;
+}
+
+.job-card {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.job-card h3 {
+    margin-top: 0;
+}
+
+.job-card .salary {
+    font-weight: bold;
+}
+
+.job-card .job-type {
+    font-style: italic;
+    color: #777;
+}
+
+.job-card .description {
+    margin-top: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.edit-btn {
+    background-color: #f0ad4e;
+}
+
+.edit-btn:hover {
+    background-color: #ec971f;
+}
+
+.delete-btn {
+    background-color: #d9534f;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Style for radio buttons on the same line */
+form .radio-group {
+    display: flex;
+    justify-content: flex-start;  /* Align items to the start */
+    align-items: center;
+}
+
+form .radio-group label {
+    margin-right: 20px; /* Optional: space between the labels */
+    display: inline-flex; /* Ensures that both radio buttons and their labels are inline */
+    align-items: center;
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+}
+
+form .radio-group input {
+    margin-right: 5px; /* Adds some space between the radio button and label */
+}

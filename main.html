@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Card Creator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a Job Posting</h1>
+        <form id="jobForm">
+            <label for="jobName">Job Name:</label>
+            <input type="text" id="jobName" name="jobName" required><br><br>
+
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" required><br><br>
+
+            <label>Job Type:</label><br>
+            <div class="radio-group">
+                <label for="fullTime">
+                    <input type="radio" id="fullTime" name="jobType" value="Full Time" required> Full Time
+                </label>
+                <label for="partTime">
+                    <input type="radio" id="partTime" name="jobType" value="Part Time" required> Part Time
+                </label>
+            </div><br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br><br>
+
+            <button type="submit">Create</button>
+        </form>
+
+        <div id="jobCards">
+            <!-- New job cards will appear here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
