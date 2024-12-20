@@ -1,50 +1,73 @@
 package router
 
 import (
+	"enbektap/database"
+	"enbektap/models"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
-
-// Структура для данных JSON
-type RequestData struct {
-	Message *string `json:"message"`
-}
 
 type ResponseData struct {
 	Status  string `json:"status"`
 	Message string `json:"message"`
 }
 
-func Handlers(w http.ResponseWriter, r *http.Request) { // Установка заголовков для ответа
+func Handlers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	db, err := database.ConnectDB()
+	if err != nil {
+		http.Error(w, "Failed to connect to database", http.StatusInternalServerError)
+		return
+	}
+	sqlDB, err := db.DB()
+	if err != nil {
+		http.Error(w, "Failed to get database connection", http.StatusInternalServerError)
+		return
+	}
+	defer sqlDB.Close()
 
-	if r.Method == http.MethodPost {
-		var requestData RequestData
-		// Чтение JSON из тела запроса
+	switch r.Method {
+	case http.MethodPost:
+		var requestData struct {
+			JobName     string `json:"Vacancy"`
+			Salary      int    `json:"Salary"`
+			JobType     string `json:"JobType"`
+			Description string `json:"Description"`
+		}
+
 		err := json.NewDecoder(r.Body).Decode(&requestData)
-		if err != nil || requestData.Message == nil {
-			// Некорректный JSON
-			jsonResponse(w, http.StatusBadRequest, "fail", "Invalid JSON message")
+		if err != nil {
+			jsonResponse(w, http.StatusBadRequest, "fail", "Invalid JSON data")
 			return
 		}
 
-		// Логирование сообщения в консоль
-		fmt.Println("Получено сообщение:", *requestData.Message)
+		if requestData.JobName == "" || requestData.Salary == 0 || requestData.JobType == "" || requestData.Description == "" {
+			jsonResponse(w, http.StatusBadRequest, "fail", "All fields are required")
+			return
+		}
 
-		// Успешный ответ
-		jsonResponse(w, http.StatusOK, "success", "Data successfully received")
+		err = models.CreateVacancy(db, requestData.JobName, requestData.JobType, requestData.Description, requestData.Salary)
+		if err != nil {
+			jsonResponse(w, http.StatusInternalServerError, "fail", "Failed to save vacancy")
+			return
+		}
+
+		jsonResponse(w, http.StatusOK, "success", "Vacancy successfully created")
 		return
-	}
 
-	if r.Method == http.MethodGet {
-		// Для GET запросов просто возвращаем JSON ответ
-		jsonResponse(w, http.StatusOK, "success", "GET request received")
+	case http.MethodGet:
+		vacancies, err := models.ReadVacancies(db)
+		if err != nil {
+			jsonResponse(w, http.StatusInternalServerError, "fail", "Failed to fetch vacancies")
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(vacancies)
 		return
-	}
 
-	// Если метод не поддерживается
-	jsonResponse(w, http.StatusMethodNotAllowed, "fail", "Invalid HTTP method")
+	default:
+		jsonResponse(w, http.StatusMethodNotAllowed, "fail", "Invalid HTTP method")
+	}
 }
 
 func jsonResponse(w http.ResponseWriter, statusCode int, status, message string) {

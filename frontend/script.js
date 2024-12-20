@@ -1,14 +1,41 @@
 document.getElementById('jobForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form from submitting normally
 
-    // Get values from the form fields
-    const jobName = document.getElementById('jobName').value;
-    const salary = document.getElementById('salary').value;
-    const jobType = document.querySelector('input[name="jobType"]:checked')?.value; // Get the selected radio button value
-    const description = document.getElementById('description').value;
+    const jobData = {
+        Vacancy: document.getElementById('jobName').value,
+        Salary: parseInt(document.getElementById('salary').value, 10),
+        JobType: document.querySelector('input[name="JobType"]:checked').value,
+        Description: document.getElementById('description').value
+    };
+
+    fetch('/vacancies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jobData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); // Use text() to handle empty responses
+    })
+    .then(text => {
+        const data = text ? JSON.parse(text) : {}; // Parse only if text is not empty
+        if (data.status === 'success') {
+            alert('Job successfully created!');
+            // Optionally, update the UI to show the new job card
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 
     // Check if a job type is selected
-    if (!jobType) {
+    if (!jobData.JobType) {
         alert('Please select a job type (Full Time or Part Time).');
         return; // Prevent card creation if no job type is selected
     }
@@ -18,10 +45,10 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     newCard.classList.add('job-card');
 
     newCard.innerHTML = `
-        <h3>${jobName}</h3>
-        <p class="salary">Salary: $${salary}</p>
-        <p class="job-type">Job Type: ${jobType}</p>
-        <p class="description">${description}</p>
+        <h3>${jobData.jobName}</h3>
+        <p class="salary">Salary: $${jobData.salary}</p>
+        <p class="job-type">Job Type: ${jobData.JobType}</p>
+        <p class="description">${jobData.description}</p>
         <button class="edit-btn">Edit</button>
         <button class="delete-btn">Delete</button>
     `;

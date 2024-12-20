@@ -9,25 +9,25 @@
 <body>
     <div class="container">
         <h1>Create a Job Posting</h1>
-        <form id="jobForm">
+        <form action="/vacancies" id="jobForm" method="post">
             <label for="jobName">Job Name:</label>
-            <input type="text" id="jobName" name="jobName" required><br><br>
+            <input type="text" id="jobName" name="Vacancy" required><br><br>
 
             <label for="salary">Salary:</label>
-            <input type="number" id="salary" name="salary" required><br><br>
+            <input type="number" id="salary" name="Salary" required><br><br>
 
             <label>Job Type:</label><br>
             <div class="radio-group">
                 <label for="fullTime">
-                    <input type="radio" id="fullTime" name="jobType" value="Full Time" required> Full Time
+                    <input type="radio" id="fullTime" name="JobType" value="Full Time" required> Full Time
                 </label>
                 <label for="partTime">
-                    <input type="radio" id="partTime" name="jobType" value="Part Time" required> Part Time
+                    <input type="radio" id="partTime" name="JobType" value="Part Time" required> Part Time
                 </label>
             </div><br><br>
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea><br><br>
+            <textarea id="description" name="Description" required></textarea><br><br>
 
             <button type="submit">Create</button>
         </form>
