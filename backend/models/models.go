@@ -77,7 +77,6 @@ func updateRecord(db *sql.DB) error {
 	fmt.Println("Введите ID записи, которую хотите обновить:")
 	fmt.Scan(&InputId)
 
-	// Retrieve and display the current record
 	var currentCompanyName, currentApplicant string
 	query := `SELECT company, applicant FROM employee WHERE id = $1`
 	err := db.QueryRow(query, InputId).Scan(&currentCompanyName, &currentApplicant)
@@ -100,7 +99,6 @@ func updateRecord(db *sql.DB) error {
 	fmt.Println("Введите новое имя аппликанта (оставьте пустым, чтобы не изменять):")
 	fmt.Scan(&newApplicant)
 
-	// Use current values if no new input is provided
 	if newCompanyName == "" {
 		newCompanyName = currentCompanyName
 	}
@@ -108,7 +106,6 @@ func updateRecord(db *sql.DB) error {
 		newApplicant = currentApplicant
 	}
 
-	// Update the record
 	updateQuery := `UPDATE employee SET company = $1, applicant = $2 WHERE id = $3`
 	_, err = db.Exec(updateQuery, newCompanyName, newApplicant, InputId)
 	if err != nil {
