@@ -2,32 +2,21 @@ package models
 
 import (
 	"database/sql"
+	"enbektap/database"
 	"fmt"
 
 	_ "github.com/lib/pq" // Импорт драйвера для PostgreSQL
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "aldiyar"
-	dbname   = "first_db"
-	//
-)
-
 func Models() {
-	var CompanyName string
-	var InputId int
-	var Applicant string
-	var choice int
-
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-	db, err := sql.Open("postgres", psqlconn)
-	CheckErrror(err)
+	db, err := database.ConnectDB()
+	if err != nil {
+		panic(err)
+	}
 	defer db.Close()
 
 	for {
+		var choice int
 		fmt.Println("Что вы хотите сделать?")
 		fmt.Println("1) Добавить данные")
 		fmt.Println("2) Обновить данные")
@@ -38,37 +27,21 @@ func Models() {
 		fmt.Scan(&choice)
 		switch choice {
 		case 1:
-			fmt.Println("Введите имя компании:")
-			fmt.Scan(&CompanyName)
-			fmt.Println("Введите имя Апликанта:")
-			fmt.Scan(&Applicant)
-			fmt.Println("Введите ID:")
-			fmt.Scan(&InputId)
-
-			InsertAldik := `INSERT INTO "employee" ("company", "applicant", "id") VALUES ($1, $2, $3)`
-			_, err = db.Exec(InsertAldik, CompanyName, Applicant, InputId)
-			CheckErrror(err)
-			fmt.Println("Данные добавлены успешно!")
-			break
+			if err := createRecord(db); err != nil {
+				fmt.Println("Ошибка при добавлении данных:", err)
+			}
 		case 2:
-			fmt.Println("Введите имя новой компании:")
-			fmt.Scan(&CompanyName)
-			fmt.Println("Введите имя нового Апликанта:")
-			fmt.Scan(&Applicant)
-			fmt.Println("Введите ID: чье имя и компанию хотите поменять")
-			fmt.Scan(&InputId)
-
-			UpdateAldik := fmt.Sprintf(`UPDATE employee SET company = '%s', applicant = '%s' WHERE id = %d;`, CompanyName, Applicant, InputId)
-			_, err := db.Exec(UpdateAldik)
-			CheckErrror(err)
-			fmt.Println("Данные таблицы под номером", InputId, "обновлины")
-			break
+			if err := updateRecord(db); err != nil {
+				fmt.Println("Ошибка при обновлении данных:", err)
+			}
 		case 3:
-			selectAll(db)
-			break
+			if err := readRecords(db); err != nil {
+				fmt.Println("Ошибка при чтении данных:", err)
+			}
 		case 4:
-			DeleteRow(db)
-			break
+			if err := deleteRecord(db); err != nil {
+				fmt.Println("Ошибка при удалении данных:", err)
+			}
 		case 5:
 			fmt.Println("Вы вышли из Crud системы")
 			return
@@ -78,37 +51,79 @@ func Models() {
 	}
 }
 
-func CheckErrror(err error) {
+func createRecord(db *sql.DB) error {
+	var CompanyName, Applicant string
+	var InputId int
+
+	fmt.Println("Введите имя компании:")
+	fmt.Scan(&CompanyName)
+	fmt.Println("Введите имя Апликанта:")
+	fmt.Scan(&Applicant)
+	fmt.Println("Введите ID:")
+	fmt.Scan(&InputId)
+
+	query := `INSERT INTO "employee" ("company", "applicant", "id") VALUES ($1, $2, $3)`
+	_, err := db.Exec(query, CompanyName, Applicant, InputId)
 	if err != nil {
-		panic(err)
+		return err
 	}
+	fmt.Println("Данные добавлены успешно!")
+	return nil
 }
 
-func selectAll(db *sql.DB) {
+func updateRecord(db *sql.DB) error {
+	var CompanyName, Applicant string
+	var InputId int
+
+	fmt.Println("Введите имя новой компании:")
+	fmt.Scan(&CompanyName)
+	fmt.Println("Введите имя нового Апликанта:")
+	fmt.Scan(&Applicant)
+	fmt.Println("Введите ID: чье имя и компанию хотите поменять")
+	fmt.Scan(&InputId)
+
+	query := `UPDATE employee SET company = $1, applicant = $2 WHERE id = $3`
+	_, err := db.Exec(query, CompanyName, Applicant, InputId)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Данные таблицы под номером", InputId, "обновлены")
+	return nil
+}
+
+func readRecords(db *sql.DB) error {
 	rows, err := db.Query(`SELECT * FROM "employee"`)
-	CheckErrror(err)
+	if err != nil {
+		return err
+	}
 	defer rows.Close()
 
 	fmt.Println("Результаты:")
 	for rows.Next() {
-		var CompanyName string
-		var Applicant string
+		var CompanyName, Applicant string
 		var InputId int
 		if err := rows.Scan(&CompanyName, &Applicant, &InputId); err != nil {
-			CheckErrror(err)
+			return err
 		}
-		fmt.Println("Имя компании :", CompanyName, "Имя аппликанта:", Applicant, "ID:", InputId)
+		fmt.Println("Имя компании:", CompanyName, "Имя аппликанта:", Applicant, "ID:", InputId)
 	}
 
 	if err := rows.Err(); err != nil {
-		CheckErrror(err)
+		return err
 	}
+	return nil
 }
-func DeleteRow(db *sql.DB) {
+
+func deleteRecord(db *sql.DB) error {
 	var InputId int
-	fmt.Println("Введите Id строи которую хотите удалить")
+	fmt.Println("Введите Id строки, которую хотите удалить")
 	fmt.Scan(&InputId)
-	command := fmt.Sprintf(`Delete from employee where id = '%d'`, InputId)
-	_, err := db.Exec(command)
-	CheckErrror(err)
+
+	query := `DELETE FROM employee WHERE id = $1`
+	_, err := db.Exec(query, InputId)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Запись удалена успешно!")
+	return nil
 }
