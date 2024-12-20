@@ -55,11 +55,11 @@ func createRecord(db *sql.DB) error {
 	var CompanyName, Applicant string
 	var InputId int
 
-	fmt.Println("Введите имя компании:")
+	fmt.Print("Введите имя компании: ")
 	fmt.Scan(&CompanyName)
-	fmt.Println("Введите имя Апликанта:")
+	fmt.Print("Введите имя Апликанта: ")
 	fmt.Scan(&Applicant)
-	fmt.Println("Введите ID:")
+	fmt.Print("Введите ID: ")
 	fmt.Scan(&InputId)
 
 	query := `INSERT INTO "employee" ("company", "applicant", "id") VALUES ($1, $2, $3)`
@@ -68,26 +68,55 @@ func createRecord(db *sql.DB) error {
 		return err
 	}
 	fmt.Println("Данные добавлены успешно!")
+	fmt.Println("-------------------------")
 	return nil
 }
 
 func updateRecord(db *sql.DB) error {
-	var CompanyName, Applicant string
 	var InputId int
-
-	fmt.Println("Введите имя новой компании:")
-	fmt.Scan(&CompanyName)
-	fmt.Println("Введите имя нового Апликанта:")
-	fmt.Scan(&Applicant)
-	fmt.Println("Введите ID: чье имя и компанию хотите поменять")
+	fmt.Println("Введите ID записи, которую хотите обновить:")
 	fmt.Scan(&InputId)
 
-	query := `UPDATE employee SET company = $1, applicant = $2 WHERE id = $3`
-	_, err := db.Exec(query, CompanyName, Applicant, InputId)
+	// Retrieve and display the current record
+	var currentCompanyName, currentApplicant string
+	query := `SELECT company, applicant FROM employee WHERE id = $1`
+	err := db.QueryRow(query, InputId).Scan(&currentCompanyName, &currentApplicant)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			fmt.Println("Запись с таким ID не найдена.")
+			return nil
+		}
+		return err
+	}
+	fmt.Println("-------------------------")
+	fmt.Println("Текущие данные:")
+	fmt.Println("Имя компании:", currentCompanyName)
+	fmt.Println("Имя аппликанта:", currentApplicant)
+	fmt.Println("-------------------------")
+	// Prompt for new data
+	var newCompanyName, newApplicant string
+	fmt.Println("Введите новое имя компании (оставьте пустым, чтобы не изменять):")
+	fmt.Scan(&newCompanyName)
+	fmt.Println("Введите новое имя аппликанта (оставьте пустым, чтобы не изменять):")
+	fmt.Scan(&newApplicant)
+
+	// Use current values if no new input is provided
+	if newCompanyName == "" {
+		newCompanyName = currentCompanyName
+	}
+	if newApplicant == "" {
+		newApplicant = currentApplicant
+	}
+
+	// Update the record
+	updateQuery := `UPDATE employee SET company = $1, applicant = $2 WHERE id = $3`
+	_, err = db.Exec(updateQuery, newCompanyName, newApplicant, InputId)
 	if err != nil {
 		return err
 	}
+
 	fmt.Println("Данные таблицы под номером", InputId, "обновлены")
+	fmt.Println("-------------------------")
 	return nil
 }
 
@@ -97,7 +126,7 @@ func readRecords(db *sql.DB) error {
 		return err
 	}
 	defer rows.Close()
-
+	fmt.Println("-------------------------")
 	fmt.Println("Результаты:")
 	for rows.Next() {
 		var CompanyName, Applicant string
@@ -105,25 +134,56 @@ func readRecords(db *sql.DB) error {
 		if err := rows.Scan(&CompanyName, &Applicant, &InputId); err != nil {
 			return err
 		}
-		fmt.Println("Имя компании:", CompanyName, "Имя аппликанта:", Applicant, "ID:", InputId)
+		fmt.Println("Имя компании:", CompanyName, "\nИмя аппликанта:", Applicant, "\nID:", InputId)
 	}
 
 	if err := rows.Err(); err != nil {
 		return err
 	}
+	fmt.Println("-------------------------")
 	return nil
 }
 
 func deleteRecord(db *sql.DB) error {
 	var InputId int
-	fmt.Println("Введите Id строки, которую хотите удалить")
+	fmt.Println("Введите Id строки, которую хотите удалить:")
 	fmt.Scan(&InputId)
 
-	query := `DELETE FROM employee WHERE id = $1`
-	_, err := db.Exec(query, InputId)
+	var currentCompanyName, currentApplicant string
+	query := `SELECT company, applicant FROM employee WHERE id = $1`
+	err := db.QueryRow(query, InputId).Scan(&currentCompanyName, &currentApplicant)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			fmt.Println("Запись с таким ID не найдена.")
+			fmt.Println("-------------------------")
+			return nil
+		}
+		return err
+	}
+	fmt.Println("-------------------------")
+	fmt.Println("Вы собираетесь удалить следующую запись:")
+	fmt.Println("-------------------------")
+	fmt.Println("Имя компании:", currentCompanyName)
+	fmt.Println("Имя аппликанта:", currentApplicant)
+	fmt.Println("-------------------------")
+
+	var confirmation string
+	fmt.Println("Вы уверены, что хотите удалить эту запись? (да/нет):")
+	fmt.Scan(&confirmation)
+
+	if confirmation != "да" {
+		fmt.Println("Удаление отменено.")
+		fmt.Println("-------------------------")
+		return nil
+	}
+
+	deleteQuery := `DELETE FROM employee WHERE id = $1`
+	_, err = db.Exec(deleteQuery, InputId)
 	if err != nil {
 		return err
 	}
+
 	fmt.Println("Запись удалена успешно!")
+	fmt.Println("-------------------------")
 	return nil
 }
