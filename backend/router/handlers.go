@@ -1,4 +1,4 @@
-package main
+package router
 
 import (
 	"encoding/json"
@@ -16,14 +16,7 @@ type ResponseData struct {
 	Message string `json:"message"`
 }
 
-func main() {
-	http.HandleFunc("/json", handleJSON)
-	fmt.Println("Сервер запущен на порту 8080...")
-	http.ListenAndServe("localhost:8080", nil)
-}
-
-func handleJSON(w http.ResponseWriter, r *http.Request) {
-	// Установка заголовков для ответа
+func Handlers(w http.ResponseWriter, r *http.Request) { // Установка заголовков для ответа
 	w.Header().Set("Content-Type", "application/json")
 
 	if r.Method == http.MethodPost {
@@ -54,7 +47,6 @@ func handleJSON(w http.ResponseWriter, r *http.Request) {
 	jsonResponse(w, http.StatusMethodNotAllowed, "fail", "Invalid HTTP method")
 }
 
-// Утилита для отправки JSON ответа
 func jsonResponse(w http.ResponseWriter, statusCode int, status, message string) {
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(ResponseData{

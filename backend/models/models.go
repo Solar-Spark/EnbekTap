@@ -1,23 +1,4 @@
-// Для начала сделайте новый db и назовите first_db
-// пароль свой поставьте
-
-
-
-// Потом создайте таблицу 
-// Create table employee(
-// 	Company varchar(30),
-// 	Applicant varchar(50),
-// 	id int Primary key
-// )
-
-
-
-
-
-
-
-
-package main
+package models
 
 import (
 	"database/sql"
@@ -35,7 +16,7 @@ const (
 	//
 )
 
-func main() {
+func Models() {
 	var CompanyName string
 	var InputId int
 	var Applicant string
@@ -55,7 +36,7 @@ func main() {
 		fmt.Println("5) Выход")
 
 		fmt.Scan(&choice)
-		switch choice{
+		switch choice {
 		case 1:
 			fmt.Println("Введите имя компании:")
 			fmt.Scan(&CompanyName)
@@ -65,7 +46,7 @@ func main() {
 			fmt.Scan(&InputId)
 
 			InsertAldik := `INSERT INTO "employee" ("company", "applicant", "id") VALUES ($1, $2, $3)`
-			_, err = db.Exec(InsertAldik, CompanyName, Applicant,InputId)
+			_, err = db.Exec(InsertAldik, CompanyName, Applicant, InputId)
 			CheckErrror(err)
 			fmt.Println("Данные добавлены успешно!")
 			break
@@ -76,7 +57,6 @@ func main() {
 			fmt.Scan(&Applicant)
 			fmt.Println("Введите ID: чье имя и компанию хотите поменять")
 			fmt.Scan(&InputId)
-
 
 			UpdateAldik := fmt.Sprintf(`UPDATE employee SET company = '%s', applicant = '%s' WHERE id = %d;`, CompanyName, Applicant, InputId)
 			_, err := db.Exec(UpdateAldik)
@@ -117,14 +97,14 @@ func selectAll(db *sql.DB) {
 		if err := rows.Scan(&CompanyName, &Applicant, &InputId); err != nil {
 			CheckErrror(err)
 		}
-		fmt.Println("Имя компании :", CompanyName, "Имя аппликанта:", Applicant,  "ID:", InputId)
+		fmt.Println("Имя компании :", CompanyName, "Имя аппликанта:", Applicant, "ID:", InputId)
 	}
 
 	if err := rows.Err(); err != nil {
 		CheckErrror(err)
 	}
 }
-func DeleteRow(db *sql.DB){
+func DeleteRow(db *sql.DB) {
 	var InputId int
 	fmt.Println("Введите Id строи которую хотите удалить")
 	fmt.Scan(&InputId)
@@ -132,6 +112,3 @@ func DeleteRow(db *sql.DB){
 	_, err := db.Exec(command)
 	CheckErrror(err)
 }
-
-
-
