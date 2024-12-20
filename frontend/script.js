@@ -76,3 +76,8 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     // Clear the form after creating the card
     document.getElementById('jobForm').reset();
 });
+
+document.getElementById('jobForm').addEventListener('button', function(event){
+
+    
+});
