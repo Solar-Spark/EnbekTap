@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/vacancies", router.Handlers)
-	fmt.Println("Сервер запущен на порту 5500...")
-	http.ListenAndServe("localhost:5500", nil)
+	http.Handle("/vacancies", router.EnableCORS(http.HandlerFunc(router.Handlers)))
+	fmt.Println("Сервер запущен на порту 8080...")
+	http.ListenAndServe("localhost:8080", nil)
 }

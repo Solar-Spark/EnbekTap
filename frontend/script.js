@@ -1,83 +1,77 @@
-document.getElementById('jobForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from submitting normally
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("jobForm");
+    const jobCardsContainer = document.getElementById("jobCards");
 
-    const jobData = {
-        Vacancy: document.getElementById('jobName').value,
-        Salary: parseInt(document.getElementById('salary').value, 10),
-        JobType: document.querySelector('input[name="JobType"]:checked').value,
-        Description: document.getElementById('description').value
-    };
+    // Handle form submission via POST
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    fetch('/vacancies', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jobData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        const jobName = document.getElementById("jobName").value;
+        const salary = document.getElementById("salary").value;
+        const jobType = document.querySelector("input[name='JobType']:checked").value;
+        const description = document.getElementById("description").value;
+
+        try {
+            const response = await fetch("http://localhost:8080/vacancies", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    Vacancy: jobName,
+                    Salary: parseInt(salary),
+                    JobType: jobType,
+                    Description: description,
+                }),
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${text}`);
+            }
+
+            const result = await response.json();
+            alert(result.message);
+            form.reset();
+            loadJobCards(); // Reload job cards
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("Error submitting the form. Please try again.");
         }
-        return response.text(); // Use text() to handle empty responses
-    })
-    .then(text => {
-        const data = text ? JSON.parse(text) : {}; // Parse only if text is not empty
-        if (data.status === 'success') {
-            alert('Job successfully created!');
-            // Optionally, update the UI to show the new job card
-        } else {
-            alert('Error: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
     });
 
-    // Check if a job type is selected
-    if (!jobData.JobType) {
-        alert('Please select a job type (Full Time or Part Time).');
-        return; // Prevent card creation if no job type is selected
+    // Fetch and display vacancies via GET
+    async function loadJobCards() {
+        try {
+            const response = await fetch("http://localhost:8080/vacancies");
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Server Error: ${response.status} - ${text}`);
+            }
+
+            const vacancies = await response.json();
+            renderJobCards(vacancies);
+        } catch (error) {
+            console.error("Error fetching vacancies:", error);
+        }
     }
 
-    // Create a new card
-    const newCard = document.createElement('div');
-    newCard.classList.add('job-card');
+    // Render job cards
+    function renderJobCards(vacancies) {
+        jobCardsContainer.innerHTML = ""; // Clear existing cards
+        vacancies.forEach((vacancy) => {
+            const card = document.createElement("div");
+            card.className = "job-card";
+            card.innerHTML = `
+                <h2>${vacancy.Vacancy}</h2>
+                <p><strong>Salary:</strong> $${vacancy.Salary}</p>
+                <p><strong>Type:</strong> ${vacancy.JobType}</p>
+                <p>${vacancy.Description}</p>
+            `;
+            jobCardsContainer.appendChild(card);
+        });
+    }
 
-    newCard.innerHTML = `
-        <h3>${jobData.jobName}</h3>
-        <p class="salary">Salary: $${jobData.salary}</p>
-        <p class="job-type">Job Type: ${jobData.JobType}</p>
-        <p class="description">${jobData.description}</p>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-    `;
-
-    // Append the new card to the job cards container
-    document.getElementById('jobCards').appendChild(newCard);
-
-    // Add event listener for the "Delete" button
-    newCard.querySelector('.delete-btn').addEventListener('click', function() {
-        newCard.remove(); // Remove the card from the DOM
-    });
-
-    // Add event listener for the "Edit" button
-    newCard.querySelector('.edit-btn').addEventListener('click', function() {
-        // Prefill the form with the current card's data
-        document.getElementById('jobName').value = jobName;
-        document.getElementById('salary').value = salary;
-        document.querySelector(`input[name="jobType"][value="${jobType}"]`).checked = true;
-        document.getElementById('description').value = description;
-
-        // Remove the card when editing (optional)
-        newCard.remove();
-    });
-
-    // Clear the form after creating the card
-    document.getElementById('jobForm').reset();
-});
-
-document.getElementById('jobForm').addEventListener('button', function(event){
-
-    
+    // Initial load
+    loadJobCards();
 });
