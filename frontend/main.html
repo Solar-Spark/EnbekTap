@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Create a Job Posting</h1>
-        <form action="/vacancies" id="jobForm" method="post">
+        <form id="jobForm">
             <label for="jobName">Job Name:</label>
             <input type="text" id="jobName" name="Vacancy" required><br><br>
 
@@ -18,10 +18,10 @@
 
             <label>Job Type:</label><br>
             <div class="radio-group">
-                <label for="fullTime">
+                <label>
                     <input type="radio" id="fullTime" name="JobType" value="Full Time" required> Full Time
                 </label>
-                <label for="partTime">
+                <label>
                     <input type="radio" id="partTime" name="JobType" value="Part Time" required> Part Time
                 </label>
             </div><br><br>
@@ -31,12 +31,44 @@
 
             <button type="submit">Create</button>
         </form><br><br>
-          <form>
-                <input id="search" type="text" placeholder="Search..">
-                <button  id="search" type="button">Search</button>
-           </form>
+
+        <form>
+            <input id="search" type="text" placeholder="Search...">
+            <button id="search" type="button">Search</button>
+        </form>
         <div id="jobCards">
-            <!-- New job cards will appear here -->
+            <!-- Job cards will be dynamically loaded here -->
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span id="closeEditModal">&times;</span>
+                <h2>Edit Job</h2>
+                <form id="editForm">
+                    <input type="hidden" id="editVacancyID">
+                    <label for="editJobName">Job Name:</label>
+                    <input type="text" id="editJobName" required><br><br>
+
+                    <label for="editSalary">Salary:</label>
+                    <input type="number" id="editSalary" required><br><br>
+
+                    <label>Job Type:</label><br>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" id="editFullTime" name="EditJobType" value="Full Time" required> Full Time
+                        </label>
+                        <label>
+                            <input type="radio" id="editPartTime" name="EditJobType" value="Part Time" required> Part Time
+                        </label>
+                    </div><br><br>
+
+                    <label for="editDescription">Description:</label>
+                    <textarea id="editDescription" required></textarea><br><br>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
         </div>
     </div>
 
