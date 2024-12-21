@@ -32,7 +32,7 @@ func UpdateVacancy(db *gorm.DB, vacancyID int64, newVacancy, newJobType, newDesc
 	var vacancyRecord Vacancy
 	result := db.First(&vacancyRecord, vacancyID)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		return errors.New("вакансия с таким ID не найдена")
+		return errors.New("vacancy with this ID not found")
 	}
 
 	if newVacancy != "" {
@@ -63,6 +63,18 @@ func ReadVacancies(db *gorm.DB) ([]Vacancy, error) {
 		return nil, result.Error
 	}
 	return vacancies, nil
+}
+
+func ReadOneVacancy(db *gorm.DB, id int64) (*Vacancy, error) {
+	var vacancy Vacancy
+	result := db.First(&vacancy, id)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		return nil, errors.New("vacancy not found")
+	}
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &vacancy, nil
 }
 
 func DeleteVacancy(db *gorm.DB, vacancyID int64) error {

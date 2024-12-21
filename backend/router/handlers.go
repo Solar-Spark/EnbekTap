@@ -5,6 +5,7 @@ import (
 	"enbektap/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type ResponseData struct {
@@ -56,6 +57,23 @@ func Handlers(w http.ResponseWriter, r *http.Request) {
 		return
 
 	case http.MethodGet:
+		if r.URL.Query().Has("id") {
+			id, err := strconv.ParseInt(r.URL.Query().Get("id"), 10, 64)
+			if err != nil {
+				jsonResponse(w, http.StatusBadRequest, "fail", "Invalid ID format")
+				return
+			}
+
+			vacancy, err := models.ReadOneVacancy(db, id)
+			if err != nil {
+				jsonResponse(w, http.StatusNotFound, "fail", err.Error())
+				return
+			}
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(vacancy)
+			return
+		}
+
 		vacancies, err := models.ReadVacancies(db)
 		if err != nil {
 			jsonResponse(w, http.StatusInternalServerError, "fail", "Failed to fetch vacancies")
