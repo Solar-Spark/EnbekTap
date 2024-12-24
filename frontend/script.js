@@ -13,6 +13,7 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
         headers: {
             'Content-Type': 'application/json'
         },
+        
         body: JSON.stringify(jobData)
     })
     .then(response => {

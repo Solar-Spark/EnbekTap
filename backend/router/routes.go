@@ -1,3 +1,3 @@
 package router
 
-func router() {}
+func routes() {}

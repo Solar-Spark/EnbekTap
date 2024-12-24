@@ -13,7 +13,7 @@ type ResponseData struct {
 }
 
 func Handlers(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "json")
 	db, err := database.ConnectDB()
 	if err != nil {
 		http.Error(w, "Failed to connect to database", http.StatusInternalServerError)
