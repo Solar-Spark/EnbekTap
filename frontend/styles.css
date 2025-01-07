@@ -1,19 +1,87 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
 }
 
+nav {
+    background-color: #333;
+    padding: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* This spaces the left and right containers apart */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left {
+    padding-left: 20px;
+    flex-grow: 1; /* Allow this side to take up remaining space */
+}
+
+.nav-right {
+    justify-content: flex-end; /* Align the items in the right section to the end */
+    padding-right: 20px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;   
+    padding-right: 60px; 
+}
+
+.search-form input {
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 500px;
+   
+}
+
+.search-form button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 150px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.login-link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
 .container {
+    margin-top: 80px; /* Offset the fixed nav */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
@@ -28,8 +96,8 @@ form label {
 
 form input, form textarea {
     width: 100%;
-    padding-top:5px;
-    padding-bottom:10px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     margin: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -45,12 +113,33 @@ form button {
     cursor: pointer;
 }
 
-form button:hover {
-    background-color: #45a049;
+
+/* Styling the dropdowns */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 #jobCards {
     margin-top: 20px;
+}
+.job-cards-container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+    gap: 20px; /* Space between columns and rows */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .job-card {
@@ -59,6 +148,9 @@ form button:hover {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
 }
 
 .job-card h3 {
@@ -78,6 +170,7 @@ form button:hover {
     margin-top: 10px;
 }
 
+
 button {
     background-color: #4CAF50;
     color: white;
@@ -87,10 +180,6 @@ button {
     margin: 5px;
     cursor: pointer;
     font-size: 14px;
-}
-
-button:hover {
-    background-color: #45a049;
 }
 
 .edit-btn {
@@ -125,4 +214,76 @@ form .radio-group label {
 
 form .radio-group input {
     margin-right: 5px; /* Adds some space between the radio button and label */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hide the modal by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1001; /* Make sure the modal is above other content */
+}
+
+.modal-content {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Close button for the modal */
+#closeEditModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Style for both dropdowns */
+.dropdown {
+    width: 100%; /* Make the dropdown take up the full width of the container */
+    padding: 10px; /* Add padding inside dropdown */
+    font-size: 14px; /* Set font size */
+    margin-bottom: 10px; /* Space between dropdowns */
+}
+
+/* Style for the reset button */
+.reset-btn {
+    width: 100%; /* Full width for the button */
+    padding: 10px; /* Add padding for the button */
+    font-size: 14px; /* Set font size */
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px ;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
