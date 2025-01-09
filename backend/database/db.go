@@ -11,7 +11,7 @@ func ConnectDB() (*gorm.DB, error) {
 	host := "localhost"
 	port := 5432
 	user := "postgres"
-	password := "Qqwerty1!"
+	password := "aldiyar"
 	dbname := "first_db"
 
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)

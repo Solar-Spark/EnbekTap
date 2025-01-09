@@ -261,3 +261,338 @@ searchButton.addEventListener("click", async () => {
 
     loadJobCards();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const jobCardsContainer = document.getElementById("jobCards");
+    const prevPageButton = document.getElementById("prevPage");
+    const nextPageButton = document.getElementById("nextPage");
+    const currentPageSpan = document.getElementById("currentPage");
+
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    let jobCardsData = [];
+
+    async function loadJobCards() {
+        try {
+            const response = await fetch("http://localhost:8080/vacancies");
+            if (!response.ok) {
+                throw new Error(`Server Error: ${response.status}`);
+            }
+            jobCardsData = await response.json();
+            renderPaginatedCards();
+        } catch (error) {
+            console.error("Error fetching vacancies:", error);
+            alert("Error fetching job postings. Please try again.");
+        }
+    }
+
+    function renderPaginatedCards() {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedData = jobCardsData.slice(startIndex, endIndex);
+
+        jobCardsContainer.innerHTML = "";
+        if (paginatedData.length === 0) {
+            jobCardsContainer.innerHTML = "<h1>No vacancies posted</h1>";
+            return;
+        }
+
+        paginatedData.forEach((vacancy) => {
+            const card = document.createElement("div");
+            card.className = "job-card compact";
+            card.innerHTML = `
+                <h3>${vacancy.Vacancy}</h3>
+                <p><strong>Salary:</strong> $${vacancy.Salary}</p>
+                <p><strong>Type:</strong> ${vacancy.JobType}</p>
+                <button class="edit-button" data-id="${vacancy.VacancyID}">Edit</button>
+                <button class="delete-button" data-id="${vacancy.VacancyID}">Delete</button>
+            `;
+            jobCardsContainer.appendChild(card);
+        });
+
+        updatePaginationButtons();
+    }
+
+    function updatePaginationButtons() {
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = currentPage * itemsPerPage >= jobCardsData.length;
+        currentPageSpan.textContent = `Page ${currentPage}`;
+    }
+
+    prevPageButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPaginatedCards();
+        }
+    });
+
+    nextPageButton.addEventListener("click", () => {
+        if (currentPage * itemsPerPage < jobCardsData.length) {
+            currentPage++;
+            renderPaginatedCards();
+        }
+    });
+
+    loadJobCards();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const jobCardsContainer = document.getElementById("jobCards");
+    const prevPageButton = document.getElementById("prevPage");
+    const nextPageButton = document.getElementById("nextPage");
+    const currentPageSpan = document.getElementById("currentPage");
+    const jobTypeDropdown = document.getElementById("jobTypeDropdown");
+    const sortDropdown = document.getElementById("sortDropdown");
+    const resetButton = document.getElementById("reset");
+
+    let currentPage = 1;
+    const itemsPerPage = 10;
+    let jobCardsData = [];
+
+    async function loadJobCards() {
+        try {
+            const response = await fetch("http://localhost:8080/vacancies");
+            if (!response.ok) {
+                throw new Error(`Server Error: ${response.status}`);
+            }
+            jobCardsData = await response.json();
+            applyFiltersAndRender();
+        } catch (error) {
+            console.error("Error fetching vacancies:", error);
+            alert("Error fetching job postings. Please try again.");
+        }
+    }
+
+    function applyFiltersAndRender() {
+        let filteredData = [...jobCardsData];
+
+        // Apply Job Type Filter
+        const selectedJobType = jobTypeDropdown.value;
+        if (selectedJobType) {
+            filteredData = filteredData.filter(job => job.JobType.toLowerCase() === selectedJobType.replace('-', ' '));
+        }
+
+        // Apply Sorting
+        const sortBy = sortDropdown.value;
+        if (sortBy === "salary-asc") {
+            filteredData.sort((a, b) => a.Salary - b.Salary);
+        } else if (sortBy === "salary-desc") {
+            filteredData.sort((a, b) => b.Salary - a.Salary);
+        }
+
+        renderPaginatedCards(filteredData);
+    }
+
+    function renderPaginatedCards(data) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedData = data.slice(startIndex, endIndex);
+
+        jobCardsContainer.innerHTML = "";
+        if (paginatedData.length === 0) {
+            jobCardsContainer.innerHTML = "<h1>No vacancies posted</h1>";
+            return;
+        }
+
+        paginatedData.forEach((vacancy) => {
+            const card = document.createElement("div");
+            card.className = "job-card compact";
+            card.innerHTML = `
+                <h3>${vacancy.Vacancy}</h3>
+                <p><strong>Salary:</strong> $${vacancy.Salary}</p>
+                <p><strong>Type:</strong> ${vacancy.JobType}</p>
+                <button class="edit-button" data-id="${vacancy.VacancyID}">Edit</button>
+                <button class="delete-button" data-id="${vacancy.VacancyID}">Delete</button>
+            `;
+            jobCardsContainer.appendChild(card);
+        });
+
+        updatePaginationButtons(data.length);
+    }
+
+    function updatePaginationButtons(totalItems) {
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = currentPage * itemsPerPage >= totalItems;
+        currentPageSpan.textContent = `Page ${currentPage}`;
+    }
+
+    prevPageButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            applyFiltersAndRender();
+        }
+    });
+
+    nextPageButton.addEventListener("click", () => {
+        if (currentPage * itemsPerPage < jobCardsData.length) {
+            currentPage++;
+            applyFiltersAndRender();
+        }
+    });
+
+    jobTypeDropdown.addEventListener("change", () => {
+        currentPage = 1;
+        applyFiltersAndRender();
+    });
+
+    sortDropdown.addEventListener("change", () => {
+        currentPage = 1;
+        applyFiltersAndRender();
+    });
+
+    resetButton.addEventListener("click", () => {
+        jobTypeDropdown.selectedIndex = 0;
+        sortDropdown.selectedIndex = 0;
+        currentPage = 1;
+        applyFiltersAndRender();
+    });
+
+    loadJobCards();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
