@@ -30,7 +30,7 @@ func (repo *VacancyRepo) ReadVacancy(id uint) (entities.Vacancy, error) {
 
 func (repo *VacancyRepo) ReadVacancies() ([]entities.Vacancy, error) {
 	var vacancies []entities.Vacancy
-	err := repo.DB.Find(&vacancies).Error
+	err := repo.DB.Limit(9).Find(&vacancies).Error
 	return vacancies, err
 }
 
