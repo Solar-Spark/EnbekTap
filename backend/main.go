@@ -1,13 +1,31 @@
 package main
 
 import (
+	"enbektap/controllers"
+	"enbektap/infra"
 	"enbektap/router"
-	"fmt"
+	"enbektap/services"
+	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/vacancies", router.Handlers)
-	fmt.Println("Server is running on port 8080...")
-	http.ListenAndServe("localhost:8080", nil)
+	// Database connection
+	db, error := infra.ConnectDB()
+
+	if error != nil {
+		return
+	}
+
+	// Dependency injection
+	repo := &infra.VacancyRepo{DB: db}
+	service := &services.VacancyService{Repo: repo}
+	controller := &controllers.VacancyController{Service: service}
+
+	// Setup routes
+	router.SetupRoutes(controller)
+
+	// Start server
+	log.Println("Server running on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
