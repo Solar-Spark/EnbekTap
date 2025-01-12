@@ -3,137 +3,135 @@ package controllers
 import (
 	"enbektap/entities"
 	"enbektap/services"
-	"encoding/json"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 type VacancyController struct {
 	Service *services.VacancyService
 }
 
-func (c *VacancyController) CreateVacancy(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+func (c *VacancyController) CreateVacancy(ctx *gin.Context) {
+	if ctx.Request.Method != http.MethodPost {
+		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
 
 	var vacancy entities.Vacancy
-	if err := json.NewDecoder(r.Body).Decode(&vacancy); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+	if err := ctx.ShouldBindJSON(&vacancy); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
 	if err := c.Service.CreateVacancy(vacancy); err != nil {
-		http.Error(w, "Failed to create vacancy", http.StatusInternalServerError)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create vacancy"})
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]string{"message": "Vacancy created successfully"})
+	ctx.JSON(http.StatusCreated, gin.H{"message": "Vacancy created successfully"})
 }
 
-func (c *VacancyController) GetVacancy(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+func (c *VacancyController) GetVacancy(ctx *gin.Context) {
+	if ctx.Request.Method != http.MethodGet {
+		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
 
-	idStr := r.URL.Query().Get("id")
+	idStr := ctx.DefaultQuery("id", "")
 	if idStr == "" {
-		http.Error(w, "Missing id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Missing id parameter"})
 		return
 	}
 
-	id64, err := strconv.ParseUint(idStr, 10, 64) // Parse as uint64
+	id64, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
-		http.Error(w, "Invalid id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id parameter"})
 		return
 	}
 
-	id := uint(id64) // Convert uint64 to uint
+	id := uint(id64)
 	vacancy, err := c.Service.GetVacancy(id)
 	if err != nil {
-		http.Error(w, "Vacancy not found", http.StatusNotFound)
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "Vacancy not found"})
 		return
 	}
 
-	json.NewEncoder(w).Encode(vacancy)
+	ctx.JSON(http.StatusOK, vacancy)
 }
 
-func (c *VacancyController) GetAllVacancies(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+func (c *VacancyController) GetAllVacancies(ctx *gin.Context) {
+	if ctx.Request.Method != http.MethodGet {
+		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
 
 	vacancies, err := c.Service.GetAllVacancies()
 	if err != nil {
-		http.Error(w, "Failed to fetch vacancies", http.StatusInternalServerError)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch vacancies"})
 		return
 	}
 
-	json.NewEncoder(w).Encode(vacancies)
+	ctx.JSON(http.StatusOK, vacancies)
 }
 
-func (c *VacancyController) UpdateVacancy(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPut {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+func (c *VacancyController) UpdateVacancy(ctx *gin.Context) {
+	if ctx.Request.Method != http.MethodPut {
+		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
 
-	idStr := r.URL.Query().Get("id")
+	idStr := ctx.DefaultQuery("id", "")
 	if idStr == "" {
-		http.Error(w, "Missing id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Missing id parameter"})
 		return
 	}
 
-	id64, err := strconv.ParseUint(idStr, 10, 64) // Parse as uint64
+	id64, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
-		http.Error(w, "Invalid id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id parameter"})
 		return
 	}
 
-	id := uint(id64) // Convert uint64 to uint
+	id := uint(id64)
 	var vacancy entities.Vacancy
-	if err := json.NewDecoder(r.Body).Decode(&vacancy); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+	if err := ctx.ShouldBindJSON(&vacancy); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
 	if err := c.Service.UpdateVacancy(id, vacancy); err != nil {
-		http.Error(w, "Failed to update vacancy", http.StatusInternalServerError)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update vacancy"})
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"message": "Vacancy updated successfully"})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Vacancy updated successfully"})
 }
 
-func (c *VacancyController) DeleteVacancy(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+func (c *VacancyController) DeleteVacancy(ctx *gin.Context) {
+	if ctx.Request.Method != http.MethodDelete {
+		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
 
-	idStr := r.URL.Query().Get("id")
+	idStr := ctx.DefaultQuery("id", "")
 	if idStr == "" {
-		http.Error(w, "Missing id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Missing id parameter"})
 		return
 	}
 
-	id64, err := strconv.ParseUint(idStr, 10, 64) // Parse as uint64
+	id64, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
-		http.Error(w, "Invalid id parameter", http.StatusBadRequest)
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid id parameter"})
 		return
 	}
 
-	id := uint(id64) // Convert uint64 to uint
+	id := uint(id64)
 	if err := c.Service.DeleteVacancy(id); err != nil {
-		http.Error(w, "Failed to delete vacancy", http.StatusInternalServerError)
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete vacancy"})
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"message": "Vacancy deleted successfully"})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Vacancy deleted successfully"})
 }
