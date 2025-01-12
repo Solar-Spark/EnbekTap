@@ -1,0 +1,1072 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment #2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1576e0d1-7843-8031-b50c-dcaf30aa8039" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">✅</span></div><h1 class="page-title">Assignment #2</h1><p class="page-description"></p></header><div class="page-body"><h3 id="1576e0d1-7843-8142-82ea-c27ab0669d81" class="">Important information:</h3><ol type="1" id="15b6e0d1-7843-806e-b51d-c2238400352a" class="numbered-list" start="1"><li>We are continuing with your team-based <mark class="highlight-orange_background">project work</mark>. Remember, the project topic is assigned to you until the end of the trimester, and each new task will build on the <mark class="highlight-orange_background">previous</mark> one. The team composition will remain unchanged throughout the trimester.</li></ol><ol type="1" id="15b6e0d1-7843-809d-9363-efcd1623be4a" class="numbered-list" start="2"><li>Make sure to commit your updated projects and tasks to your repository and keep the <code>README.md</code> file up to date. Ensure your repository contains everything needed—code, images, and other materials—and that it is <mark class="highlight-orange_background">public access</mark>.</li></ol><ol type="1" id="15b6e0d1-7843-80a0-af49-f7fe57fb69ac" class="numbered-list" start="3"><li>It&#x27;s important to remember that tasks sometimes need to be <mark class="highlight-orange_background">adjusted</mark> to fit your unique project. The examples provided in the file are just guidelines—you’re free to modify them or take a different approach that works best for your team.</li></ol><ol type="1" id="15b6e0d1-7843-80a1-ab91-f47efbe5a453" class="numbered-list" start="4"><li>Deadline — <mark class="highlight-orange_background">by 21:00 on 8 January 2025</mark>. If you encounter any issues with the Moodle system, submit your work through Teams. Don&#x27;t forget to include the names of your team members. One team — one link.</li></ol><ol type="1" id="15b6e0d1-7843-808a-bafb-c96b710a5fd8" class="numbered-list" start="5"><li>You can defend your project until the <mark class="highlight-orange_background">end of the 4th week</mark>. Presentations are not required, just show and tell us about your work. If you can&#x27;t make it for valid reasons, there&#x27;s an option to submit everything online. Contact me on Teams for more details.</li></ol><ol type="1" id="15b6e0d1-7843-80e5-94c7-cc1016ca4bd1" class="numbered-list" start="6"><li>If the team does not attach the GitHub link in Moodle or send it through Teams, and also does not defend the project, unfortunately, that will result in <mark class="highlight-orange_background">0 points</mark>.</li></ol><ol type="1" id="15b6e0d1-7843-80ec-ae24-d8e4e6615885" class="numbered-list" start="7"><li>Please try to submit your projects on time, as late submissions are subject to penalties. A delay of 1-2 days will result in a 5% deduction from the remaining amount, 3-7 days — a 15% deduction, up to 2 weeks — a 30% deduction, and over 2 weeks — a 50% deduction.</li></ol><h3 id="1576e0d1-7843-81a8-813d-e37a378c9555" class="">Tasks:</h3><p id="1576e0d1-7843-8122-938a-c9c97dd448cd" class="">In this assessment we will cover the following topics: </p><ul id="1576e0d1-7843-81f3-81c9-ce6e35af0fbb" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background">Filtering Sorting and Pagination</mark>. (25 points)</summary><h2 id="1576e0d1-7843-81d0-9765-cba146592681" class=""><mark class="highlight-teal_background">3. Filtering Sorting and Pagination. </mark></h2><p id="1576e0d1-7843-810f-bc40-efa488eafca1" class="">These are important aspects of web development that help manage and optimize data display.</p><ul id="1576e0d1-7843-8144-82c6-f0f87c7656d2" class="bulleted-list"><li style="list-style-type:disc"><strong>Filtering</strong>: Allows users to limit the set of displayed data based on specific criteria. For example, in a user database, you can filter by name, age, or email.</li></ul><ul id="1576e0d1-7843-8133-b728-dea0d934a4f3" class="bulleted-list"><li style="list-style-type:disc"><strong>Sorting</strong>: Enables the ordering of data in ascending or descending order based on a selected field, such as registration date or username.</li></ul><ul id="1576e0d1-7843-817a-ba25-e25cc62e313e" class="bulleted-list"><li style="list-style-type:disc"><strong>Pagination</strong>: This is the process of dividing content into separate pages, which improves performance and usability, especially with large volumes of data. For example, displaying a list of news with the ability to switch between pages.</li></ul><p id="1576e0d1-7843-811f-b570-d24d6152f13e" class="">It&#x27;s important to understand that these procedures can be performed both on the backend and the frontend. However, given the specifics of our discipline, active use of the backend part is <mark class="highlight-teal_background">mandatory.</mark></p><ul id="15b6e0d1-7843-80de-ab6f-f72ad5a1d5d3" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.1 Filtering (8 points)</strong></mark></summary><figure id="1576e0d1-7843-8196-9e8d-c5bee994c968" class="image" style="text-align:center"><a href="Assignment_2/0__g5LDhY9fXdP4roN.png"><img style="width:384px" src="Assignment_2/0__g5LDhY9fXdP4roN.png"/></a></figure><ol type="1" id="1576e0d1-7843-8177-a43d-d0b4d515167a" class="numbered-list" start="1"><li><strong>Adding Filtering to the Server Code</strong>:<p id="1576e0d1-7843-81b3-be6e-fc6880efab1d" class="">Suppose you are storing data in a database and need to add filtering by the <code><strong>name</strong></code> field. In the request handler&#x27;s code, you would modify the SQL query to include a filtering condition. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8165-a37b-c064bf965e1a" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve the filter parameter from the URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+
+    // SQL query taking into account the filter
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+
+    // Sending the query to the database and processing the results
+    // ...
+
+    // Displaying the results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-817f-b70e-f150562cfe33" class="numbered-list" start="2"><li><strong>Adding an Input Field to the Web Page for Filtering</strong>:<p id="1576e0d1-7843-8181-8fc9-f5fa5f5ea59b" class="">Add a field to the web page where users can input the filter criteria.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81b7-a055-ea3b5831109d" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;label for=&quot;filter&quot;&gt;Filter:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;filter&quot; name=&quot;filter&quot; placeholder=&quot;Enter filter&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Filter&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Displaying results --&gt;
+    &lt;!-- ... --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul><ul id="15b6e0d1-7843-8034-b6d2-de9e7567f68a" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.2 Sorting (8 points)</strong></mark></summary><figure id="1576e0d1-7843-8141-af87-d4e55fb974ca" class="image" style="text-align:center"><a href="Assignment_2/c04af87bcb3cb6bdf274c770d2a88fff.jpg"><img style="width:384px" src="Assignment_2/c04af87bcb3cb6bdf274c770d2a88fff.jpg"/></a></figure><ol type="1" id="1576e0d1-7843-81c2-8c05-d23a0525bdde" class="numbered-list" start="1"><li><strong>Adding Sorting to the Server Code</strong>:<p id="1576e0d1-7843-81f1-b8c7-e94fd0721141" class="">Suppose you want to add the capability to sort by the price field. In the request handler code, modify the SQL query by adding a sorting condition.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8147-b743-e0596117559d" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve filter and sort parameters from URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+    sort := r.URL.Query().Get(&quot;sort&quot;)
+
+    // SQL query considering filtering and sorting
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+    if sort != &quot;&quot; {
+        query += &quot; ORDER BY &quot; + sort
+    }
+
+    // Sending request to database and handling results
+    // ...
+
+    // Displaying results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81a4-b701-c592ebb9cee0" class="numbered-list" start="2"><li><strong>Adding Buttons to the Web Page for Sorting Options</strong>:<p id="1576e0d1-7843-8100-8ece-d7d11cf3d550" class="">Add buttons to the web page to allow users to choose the sorting field.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-815c-9ff1-ed7c44a433fb" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;label for=&quot;filter&quot;&gt;Filter:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;filter&quot; name=&quot;filter&quot; placeholder=&quot;Enter filter&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Filter&lt;/button&gt;
+        &lt;br&gt;
+        &lt;label for=&quot;sort&quot;&gt;Sort:&lt;/label&gt;
+        &lt;select id=&quot;sort&quot; name=&quot;sort&quot;&gt;
+            &lt;option value=&quot;name&quot;&gt;By Name&lt;/option&gt;
+            &lt;option value=&quot;price&quot;&gt;By Price&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Sorting&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Display results --&gt;
+    &lt;!-- ... --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul><ul id="15b6e0d1-7843-8014-b391-fb1315ef3e9e" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.3 Pagination (9 points)</strong></mark></summary><figure id="1576e0d1-7843-8184-94cf-de6b75bca1f8" class="image" style="text-align:center"><a href="Assignment_2/e6b30bf5-dcdd-4430-a971-97706bd0fe05-cover.png"><img style="width:288px" src="Assignment_2/e6b30bf5-dcdd-4430-a971-97706bd0fe05-cover.png"/></a></figure><ol type="1" id="1576e0d1-7843-8136-9f0a-d2d7e8bf20cf" class="numbered-list" start="1"><li><strong>Adding Pagination to the Server-Side Code</strong>:<p id="1576e0d1-7843-81f7-a0eb-dcf3379445b7" class="">Suppose you want to display 10 items per page. In the server-side code, modify the SQL query to support pagination.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-815b-b618-c9879e140002" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve filtering, sorting, and pagination parameters from the URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+    sort := r.URL.Query().Get(&quot;sort&quot;)
+    page := r.URL.Query().Get(&quot;page&quot;)
+
+    limit := 10  // Number of items per page
+    offset := 0  // Offset for SQL query
+
+    // Calculate offset based on pagination
+    if p, err := strconv.Atoi(page); err == nil &amp;&amp; p &gt; 1 {
+        offset = (p - 1) * limit
+    }
+
+    // SQL query considering all parameters
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+    if sort != &quot;&quot; {
+        query += &quot; ORDER BY &quot; + sort
+    }
+    query += fmt.Sprintf(&quot; LIMIT %d OFFSET %d&quot;, limit, offset)
+
+    // Send the query to the database and process the results
+    // ...
+
+    // Display the results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81bb-a1ad-d99902ddf8d9" class="numbered-list" start="2"><li><strong>Adding Pagination Controls to the Web Page</strong>:<p id="1576e0d1-7843-8185-9bcc-dabdbd57ea57" class="">Add elements to the web page for navigating between pages.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81de-a91c-cda158775230" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;!-- Filtering and Sorting --&gt;
+        &lt;!-- ... --&gt;
+
+        &lt;label for=&quot;page&quot;&gt;Page:&lt;/label&gt;
+        &lt;input type=&quot;number&quot; id=&quot;page&quot; name=&quot;page&quot; min=&quot;1&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Go&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Displaying Results --&gt;
+    &lt;!-- ... --&gt;
+
+    &lt;!-- Pagination Navigation --&gt;
+    &lt;!-- JavaScript can be added here for more dynamic navigation --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul></details></li></ul><ul id="1576e0d1-7843-8116-a054-f2f1b3cb9dbc" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background">Structured Logging, Error Handlig, Rate Limiting and Graceful Shutdown </mark>(25 points)</summary><h2 id="1576e0d1-7843-8105-b8f7-d8ff0f78da90" class=""><mark class="highlight-blue_background">4. Structured Logging Error Handlig Rate Limiting and Graceful Shutdown</mark></h2><p id="1576e0d1-7843-811d-a83d-e5cd309a6588" class="">These topics are related to more advanced aspects of web development and application support.</p><ul id="1576e0d1-7843-81f8-982c-dff97882921d" class="bulleted-list"><li style="list-style-type:disc"><strong>Structured Logging</strong>: Involves logging in a standardized format (e.g., JSON), making it easier to analyze and process logs.</li></ul><ul id="1576e0d1-7843-8197-89ca-e72a3d2ea026" class="bulleted-list"><li style="list-style-type:disc"><strong>Error Handling</strong>: Encompasses the development of effective methods for detecting, logging, and responding to errors in the application.</li></ul><ul id="1576e0d1-7843-81d9-a74d-fcccfdd82097" class="bulleted-list"><li style="list-style-type:disc"><strong>Rate Limiting</strong>: Prevents server overload by restricting the number of requests from a single user or IP address within a specific time period.</li></ul><ul id="1576e0d1-7843-818c-bacc-ea862342f95c" class="bulleted-list"><li style="list-style-type:disc"><strong>Graceful Shutdown</strong>: The process of safely stopping an application, where ongoing operations are concluded, necessary data is preserved, and resources are released before a complete shutdown.</li></ul><ul id="15b6e0d1-7843-8081-b689-d4dbc23c89eb" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.1 Structured Logging </strong></mark>(8 points)</summary><ol type="1" id="1576e0d1-7843-81cf-b401-da61756d76fa" class="numbered-list" start="1"><li><strong>Choosing a Logging Library:</strong><p id="1576e0d1-7843-8106-a6e2-d56ab1c56033" class="">It is recommended to use third-party logging libraries, such as <a href="https://github.com/sirupsen/logrus">logrus</a> for Golang. (However, you can use any suitable library.) Install it using:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-819d-a0d4-ca5e61e57b31" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">go get -u github.com/sirupsen/logrus</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8191-9c7d-f001ba2a4047" class="numbered-list" start="2"><li><strong>Integrating the Logger into the Project:</strong><p id="1576e0d1-7843-81e5-88e9-e2920384059d" class="">Import the library in your code and create an instance of the logger.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8104-8e66-f174b5acf37b" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">import (
+    &quot;github.com/sirupsen/logrus&quot;
+)
+
+func main() {
+    // Configure logrus
+    log := logrus.New()
+    log.SetFormatter(&amp;logrus.JSONFormatter{})
+    // ...
+
+    // Use log to write logs instead of fmt.Println()
+    // Example:
+    // log.Info(&quot;This is an informational message&quot;)
+    // log.Warn(&quot;This is a warning message&quot;)
+    // log.Error(&quot;This is an error message&quot;)
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81d4-84f5-d4c59bb0e123" class="numbered-list" start="3"><li><strong>Structured Log Output:</strong><p id="1576e0d1-7843-81be-9c95-f853e561f114" class="">Use a structured log output format for improved readability.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81de-a300-fc4bdf5edb21" class="code"><code class="language-Go">log.WithFields(logrus.Fields{
+	&quot;action&quot;: &quot;start&quot;,
+	&quot;status&quot;: &quot;success&quot;,
+}).Info(&quot;Application started successfully&quot;)</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8143-93f9-e2792336e436" class="code"><code class="language-Go">log.WithFields(log.Fields{
+    &quot;module&quot;: &quot;main&quot;,
+    &quot;function&quot;: &quot;main&quot;,
+    &quot;action&quot;: &quot;start&quot;,
+}).Info(&quot;Application started&quot;)</code></pre><p id="1576e0d1-7843-81b0-a2ba-dbcce4782cac" class="">You are tasked with implementing a logging system similar to the one used in Moodle, which records all user actions from logging in to interacting with courses and assignments. If your website is a store, the logging should commence from the moment a client accesses the server. Every user action must be logged, such as opening specific pages, using filters and sorting, deleting or adding products, along with the timestamp of these actions and the IDs of the products involved.</p><p id="1576e0d1-7843-81d0-97c0-ebc64d0560ba" class="">The goal is to capture any activity related to the interaction between the server and the client. You can store this data in any convenient format, whether <mark class="highlight-blue_background">writing logs to a text file</mark> in JSON format or even <mark class="highlight-blue_background">logging to a database</mark>, similar to Moodle. If using a database, remember to create a dedicated table for this purpose.</p></li></ol></details></li></ul><ul id="15b6e0d1-7843-8073-bc38-c43c4a096336" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.2 Error Handling </strong></mark>(8 points)</summary><p id="15b6e0d1-7843-80b0-b1c2-e8a9312ef172" class=""><strong>Error Handling</strong> in programming is the process of managing and responding to situations where a program encounters unexpected issues. In the context of Go, it’s not just about preventing errors but rather the ability to detect, interpret, and handle them correctly. This ensures that the program can continue running, inform the user about the error, or terminate gracefully.</p><ol type="1" id="1576e0d1-7843-8110-aea6-f129993f2cb0" class="numbered-list" start="1"><li><strong>Error checking after each action:</strong><br/>In Go, the standard approach involves functions returning an error as one of their results. The correct approach is to check for an error after each action.<br/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8118-96cc-c54dfbdbd7de" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func doSomething() error {
+    _, err := someOperation()
+    if err != nil {
+        // Error handling
+        return fmt.Errorf(&quot;someOperation failed: %v&quot;, err)
+    }
+    // Further actions if there was no error
+    return nil
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81eb-809b-e66d6402a526" class="numbered-list" start="2"><li><strong>Error handling at a higher level:</strong><br/>Instead of handling an error right where it occurs, it&#x27;s sometimes better to pass it up to a higher level where it can be managed centrally.<br/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-810f-92ec-f7cf99375b59" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func doSomething() error {
+    // Example function returning an error
+    return errors.New(&quot;an error occurred&quot;)
+}
+
+func main() {
+    err := doSomething()
+    if err != nil {
+        // Logging the error occurred in doSomething
+        log.WithField(&quot;error&quot;, err).Error(&quot;Error occurred while executing doSomething&quot;)
+    }
+}</code></pre></li></ol><p id="15b6e0d1-7843-807a-8141-c73d1958285b" class="">To better understand, let me give an example. Suppose we already have filtering, sorting, and pagination implemented. In this case, it’s necessary to add error handling for filtering and sorting. If the result of filtering or sorting is empty, an error with the message <em>&quot;No products match the filter&quot;</em> should be returned and displayed to the client, instead of returning <code>NULL</code> or relying on default frontend messages.</p><p id="15b6e0d1-7843-80e8-b91b-d15996ed1473" class="">For this task, 2–3 simple examples of error handling will suffice, and they should be diverse. Let your imagination run wild and propose solutions that best fit your project.</p></details></li></ul><ul id="15b6e0d1-7843-80a1-ab63-dc870f92822d" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.3 Rate Limiting </strong></mark>(9 points)</summary><ol type="1" id="1576e0d1-7843-81f7-969e-cc09e7f258ef" class="numbered-list" start="1"><li><strong>Using </strong><code><strong>NewLimiter</strong></code><strong> for Rate Limiting:</strong><p id="1576e0d1-7843-81d3-a3de-ca703e3c3945" class="">Implement rate limiting for your project&#x27;s API to prevent overload. Use the <code><strong>golang.org/x/time/rate</strong></code> package for implementing the limiter.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8199-8d5a-d463c71ca002" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">import (
+    &quot;golang.org/x/time/rate&quot;
+    &quot;net/http&quot;
+)
+
+var limiter = rate.NewLimiter(1, 3) // Rate limit of 1 request per second with a burst of 3 requests
+
+func main() {
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+        if !limiter.Allow() {
+            // Exceeded request limit
+            http.Error(w, &quot;Rate limit exceeded&quot;, http.StatusTooManyRequests)
+            return
+        }
+        // Request processing
+    })
+    http.ListenAndServe(&quot;:8080&quot;, nil)
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8157-8eb1-d50ddacfef40" class="numbered-list" start="2"><li><strong>Actions When Exceeding the Limit:</strong><p id="1576e0d1-7843-81ab-a591-ef8bd2b2b3e5" class="">When the number of requests exceeds the set limit, the server usually takes the following actions:</p><ul id="1576e0d1-7843-81d8-8c68-d2203d848ed8" class="bulleted-list"><li style="list-style-type:disc"><strong>Returning an Error Code</strong>: The most common approach is to return an error to the client with the HTTP code 429 (Too Many Requests). This informs the client that the request limit has been exceeded.</li></ul><ul id="1576e0d1-7843-8140-9968-ea44ecc2c967" class="bulleted-list"><li style="list-style-type:disc"><strong>Delaying Request Processing</strong>: In some cases, the server may not reject excess requests but simply delay their processing until the next permissible time interval for processing.</li></ul><ul id="1576e0d1-7843-815e-8c69-c9916e7b6a53" class="bulleted-list"><li style="list-style-type:disc"><strong>Providing Limit Information</strong>: It&#x27;s good practice to send information in the response headers about how many more requests can be made before reaching the limit, and when the limit will be reset. (Suitable for those involved in file processing)</li></ul><ul id="1576e0d1-7843-81ad-8dac-e4eb19389829" class="bulleted-list"><li style="list-style-type:disc"><strong>Offering Paid Subscription Plans</strong>: For commercial services, rate limiting is often associated with different subscription levels, where higher plans offer a larger number of permissible requests. (Also, for file processing)</li></ul><ul id="1576e0d1-7843-8107-bc87-d807498d794c" class="bulleted-list"><li style="list-style-type:disc"><strong>Request Queuing</strong>: In some systems, requests exceeding the limit can be queued and processed later when possible.</li></ul><p id="1576e0d1-7843-8170-9f42-d51b2d138905" class="">The goal of Rate Limiting is not just to block excessive traffic, but to manage it in such a way that both the server and clients operate efficiently and stably. Now, you just need to choose the most suitable option for your needs :)</p></li></ol></details></li></ul><ul id="15b6e0d1-7843-8027-982a-d76eec290435" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.4 Graceful Shutdown</strong></mark></summary><p id="1576e0d1-7843-81eb-8a81-df98d5be84c6" class="">(<em>This step is optional</em>) Theoretical introduction.</p><ol type="1" id="1576e0d1-7843-81b7-aa97-c0487a73dd7d" class="numbered-list" start="1"><li><strong>Preparing to Receive Shutdown Signals:</strong><p id="1576e0d1-7843-81c8-ab74-eb54d104d0d5" class="">Use the <code><strong>os/signal</strong></code> package to handle signals, such as SIGINT (Ctrl+C) and SIGTERM (a signal from the system to terminate the process). <code><strong>signal.Notify(quit, os.Interrupt, syscall.SIGTERM)</strong></code> instructs Go to listen for interrupt and termination signals.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81f2-8408-d95cde888662" class="code"><code class="language-Go">quit := make(chan os.Signal, 1)
+signal.Notify(quit, os.Interrupt, syscall.SIGTERM)</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81ff-84d9-cc85d57254a7" class="numbered-list" start="2"><li><strong>Launching the Web Server in a Separate Goroutine:</strong><p id="1576e0d1-7843-8157-8129-c4e136779024" class="">1. Start your HTTP server in a separate goroutine so that the main goroutine can continue listening for signals.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-816a-82c6-d6facff7d897" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">srv := &amp;http.Server{Addr: &quot;:8080&quot;}
+
+go func() {
+    if err := srv.ListenAndServe(); err != nil &amp;&amp; err != http.ErrServerClosed {
+        log.Fatalf(&quot;ListenAndServe(): %v&quot;, err)
+    }
+}()</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8103-ae25-db9c7f7f819b" class="numbered-list" start="3"><li><strong>Handling the Shutdown Signal:</strong><p id="1576e0d1-7843-8194-9e65-e71c2ecbef6f" class="">1. Upon receiving the shutdown signal, initiate the Graceful Shutdown process. The <code><strong>srv.Shutdown(ctx)</strong></code> method gracefully stops the server without interrupting ongoing request handling. <code><strong>context.WithTimeout</strong></code> ensures that the server will wait for the completion of all processes within the specified time (in this case, 30 seconds) before a complete shutdown.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81a3-84a4-d3e0b9c44aba" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">&lt;-quit
+log.Println(&quot;Server is shutting down...&quot;)
+
+ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+defer cancel()
+
+if err := srv.Shutdown(ctx); err != nil {
+    log.Fatalf(&quot;Server forced to shutdown: %v&quot;, err)
+}
+
+log.Println(&quot;Server exiting&quot;)</code></pre><p id="1576e0d1-7843-8173-83da-d8edf9172c1e" class="">Graceful Shutdown is important for preventing data loss and ensuring proper termination of operations. It guarantees that all active connections and processes will be correctly completed before the application fully stops.</p></li></ol></details></li></ul></details></li></ul><ul id="1596e0d1-7843-803b-b217-dc130e948128" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Sending Emails </mark>(50 points)</summary><h2 id="15b6e0d1-7843-8046-89b6-d331614c0f70" class=""><mark class="highlight-yellow_background">5. Sending Emails</mark></h2><p id="15b6e0d1-7843-8029-bc9e-c8749fd059e4" class="">You&#x27;ve learned how to create a server using Go, connect it to a database, and link a web page to the server. Now, it&#x27;s time to take your project to the next level by adding <mark class="highlight-yellow_background">email functionality</mark>.</p><p id="15b6e0d1-7843-8058-a339-e70f0b3ae4c6" class=""><mark class="highlight-yellow_background">The goal</mark> of this task is to enhance your project&#x27;s features by implementing <mark class="highlight-yellow_background">email-sending</mark> capabilities. <mark class="highlight-yellow_background">You can choose one of the two options below</mark>:</p><div id="15b6e0d1-7843-801d-8584-e5fc511b39ba" class="column-list"><div id="956d8c50-a221-4fb6-9928-271e3517214b" style="width:50%" class="column"><p id="7190c885-6cb5-4704-a37f-fa968e6541c0" class="block-color-yellow_background"><em><strong>Administrative Panel</strong></em><strong> (40 points)</strong></p><p id="cd02ee1d-9114-42da-8f62-1a3a1bf3287b" class="block-color-yellow_background">Implement the functionality for sending informational and promotional emails from the administrator.</p><p id="15b6e0d1-7843-8026-b09f-cf7dba6e2244" class=""><strong>Steps:</strong></p><p id="15b6e0d1-7843-80ec-808d-cd3dd9bc9ca7" class="">Create an administrative interface that allows administrators to manage users, orders, products, and other aspects of the website.</p><p id="15b6e0d1-7843-8027-8fde-ce14cd674cbf" class="">Integrate an email service into the panel to send notifications to users. These notifications can include:</p><ul id="15b6e0d1-7843-800e-bd14-c613ff3c633d" class="bulleted-list"><li style="list-style-type:disc">Order status updates,</li></ul><ul id="15b6e0d1-7843-801f-93ee-c2313aec4db3" class="bulleted-list"><li style="list-style-type:disc">Information about new products,</li></ul><ul id="15b6e0d1-7843-80a0-b606-e3f32b7e9c0d" class="bulleted-list"><li style="list-style-type:disc">Discounts, promotions, and other important events.</li></ul><p id="15b6e0d1-7843-8098-8820-c2f2309f4a6d" class="">Try to implement not only the ability to send plain text messages but also the option to attach files or images.</p></div><div id="19219fc7-f69e-449f-ac7a-8eb76499fc9d" style="width:50%" class="column"><p id="84a0be83-0a10-4dfe-997e-97afc051512c" class="block-color-yellow_background"><em><strong>User Profile Page</strong></em><strong> (40 points)</strong></p><p id="5deaa11e-fc10-47cf-ae25-fb47d6e37e57" class="block-color-yellow_background">Implement functionality for sending support messages (to the support team&#x27;s email) from the user.</p><p id="15b6e0d1-7843-8094-bc34-f88e1aca00a9" class=""><strong>Steps:</strong></p><p id="15b6e0d1-7843-8081-a3a6-fc3e02da5f70" class="">The user profile page should include functionality for managing personal information, such as:</p><ul id="15b6e0d1-7843-80ef-9380-d2451c5601d0" class="bulleted-list"><li style="list-style-type:disc">Changing the password and email address,</li></ul><ul id="15b6e0d1-7843-8027-bb46-e02b1df1873a" class="bulleted-list"><li style="list-style-type:disc">Viewing the list of orders,</li></ul><ul id="15b6e0d1-7843-80a8-8003-d9a23909faa2" class="bulleted-list"><li style="list-style-type:disc">Accessing the history of interactions with products, comments, and other data.</li></ul><p id="15b6e0d1-7843-802a-a6eb-df5434f0a351" class="">Integrate an email service that allows users to send messages to customer support (helpdesk). These messages could include requests for technical assistance or other inquiries.</p><p id="15b6e0d1-7843-80f1-9007-c0b015ea0f37" class="">Try to implement not only the ability to send plain text messages but also the option to attach files or images.</p></div></div><p id="15b6e0d1-7843-808e-a3e2-c7bc0526984d" class="">Depending on the chosen option, you need to enhance the website by adding the required pages: <mark class="highlight-yellow_background">an administrative panel</mark> or <mark class="highlight-yellow_background">a user profile page</mark>.</p><p id="15b6e0d1-7843-80ac-ba94-f91d30e86fea" class="">
+</p><p id="15b6e0d1-7843-8099-aa5b-ea862742f3e3" class="block-color-yellow_background"><em><strong>Do you have unclear data on your homepage, like “qwerty, abc, asd, 123”? Do you have too few registered users?</strong></em><strong> (10 points)</strong></p><p id="15b6e0d1-7843-8032-98d6-c54030915e8e" class="">To make your website look realistic and functional, it&#x27;s essential to populate it with <mark class="highlight-yellow_background">content</mark>. Follow these guidelines:</p><ul id="15b6e0d1-7843-80c2-899f-c574c01127c1" class="bulleted-list"><li style="list-style-type:disc">Choose open data sources, such as public APIs, and use them to<mark class="highlight-yellow_background"> load information</mark> like products, courses, news, projects, restaurants, hotels, services, books, etc.</li></ul><ul id="15b6e0d1-7843-8014-930a-fea57c2125da" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Upload</mark> at least <mark class="highlight-yellow_background">30 readable entries</mark> to your database. Each entry should include: a name, description, price, features, date, and an image.</li></ul><ul id="15b6e0d1-7843-800d-a217-da540f350818" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Generate</mark> &quot;realistic&quot; <mark class="highlight-yellow_background">user data</mark>, including: full name, email (e.g., <code>123456@astanait.edu.kz</code>), a unified password, date of birth, and other personal details.</li></ul><ul id="15b6e0d1-7843-808f-8b14-e92f0c845a84" class="bulleted-list"><li style="list-style-type:disc">If your project involves multiple roles (e.g., admin-client, admin-teacher-student, admin-author-reader), <mark class="highlight-yellow_background">create</mark> corresponding <mark class="highlight-yellow_background">roles</mark> in the database. This will allow you to set up access permissions for each user category in the next assignment.</li></ul><ul id="15b6e0d1-7843-80ff-8d24-cc4179a89850" class="bulleted-list"><li style="list-style-type:disc">Ensure that your database structure is well-designed. Pay special attention to table relationships: many-to-many, one-to-many, and one-to-one.</li></ul></details></li></ul><hr id="1576e0d1-7843-81f3-9f26-d8467cb50dbe"/><h3 id="1576e0d1-7843-8114-a186-ffe163653b02" class="">Важная информация:</h3><ol type="1" id="1576e0d1-7843-8158-aa03-da73e498ee47" class="numbered-list" start="1"><li>Продолжаем командную работу над <mark class="highlight-orange_background">вашим проектом</mark>. Напоминаю, что тема закреплена за вами до конца триместра, и каждое новое задание будет <mark class="highlight-orange_background">продолжением</mark> предыдущего. Состав команд остаётся неизменным до конца триместра.</li></ol><ol type="1" id="15b6e0d1-7843-8036-847c-efa163fbf9d8" class="numbered-list" start="2"><li>Не забудьте коммитить обновлённые проекты и задания в ваш репозиторий, а также обновлять информацию в <code>README.md</code>. Убедитесь, что в репозитории есть всё необходимое, включая код, изображения и другие материалы, и что он доступен для просмотра <mark class="highlight-orange_background">(public access)</mark>.</li></ol><ol type="1" id="15b6e0d1-7843-80a1-8365-e570b8c39324" class="numbered-list" start="3"><li>Помните, что задания могут потребовать <mark class="highlight-orange_background">адаптации</mark> под ваш уникальный проект. Примеры, представленные в данном файле, являются ориентиром, но вы можете их изменять или использовать другой подход, удобный для вашей команды.</li></ol><ol type="1" id="1576e0d1-7843-81fa-bc84-f82b8b6c535d" class="numbered-list" start="4"><li>Дедлайн — <mark class="highlight-orange_background">до 21:00 8 января 2025 года</mark>. Если возникнут проблемы с системой мудл, отправьте работы через Teams. Не забудьте указать имена участников команды. Одна команда — одна ссылка.</li></ol><ol type="1" id="15b6e0d1-7843-8066-b724-f995dbcbf4a2" class="numbered-list" start="5"><li>Вы можете защищать проект <mark class="highlight-orange_background">до конца 4-й недели</mark>. Презентации не нужны — достаточно показать и рассказать о своей работе. Если не сможете присутствовать на защите по уважительным причинам, проект можно сдать в онлайн-формате. Для уточнения деталей пишите в Teams.</li></ol><ol type="1" id="1576e0d1-7843-8159-807a-c6fc42f6d736" class="numbered-list" start="6"><li>Если команда не приложит ссылку на GitHub в Moodle или не отправит её через Teams, а также не защитит проект, то, к сожалению, это <mark class="highlight-orange_background">0 баллов</mark>.</li></ol><ol type="1" id="15b6e0d1-7843-8091-8d2c-d69823df8318" class="numbered-list" start="7"><li>Постарайтесь сдавать проекты <mark class="highlight-orange_background">вовремя</mark>, поскольку за опоздание предусмотрены штрафы. За опоздание на 1-2 дня — штраф 5% от остатка, на 3-7 дней — 15% от остатка, на срок до 2 недель — 30% от остатка, свыше 2 недель — 50% от остатка.</li></ol><h3 id="1576e0d1-7843-81e6-a1c8-e79b7eb83518" class="">Задания:</h3><p id="1576e0d1-7843-816b-8df8-e9719fa1279e" class="">В этом ассайнменте мы рассмотрим следующие темы.</p><ul id="1576e0d1-7843-8126-b42d-c0ba24ff171b" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background">Filtering Sorting and Pagination </mark>(25 баллов)</summary><h2 id="1576e0d1-7843-8161-89d2-c40b144268ee" class=""><mark class="highlight-teal_background">3. Filtering, Sorting, and Pagination</mark></h2><p id="1576e0d1-7843-8152-a1c3-cdf9ee2d59f0" class="">Это важные аспекты в веб-разработке, которые помогают управлять и оптимизировать отображение данных.</p><ul id="1576e0d1-7843-81a8-8dff-ce003e14fffa" class="bulleted-list"><li style="list-style-type:disc"><strong>Filtering (Фильтрация)</strong>: Позволяет пользователям ограничивать набор отображаемых данных по определенным критериям. Например, в базе данных пользователей можно фильтровать по имени, возрасту или email.</li></ul><ul id="1576e0d1-7843-810a-ad06-d281afde2581" class="bulleted-list"><li style="list-style-type:disc"><strong>Sorting (Сортировка)</strong>: Дает возможность упорядочивать данные по возрастанию или убыванию на основе выбранного поля, например, по дате регистрации или имени пользователя.</li></ul><ul id="1576e0d1-7843-8105-8e31-e617f8aa855d" class="bulleted-list"><li style="list-style-type:disc"><strong>Pagination (Пагинация)</strong>: Это процесс разделения контента на отдельные страницы, что улучшает производительность и удобство пользования, особенно при большом объеме данных. Например, отображение списка новостей с возможностью переключения между страницами.</li></ul><p id="1576e0d1-7843-8100-bb57-e46dd8202de8" class="">Важно понимать, что эти процедуры можно выполнять как на бэкенде, так и на фронтенде. Тем не менее, учитывая специфику нашей дисциплины, активное использование бэкенд-части является <mark class="highlight-teal_background">обязательным</mark>.</p><ul id="15b6e0d1-7843-8090-a932-d30ac6fe6bf5" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.1 Filtering (8 баллов)</strong></mark></summary><figure id="1576e0d1-7843-81a4-92af-c8c7a5edfcb0" class="image" style="text-align:center"><a href="Assignment_2/0__g5LDhY9fXdP4roN.png"><img style="width:336px" src="Assignment_2/0__g5LDhY9fXdP4roN.png"/></a></figure><ol type="1" id="1576e0d1-7843-819e-abce-dcc50af1b37d" class="numbered-list" start="1"><li><strong>Добавление фильтрации в код сервера</strong>:<p id="1576e0d1-7843-813e-96a6-f260a0e89d0f" class="">Допустим, вы храните данные в базе данных, и вам нужно добавить фильтрацию по полю <code>name</code>. В коде обработчика запроса нужно изменить SQL-запрос, добавив условие фильтрации. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-814c-9194-f8bc4bb457df" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve the filter parameter from the URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+
+    // SQL query taking into account the filter
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+
+    // Sending the query to the database and processing the results
+    // ...
+
+    // Displaying the results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8173-b3b5-f8fd2997d02b" class="numbered-list" start="2"><li><strong>Добавление поля веб-страницы для ввода фильтра</strong>:<p id="1576e0d1-7843-81e3-89c4-d45d180aeadc" class="">Добавьте поле на веб-страницу, чтобы пользователь мог вводить фильтр.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-814d-a9a4-ea48bfafafa8" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;label for=&quot;filter&quot;&gt;Filter:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;filter&quot; name=&quot;filter&quot; placeholder=&quot;Enter filter&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Filter&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Displaying results --&gt;
+    &lt;!-- ... --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul><ul id="15b6e0d1-7843-808c-9b83-e6a2c14ac7b9" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.2 Sorting (8 баллов</strong></mark><strong>)</strong></summary><figure id="1576e0d1-7843-81bb-b3f8-edbbf337f8f4" class="image" style="text-align:center"><a href="Assignment_2/c04af87bcb3cb6bdf274c770d2a88fff.jpg"><img style="width:384px" src="Assignment_2/c04af87bcb3cb6bdf274c770d2a88fff.jpg"/></a></figure><ol type="1" id="1576e0d1-7843-8181-be07-f815601176ae" class="numbered-list" start="1"><li><strong>Добавление сортировки в код сервера</strong>:<p id="1576e0d1-7843-8114-9108-fa3aba1de4ca" class="">Допустим, вы хотите добавить возможность сортировки по полю <code>price</code>. В коде обработчика запроса нужно изменить SQL-запрос, добавив условие сортировки.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-812f-b2b0-d5c8f2667bbd" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve filter and sort parameters from URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+    sort := r.URL.Query().Get(&quot;sort&quot;)
+
+    // SQL query considering filtering and sorting
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+    if sort != &quot;&quot; {
+        query += &quot; ORDER BY &quot; + sort
+    }
+
+    // Sending request to database and handling results
+    // ...
+
+    // Displaying results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-817b-9e8c-f95e0d4b6158" class="numbered-list" start="2"><li><strong>Добавление кнопок веб-страницы для выбора сортировки</strong>:<p id="1576e0d1-7843-81b7-8c5b-df6f0765d779" class="">Добавьте кнопки на веб-страницу, чтобы пользователь мог выбрать поле для сортировки.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-810b-a380-c576f9077cef" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;label for=&quot;filter&quot;&gt;Filter:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;filter&quot; name=&quot;filter&quot; placeholder=&quot;Enter filter&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Filter&lt;/button&gt;
+        &lt;br&gt;
+        &lt;label for=&quot;sort&quot;&gt;Sort:&lt;/label&gt;
+        &lt;select id=&quot;sort&quot; name=&quot;sort&quot;&gt;
+            &lt;option value=&quot;name&quot;&gt;By Name&lt;/option&gt;
+            &lt;option value=&quot;price&quot;&gt;By Price&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button type=&quot;submit&quot;&gt;Apply Sorting&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Display results --&gt;
+    &lt;!-- ... --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul><ul id="15b6e0d1-7843-80f6-827d-edc47055976d" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background"><strong>3.3 Pagination(9 баллов)</strong></mark></summary><figure id="1576e0d1-7843-812a-8552-d3d65d0b49e5" class="image" style="text-align:center"><a href="Assignment_2/e6b30bf5-dcdd-4430-a971-97706bd0fe05-cover.png"><img style="width:288px" src="Assignment_2/e6b30bf5-dcdd-4430-a971-97706bd0fe05-cover.png"/></a></figure><ol type="1" id="1576e0d1-7843-819c-8935-ced2716368da" class="numbered-list" start="1"><li><strong>Добавление пагинации в код сервера</strong>:<p id="1576e0d1-7843-81f9-8bbf-f5ebca0ac67c" class="">Предположим, что вы хотите отобразить по 10 элементов на странице. В коде сервера нужно изменить SQL-запрос для поддержки пагинации.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8166-8069-c421088c171c" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve filtering, sorting, and pagination parameters from the URL
+    filter := r.URL.Query().Get(&quot;filter&quot;)
+    sort := r.URL.Query().Get(&quot;sort&quot;)
+    page := r.URL.Query().Get(&quot;page&quot;)
+
+    limit := 10  // Number of items per page
+    offset := 0  // Offset for SQL query
+
+    // Calculate offset based on pagination
+    if p, err := strconv.Atoi(page); err == nil &amp;&amp; p &gt; 1 {
+        offset = (p - 1) * limit
+    }
+
+    // SQL query considering all parameters
+    query := &quot;SELECT * FROM products&quot;
+    if filter != &quot;&quot; {
+        query += &quot; WHERE name LIKE &#x27;%&quot; + filter + &quot;%&#x27;&quot;
+    }
+    if sort != &quot;&quot; {
+        query += &quot; ORDER BY &quot; + sort
+    }
+    query += fmt.Sprintf(&quot; LIMIT %d OFFSET %d&quot;, limit, offset)
+
+    // Send the query to the database and process the results
+    // ...
+
+    // Display the results
+    // ...
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8194-8dbe-e1fb254dcafa" class="numbered-list" start="2"><li><strong>Добавление элементов управления пагинацией на веб-страницу</strong>:<p id="1576e0d1-7843-81e2-93ee-c7cc7389eab4" class="">На веб-страницу добавляются элементы для навигации по страницам.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-813c-b154-ecd04f77c15d" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;form action=&quot;/&quot; method=&quot;get&quot;&gt;
+        &lt;!-- Filtering and Sorting --&gt;
+        &lt;!-- ... --&gt;
+
+        &lt;label for=&quot;page&quot;&gt;Page:&lt;/label&gt;
+        &lt;input type=&quot;number&quot; id=&quot;page&quot; name=&quot;page&quot; min=&quot;1&quot;&gt;
+        &lt;button type=&quot;submit&quot;&gt;Go&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;!-- Displaying Results --&gt;
+    &lt;!-- ... --&gt;
+
+    &lt;!-- Pagination Navigation --&gt;
+    &lt;!-- JavaScript can be added here for more dynamic navigation --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></li></ol></details></li></ul></details></li></ul><ul id="1576e0d1-7843-81cb-ac41-ffb62066772d" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background">Structured Logging, Error Handlig, Rate Limiting and Graceful Shutdown </mark>(25 баллов)</summary><h2 id="1576e0d1-7843-8140-86ba-ffb28c068b1f" class=""><mark class="highlight-blue_background">4. Structured Logging, Error Handling, Rate Limiting, and Graceful Shutdown</mark></h2><p id="1576e0d1-7843-8165-9456-c3e0327becb5" class="">Эти темы связаны с более продвинутыми аспектами разработки и поддержки веб-приложений.</p><ul id="1576e0d1-7843-8171-bc58-ed32e45f4a29" class="bulleted-list"><li style="list-style-type:disc"><strong>Structured Logging (Структурированное логирование)</strong>: Подразумевает запись логов в стандартизированном формате (например, JSON), что облегчает их анализ и обработку.</li></ul><ul id="1576e0d1-7843-8190-863f-fbb81e19dc28" class="bulleted-list"><li style="list-style-type:disc"><strong>Error Handling (Обработка ошибок)</strong>: Включает в себя разработку методов эффективного обнаружения, логирования и реагирования на ошибки в приложении.</li></ul><ul id="1576e0d1-7843-815a-8c27-df79e339349c" class="bulleted-list"><li style="list-style-type:disc"><strong>Rate Limiting (Ограничение скорости)</strong>: Предотвращает перегрузку сервера за счет ограничения количества запросов от одного пользователя или IP-адреса за определенный период времени.</li></ul><ul id="1576e0d1-7843-81b0-8a79-f5b851d96c96" class="bulleted-list"><li style="list-style-type:disc"><strong>Graceful Shutdown (Корректное завершение работы)</strong>: Это процесс безопасного останова приложения, при котором завершаются все текущие операции, сохраняются необходимые данные и освобождаются ресурсы перед полной остановкой.</li></ul><ul id="15b6e0d1-7843-809b-a057-e6fd09f32723" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.1 Structured Logging (8 баллов)</strong></mark></summary><ol type="1" id="1576e0d1-7843-8135-82f1-c8ec2b4c2188" class="numbered-list" start="1"><li><strong>Выбор библиотеки логгирования:</strong><p id="1576e0d1-7843-81d9-9eab-e764fcbfed15" class="">Рекомендуется использовать сторонние библиотеки логгирования, например <a href="https://github.com/sirupsen/logrus">logrus</a> для Golang. (Но вы можете использовать любую подходящую библиотеку). Выполните установку с помощью:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8108-b99e-ebb15e580504" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">go get -u github.com/sirupsen/logrus</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8187-bda5-d945eda50c0d" class="numbered-list" start="2"><li><strong>Интеграция логгера в проект:</strong><p id="1576e0d1-7843-81a5-8b0f-d1b2f92c03f1" class="">Импортируйте библиотеку в вашем коде и создайте экземпляр логгера.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8193-8945-c5352bde13bd" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">import (
+    &quot;github.com/sirupsen/logrus&quot;
+)
+
+func main() {
+    // Configure logrus
+    log := logrus.New()
+    log.SetFormatter(&amp;logrus.JSONFormatter{})
+    // ...
+
+    // Use log to write logs instead of fmt.Println()
+    // Example:
+    // log.Info(&quot;This is an informational message&quot;)
+    // log.Warn(&quot;This is a warning message&quot;)
+    // log.Error(&quot;This is an error message&quot;)
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8136-9a9d-c7f2642de3f4" class="numbered-list" start="3"><li><strong>Структурированный вывод логов:</strong><p id="1576e0d1-7843-81c3-b997-cd539fca031f" class="">Используйте структурированный формат вывода логов для лучшей читаемости.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-812f-be1e-e0e201c57a3e" class="code"><code class="language-Go">log.WithFields(logrus.Fields{
+	&quot;action&quot;: &quot;start&quot;,
+	&quot;status&quot;: &quot;success&quot;,
+}).Info(&quot;Application started successfully&quot;)</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81f0-bd4c-dc147955821c" class="code"><code class="language-Go">log.WithFields(log.Fields{
+    &quot;module&quot;: &quot;main&quot;,
+    &quot;function&quot;: &quot;main&quot;,
+    &quot;action&quot;: &quot;start&quot;,
+}).Info(&quot;Application started&quot;)</code></pre><p id="1576e0d1-7843-8185-87e4-f1d71393168b" class="">Я думаю вы знаете о системе логирования в Moodle, которая фиксирует все ваши действия, начиная от входа в систему до взаимодействия с курсами и домашними заданиями. Ваша задача - реализовать аналогичный механизм логирования.</p><p id="1576e0d1-7843-8112-82ae-e0410ed91659" class="">Например, если у вас веб-сайт магазина, логирование должно начинаться с момента обращения клиента к серверу. Вам нужно фиксировать каждое действие пользователя: открытие определенных страниц, использование фильтров и сортировки, удаление и добавление продуктов, а также время этих действий и id продуктов.</p><p id="1576e0d1-7843-8140-95c4-e23f8f3a8154" class="">Суть в том, чтобы зафиксировать любую активность, связанную с взаимодействием между сервером и клиентом. Вы можете хранить эти данные в любом удобном формате: <mark class="highlight-blue_background">записать логи в текстовый файл</mark> в формате JSON или даже <mark class="highlight-blue_background">записывать логи в базу данных</mark>, как это делается в Moodle. Но для этого не забудьте создать отдельную таблицу. </p></li></ol></details></li></ul><ul id="15b6e0d1-7843-809e-9e30-fd2931d12443" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.2  Error Handling (8 баллов)</strong></mark></summary><p id="15b6e0d1-7843-800f-bbee-d1e4260b9b93" class="">Error Handling (<strong>обработка ошибок</strong>) в программировании — это процесс управления и реагирования на ситуации, когда программа сталкивается с непредвиденными проблемами. В контексте Go это не просто предотвращение ошибок, а скорее умение <strong>обнаружить, интерпретировать и корректно обработать</strong> их, чтобы программа могла продолжить работу, сообщить пользователю об ошибке или завершиться корректным образом.</p><ol type="1" id="1576e0d1-7843-81fc-94bd-c111e5c524d9" class="numbered-list" start="1"><li><strong>Проверка ошибок после каждого действия:</strong><br/>В Go, стандартный подход заключается в том, что функции возвращают ошибку в качестве одного из своих результатов. Правильный подход заключается в проверке наличия ошибки после каждого действия.<br/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-816c-80f5-f26a7b87975b" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func doSomething() error {
+    _, err := someOperation()
+    if err != nil {
+        // Error handling
+        return fmt.Errorf(&quot;someOperation failed: %v&quot;, err)
+    }
+    // Further actions if there was no error
+    return nil
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8160-9911-f27913f9829b" class="numbered-list" start="2"><li><strong>Обработка ошибок на высшем уровне:</strong><br/>Вместо того чтобы обрабатывать ошибку непосредственно там, где она возникла, иногда лучше передать её на верхний уровень, где она может быть обработана централизованно.<br/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81c6-83ec-f99dabd10dba" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func doSomething() error {
+    // Example function returning an error
+    return errors.New(&quot;an error occurred&quot;)
+}
+
+func main() {
+    err := doSomething()
+    if err != nil {
+        // Logging the error occurred in doSomething
+        log.WithField(&quot;error&quot;, err).Error(&quot;Error occurred while executing doSomething&quot;)
+    }
+}</code></pre></li></ol><p id="15b6e0d1-7843-804d-a6e0-cb26aff09500" class="">Для лучшего понимания приведу пример. Предположим, у нас уже реализованы фильтрация, сортировка и пагинация. В этом случае необходимо добавить обработку ошибок при фильтрации и сортировке. Если результат фильтрации или сортировки оказывается пустым, следует возвращать ошибку с сообщением: <em>&quot;No products match the filter&quot;</em> и отображать её клиенту, вместо того чтобы возвращать <code>NULL</code> или полагаться на стандартные сообщения от фронтенда. </p><p id="15b6e0d1-7843-802b-95ff-f53311f726f0" class="">Для этого задания достаточно 2–3 простых примера обработки ошибок, причём они должны быть разнообразными. Дайте волю своему воображению и предложите решения, которые лучше всего подойдут для вашего проекта.</p></details></li></ul><ul id="15b6e0d1-7843-8036-98f7-d3d18ea8771f" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.3 Rate Limiting (9 баллов)</strong></mark></summary><ol type="1" id="1576e0d1-7843-81b6-a3c0-cc8c80417665" class="numbered-list" start="1"><li><strong>Использование </strong><code><strong>NewLimiter</strong></code><strong> для ограничения скорости:</strong><p id="1576e0d1-7843-81ae-98ed-e671448f54ed" class="">Реализуйте ограничение частоты запросов для API вашего проекта, чтобы предотвратить его перегрузку. Используйте пакет <code>golang.org/x/time/rate</code> для реализации ограничителя.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-8125-8250-e08d9a2c433e" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">import (
+    &quot;golang.org/x/time/rate&quot;
+    &quot;net/http&quot;
+)
+
+var limiter = rate.NewLimiter(1, 3) // Rate limit of 1 request per second with a burst of 3 requests
+
+func main() {
+    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
+        if !limiter.Allow() {
+            // Exceeded request limit
+            http.Error(w, &quot;Rate limit exceeded&quot;, http.StatusTooManyRequests)
+            return
+        }
+        // Request processing
+    })
+    http.ListenAndServe(&quot;:8080&quot;, nil)
+}</code></pre></li></ol><ol type="1" id="1576e0d1-7843-81ff-9487-ef93e214ac12" class="numbered-list" start="2"><li><strong>Действия при превышении лимита:</strong><p id="1576e0d1-7843-8152-a2c2-e61f8523aadc" class="">Когда количество запросов превышает установленный лимит, сервер обычно предпринимает следующие действия:</p><ul id="1576e0d1-7843-8111-8855-d8de2db3e307" class="bulleted-list"><li style="list-style-type:disc"><strong>Возвращение кода ошибки</strong>: Самый распространенный подход — возвращать клиенту ошибку с HTTP-кодом 429 (Too Many Requests). Это информирует клиента о том, что лимит запросов был превышен.</li></ul><ul id="1576e0d1-7843-818d-a998-fb343ebc51ce" class="bulleted-list"><li style="list-style-type:disc"><strong>Задержка обработки запросов</strong>: В некоторых случаях сервер может не отклонять лишние запросы, а просто задерживать их обработку до тех пор, пока не наступит следующий разрешенный интервал времени для обработки.</li></ul><ul id="1576e0d1-7843-814f-b91a-edfc8850a0bd" class="bulleted-list"><li style="list-style-type:disc"><strong>Предоставление информации о лимите</strong>: Хорошая практика — отправлять в заголовках ответа информацию о том, сколько запросов можно еще сделать до достижения лимита, а также когда лимит будет сброшен. (Подойдет для тех, кто занимается обработкой файлов)</li></ul><ul id="1576e0d1-7843-81e7-954e-f57a6682101d" class="bulleted-list"><li style="list-style-type:disc"><strong>Предоставление платных тарифных планов</strong>: Для коммерческих сервисов ограничение скорости часто связано с разными уровнями подписки, где более высокие тарифные планы предоставляют большее количество допустимых запросов. (Так же, для обработки файлов)</li></ul><ul id="1576e0d1-7843-816f-b70d-d658e2e75393" class="bulleted-list"><li style="list-style-type:disc"><strong>Очереди запросов</strong>: В некоторых системах запросы, превышающие лимит, могут быть поставлены в очередь и обработаны позже, когда это станет возможным.</li></ul><p id="1576e0d1-7843-8158-9fc8-df437c833934" class="">Цель Rate Limiting — не просто блокировать избыточный трафик, а управлять им таким образом, чтобы и сервер, и клиенты функционировали эффективно и стабильно. Ну а вам, остается лишь выбрать подходящий вариант :) </p></li></ol></details></li></ul><ul id="15b6e0d1-7843-8097-9e32-d833b3db021f" class="toggle"><li><details open=""><summary><mark class="highlight-blue_background"><strong>4.4 Graceful Shutdown</strong></mark></summary><p id="1576e0d1-7843-8111-b96c-c94eb72ea40a" class="">(<em>Данный пункт не обязательный</em>) Теоретические ознакомление.</p><ol type="1" id="1576e0d1-7843-8196-b88a-ebe2944463c3" class="numbered-list" start="1"><li><strong>Подготовка к Приему Сигналов Завершения:</strong><p id="1576e0d1-7843-81f8-acd1-d8b630675be7" class="">Используйте пакет <code>os/signal</code> для приема сигналов, например SIGINT (Ctrl+C) и SIGTERM (сигнал от системы для завершения процесса). <code>signal.Notify(quit, os.Interrupt, syscall.SIGTERM)</code> говорит Go слушать сигналы прерывания и завершения работы.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81b8-8649-e5c9c51f32db" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">quit := make(chan os.Signal, 1)
+signal.Notify(quit, os.Interrupt, syscall.SIGTERM)</code></pre></li></ol><ol type="1" id="1576e0d1-7843-814b-8ffc-f92a3a125692" class="numbered-list" start="2"><li><strong>Запуск Веб-сервера в Отдельной Горутине:</strong><p id="1576e0d1-7843-81cc-9128-c238f0abcd46" class="">Запустите ваш HTTP-сервер в отдельной горутине, чтобы основная горутина могла продолжать слушать сигналы.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81a9-8a83-f662a90debd2" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">srv := &amp;http.Server{Addr: &quot;:8080&quot;}
+
+go func() {
+    if err := srv.ListenAndServe(); err != nil &amp;&amp; err != http.ErrServerClosed {
+        log.Fatalf(&quot;ListenAndServe(): %v&quot;, err)
+    }
+}()</code></pre></li></ol><ol type="1" id="1576e0d1-7843-8119-a195-e1103fc052be" class="numbered-list" start="3"><li><strong>Обработка Сигнала Завершения:</strong><p id="1576e0d1-7843-8151-be9f-e5549125fbe4" class="">При получении сигнала завершения начните процесс Graceful Shutdown. Метод <code>srv.Shutdown(ctx)</code> плавно останавливает сервер, не прерывая текущие обработки запросов. <code>context.WithTimeout</code> гарантирует, что сервер будет ожидать завершения всех процессов в течение указанного времени (в данном случае 30 секунд) перед полным выключением.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1576e0d1-7843-81b8-ad69-d13552f99d33" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">&lt;-quit
+log.Println(&quot;Server is shutting down...&quot;)
+
+ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+defer cancel()
+
+if err := srv.Shutdown(ctx); err != nil {
+    log.Fatalf(&quot;Server forced to shutdown: %v&quot;, err)
+}
+
+log.Println(&quot;Server exiting&quot;)</code></pre><p id="1576e0d1-7843-8119-ba9b-d0cfad46da57" class="">Graceful Shutdown важен для предотвращения потери данных и корректного завершения работы. Он гарантирует, что все активные соединения и процессы будут корректно завершены, прежде чем приложение полностью остановится.</p></li></ol></details></li></ul></details></li></ul><ul id="1596e0d1-7843-8008-a599-e8d3e4266439" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Sending Emails </mark>(50 баллов)</summary><h2 id="c4e9ea24-d8bb-4eda-931d-49b4794e69b8" class=""><mark class="highlight-yellow_background">5. Sending Emails</mark></h2><p id="15b6e0d1-7843-8081-8470-e97ba1ab68f8" class="">Вы научились создавать сервер на Go, подключаться к базе данных и связали веб-страницу с сервером. Однако перед вами стоит задача расширения функциональности текущего проекта — добавление возможности <mark class="highlight-yellow_background">отправки email-сообщений</mark>.</p><p id="90b19067-5c69-4b90-8d38-01e4ea90d34c" class=""><mark class="highlight-yellow_background">Цель</mark> задачи - расширить функционал проекта, добавив <mark class="highlight-yellow_background">отправку сообщений на почту</mark>. <mark class="highlight-yellow_background">Выберите один из двух вариантов</mark>:</p><div id="15b6e0d1-7843-80ae-a821-dfc7e905cae1" class="column-list"><div id="95ae0932-57fe-4131-b3f4-58f9055f769b" style="width:50%" class="column"><p id="15b6e0d1-7843-803b-a4a1-ef13132998b9" class="block-color-yellow_background"><em><strong>Административная панель </strong></em><strong>(40 баллов)</strong></p><p id="fade8629-af79-4722-8f34-1f5a144241d2" class="block-color-yellow_background">Реализовать отправку информационных и рекламных рассылок от администратора.</p><p id="15b6e0d1-7843-8044-82e1-d4327475894a" class=""><strong>Шаги:</strong></p><p id="15b6e0d1-7843-80ab-9406-fbdbc6e8fb32" class="">Создайте административный интерфейс, который позволит администраторам управлять пользователями, заказами, товарами и другими аспектами сайта.</p><p id="15b6e0d1-7843-80d8-8b72-d1f83f11dc74" class="">На панели <mark class="highlight-yellow_background">добавьте почтовый сервис</mark> для отправки email-уведомлений пользователям. Уведомления могут включать:</p><ul id="15b6e0d1-7843-8035-8538-c89994168a84" class="bulleted-list"><li style="list-style-type:disc">информацию о статусе заказов,</li></ul><ul id="15b6e0d1-7843-80a1-aba6-cec82608b3b6" class="bulleted-list"><li style="list-style-type:disc">сообщения о новых товарах,</li></ul><ul id="15b6e0d1-7843-809b-be32-df065e917cf8" class="bulleted-list"><li style="list-style-type:disc">скидки, акции и другие важные события.</li></ul><p id="15b6e0d1-7843-8007-9e17-f44897a62e1c" class="">Попробуйте реализовать не только отправку текстовых сообщений, но и возможность прикрепления файлов или изображений.</p></div><div id="7ecaf11d-4b8c-4195-8ecb-5b1dd71c1076" style="width:50%" class="column"><p id="15b6e0d1-7843-8065-9afa-e7fb9ec37e11" class="block-color-yellow_background"><em><strong>Страница профиля пользователя </strong></em><strong>(40 баллов)</strong></p><p id="3925ce55-e11a-4bc1-b34d-93d901e351ce" class="block-color-yellow_background">Реализовать отправку сообщений в поддержку (на почту службы поддержки) от пользователя.</p><p id="15b6e0d1-7843-8038-a602-f05fb07c3a1f" class=""><strong>Шаги:</strong></p><p id="15b6e0d1-7843-80a3-90d3-c09b1b9a79e1" class="">Страница профиля пользователя должна включать управление личными данными, такие как:</p><ul id="15b6e0d1-7843-807f-b6a4-e4cf99e9a1e7" class="bulleted-list"><li style="list-style-type:disc">изменение пароля и email-адреса,</li></ul><ul id="15b6e0d1-7843-804e-8b69-ff2da354a527" class="bulleted-list"><li style="list-style-type:disc">просмотр списка заказов,</li></ul><ul id="15b6e0d1-7843-8099-bada-f6dd2d911e30" class="bulleted-list"><li style="list-style-type:disc">история взаимодействия с товарами, комментариями и другими данными.</li></ul><p id="15b6e0d1-7843-8027-b0ac-c97b5741c672" class=""><mark class="highlight-yellow_background">Интегрируйте почтовый сервис</mark>, позволяющий пользователям отправлять сообщения в службу поддержки (хелпдеск). Такие сообщения могут быть, например, заявками на техническую поддержку.</p><p id="15b6e0d1-7843-8067-9c1a-f9e906db7da4" class="">Попробуйте реализовать не только отправку текстовых сообщений, но и возможность прикрепления файлов или изображений.</p></div></div><p id="15b6e0d1-7843-802f-8ea7-f109ac5a5cb4" class="">В зависимости от выбранного варианта вам нужно дополнить сайт необходимыми страницами: <mark class="highlight-yellow_background">административной панели</mark> или <mark class="highlight-yellow_background">страницы профиля пользователя</mark>. </p><p id="15b6e0d1-7843-80ab-a619-f84114b153da" class="">
+</p><p id="58e1f28d-d92e-4bd4-9d43-b14019a8e12d" class="block-color-yellow_background"><em><strong>У вас непонятные данные на главной странице, по типу “qwerty, abc, asd, 123”? У вас зарегистрировано мало пользователей?</strong></em><strong> (10 баллов)</strong></p><p id="e697ed65-8875-40ce-8b58-ca7d752e68c8" class="">Для того чтобы ваш сайт выглядел реалистично и функционально, важно заполнить его <mark class="highlight-yellow_background">контентом</mark>. Следуйте этим рекомендациям: </p><ul id="15b6e0d1-7843-8072-9097-ff06e6d5a443" class="bulleted-list"><li style="list-style-type:disc">Выберите открытые источники данных, такие как публичные API, и используйте их для <mark class="highlight-yellow_background">загрузки информации</mark>, например: товары, курсы, новости, проекты, рестораны, отели, услуги, книги и т.д.</li></ul><ul id="15b6e0d1-7843-80f6-ac99-d3ef3639befc" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Загрузите</mark> как минимум<mark class="highlight-yellow_background"> 30 читабельных записей</mark> в вашу базу данных. Каждая запись должна содержать: название, описание, цену, характеристики, дату, изображение.</li></ul><ul id="15b6e0d1-7843-80dc-8b33-d7c1280608ec" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Сгенерируйте</mark> &quot;настоящие&quot; <mark class="highlight-yellow_background">данные</mark> пользователей, включая: ФИО, email (например, в формате <code>123456@astanait.edu.kz</code>), унифицированный пароль, дату рождения, другие персональные данные.</li></ul><ul id="15b6e0d1-7843-807b-abb9-f928fd2f0279" class="bulleted-list"><li style="list-style-type:disc">Если ваш проект предполагает несколько ролей (например, администратор-клиент, администратор-преподаватель-студент, администратор-автор-читатель), <mark class="highlight-yellow_background">создайте</mark> в базе соответствующие <mark class="highlight-yellow_background">роли</mark>. Это позволит настроить права доступа для каждой категории пользователей в следующем ассайнменте.</li></ul><ul id="15b6e0d1-7843-8058-a2eb-ed718f2feb77" class="bulleted-list"><li style="list-style-type:disc">Убедитесь, что структура базы данных спроектирована правильно. При проектировании обратите внимание на связи между таблицами: многие ко многим, один ко многим, один к одному.</li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
