@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openEditModal(event) {
         const id = event.target.dataset.id;
-        fetch(`http://localhost:8080/updatevacancy?id=${id}`)
+        fetch(`http://localhost:8080/vacancy?id=${id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch vacancy. Status: ${response.status}`);
