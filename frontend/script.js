@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("description").value;
 
         try {
-            const response = await fetch("http://localhost:8080/vacancies", {
+            const response = await fetch("http://localhost:8080/createvacancy", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openEditModal(event) {
         const id = event.target.dataset.id;
-        fetch(`http://localhost:8080/vacancies?id=${id}`)
+        fetch(`http://localhost:8080/updatevacancy?id=${id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch vacancy. Status: ${response.status}`);
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("editDescription").value;
     
         try {
-            const response = await fetch(`http://localhost:8080/vacancies?id=${id}`, { // Changed to use query parameter
+            const response = await fetch(`http://localhost:8080/updatevacancy?id=${id}`, { // Changed to use query parameter
                 method: "PUT",
                 headers: { 
                     "Content-Type": "application/json" 
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("Are you sure you want to delete this vacancy?")) return;
     
         try {
-            const response = await fetch(`http://localhost:8080/vacancies?id=${id}`, { // Changed to use query parameter
+            const response = await fetch(`http://localhost:8080/deletevacancy?id=${id}`, { // Changed to use query parameter
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
@@ -214,7 +214,7 @@ searchButton.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`http://localhost:8080/vacancies?id=${searchQuery}`);
+        const response = await fetch(`http://localhost:8080/vacancy?id=${searchQuery}`);
         if (!response.ok) {
             const text = await response.text();
             throw new Error(`Server Error: ${response.status} - ${text}`);
