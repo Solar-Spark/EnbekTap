@@ -1,16 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("jobForm");
+
+
     const searchButton = document.querySelector("button#search");
     const searchInput = document.querySelector("input#search");
     const jobCardsContainer = document.getElementById("jobCards");
 
+    const createPostButton = document.querySelector("#createPost");
+    const createModal = document.getElementById("createModal");
+    const closeCreateModal = document.getElementById("closeCreateModal");
+
     const editModal = document.getElementById("editModal");
     const closeEditModal = document.getElementById("closeEditModal");
-    const editForm = document.getElementById("editForm");
+
+
+  
 
     const jobTypeDropdown = document.getElementById("jobTypeDropdown");
     const sortDropdown = document.getElementById("sortDropdown");
     const resetButton = document.getElementById("reset");
+
+
+    createPostButton.addEventListener("click", ()=> {
+        createModal.style.display = "block";
+
+    })
+
+    closeCreateModal.addEventListener("click", () => {
+        createModal.style.display = "none";
+    });
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -39,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             alert(result.message);
             form.reset();
+            createModal.style.display = "none";
             loadJobCards();
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -122,9 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const fullTimeButton = document.getElementById("editFullTime");
                 const partTimeButton = document.getElementById("editPartTime");
     
-                if (vacancy.JobType === "Full Time") {
+                if (vacancy.JobType === "Full-Time") {
                     fullTimeButton.checked = true;
-                } else if (vacancy.JobType === "Part Time") {
+                } else if (vacancy.JobType === "Part-Time") {
                     partTimeButton.checked = true;
                 }
     
@@ -179,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Error editing the vacancy. Please try again.");
         }
     });
-
     async function deleteVacancy(event) {
         const id = event.target.dataset.id;
         if (!confirm("Are you sure you want to delete this vacancy?")) return;
@@ -241,8 +259,18 @@ searchButton.addEventListener("click", async () => {
             <p><strong>Salary:</strong> $${vacancy.Salary}</p>
             <p><strong>Type:</strong> ${vacancy.JobType}</p>
             <p>${vacancy.Description}</p>
+            <button class="edit-button" data-id="${vacancy.VacancyID}">Edit</button>
+            <button class="delete-button" data-id="${vacancy.VacancyID}">Delete</button>
         `;
         jobCardsContainer.appendChild(card);
+
+        document.querySelectorAll(".edit-button").forEach(button =>
+            button.addEventListener("click", openEditModal)
+        );
+    
+        document.querySelectorAll(".delete-button").forEach(button =>
+            button.addEventListener("click", deleteVacancy)
+        );
     }
 
     searchInput.addEventListener("blur", () => {
