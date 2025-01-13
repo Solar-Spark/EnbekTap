@@ -24,8 +24,8 @@
             <a href="login.html" class="login-link">Login</a>
         </div>
     </nav><br>
-
-    <div class="container" id = "login-form">
+     <!--Log inform-->
+    <div class="container" id = "login-form" style="display: block;">
         <h1>Log in</h1>
         <form>
             <div >
@@ -39,11 +39,36 @@
 
             <input type="checkbox" id="rememberMe" name="rememberMe">
             <label for="rememberMe">Organization</label>
-            <a href="#"  id = "sign-up">Sign up</a><br><br>
+            <a href = "#" id = "sign-up">Sign up</a><br><br>
 
             <button type="submit">Log in</button>
         </form>
     </div><br>
+
+    <!--Sign up form-->
+    <div class="container" id = "signup-form" style="display:none"">
+        <h1>Sign up</h1>
+        <form>
+            <div >
+                <label for="username">Username:</label><br>
+                <input type="text " id="username" name="Username" required><br><br>
+
+                <label for="password">Password:</label><br>
+                <input id="passwordFirst" name="Password" type="password" required><br><br>
+
+                <label for="password">Password:</label><br>
+                <input id="passwordSecond" name="Password" type="password" required><br><br>
+            </div>
+
+
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe">Organization</label>
+            <a  href = "#" id = "log-in">Log in</a><br><br>
+
+            <button type="submit">Sign up</button>
+        </form>
+    </div><br>
+
 
     <script src="script.js"></script>
     <footer class="footer">

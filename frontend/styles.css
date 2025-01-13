@@ -103,11 +103,12 @@ button:hover {
     text-decoration: underline;
 }
 
-#login-form{
+#login-form, #signup-form{
     margin-top:15%;
 }
 
-#sign-up{
+
+#sign-up, #log-in{
     float: right; /*positions sign up link on right side of div element*/
 }
 

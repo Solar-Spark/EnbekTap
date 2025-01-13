@@ -21,6 +21,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const resetButton = document.getElementById("reset");
 
 
+    const loginForm = document.getElementById("login-form")
+    const signupForm = document.getElementById("signup-form")
+    const login = document.getElementById("log-in")
+    const signup= document.getElementById("sign-up")
+
+
+    signup.addEventListener("click", ()=> {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        
+    });
+
+
+    login.addEventListener("click", ()=> {
+        signupForm.style.display = "none";
+        loginForm.style.display = "block";
+
+        
+    });
+
+
     createPostButton.addEventListener("click", ()=> {
         createModal.style.display = "block";
 
