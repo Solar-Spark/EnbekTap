@@ -17,8 +17,8 @@ func (s *VacancyService) GetVacancy(id uint) (entities.Vacancy, error) {
 	return s.Repo.ReadVacancy(id)
 }
 
-func (s *VacancyService) GetAllVacancies(filterBy string, sortBy string) ([]entities.Vacancy, error) {
-	return s.Repo.ReadVacancies(filterBy, sortBy)
+func (s *VacancyService) GetAllVacancies(filterBy string, sortBy string, page int, pageSize int) ([]entities.Vacancy, int64, error) {
+	return s.Repo.ReadVacancies(filterBy, sortBy, page, pageSize)
 }
 
 func (s *VacancyService) UpdateVacancy(id uint, vacancy entities.Vacancy) error {

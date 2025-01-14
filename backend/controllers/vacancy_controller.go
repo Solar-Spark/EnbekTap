@@ -3,6 +3,7 @@ package controllers
 import (
 	"enbektap/entities"
 	"enbektap/services"
+	"math"
 	"net/http"
 	"strconv"
 
@@ -72,19 +73,30 @@ func (c *VacancyController) GetAllVacancies(ctx *gin.Context) {
 		return
 	}
 
-	// Retrieve query parameters with default values of "none"
+	// Retrieve query parameters
 	filterBy := ctx.DefaultQuery("jobType", "none")
 	sortBy := ctx.DefaultQuery("sort", "none")
+	page, err := strconv.Atoi(ctx.DefaultQuery("page", "1"))
+	if err != nil || page < 1 {
+		page = 1
+	}
+	pageSize := 9 // Fixed page size
 
-	// Call the service to fetch vacancies with the filter and sort options
-	vacancies, err := c.Service.GetAllVacancies(filterBy, sortBy)
+	// Call the service to fetch vacancies with pagination
+	vacancies, total, err := c.Service.GetAllVacancies(filterBy, sortBy, page, pageSize)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch vacancies"})
 		return
 	}
 
-	// Return the filtered and sorted vacancies
-	ctx.JSON(http.StatusOK, vacancies)
+	// Return the paginated response
+	ctx.JSON(http.StatusOK, gin.H{
+		"vacancies":   vacancies,
+		"total":       total,
+		"currentPage": page,
+		"pageSize":    pageSize,
+		"totalPages":  int(math.Ceil(float64(total) / float64(pageSize))),
+	})
 }
 
 func (c *VacancyController) UpdateVacancy(ctx *gin.Context) {

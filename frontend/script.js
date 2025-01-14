@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const sortDropdown = document.getElementById("sortDropdown");
     const resetButton = document.getElementById("reset");
 
+    // Add these variables at the top of your script
+    let currentPage = 1;
+    const pageSize = 9;
+
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const jobName = document.getElementById("jobName").value;
@@ -45,11 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Update the loadJobCards function
     async function loadJobCards() {
         const jobType = jobTypeDropdown.value;
         const sortBy = sortDropdown.value;
         const url = new URL("http://localhost:8080/vacancies");
-    
+        
+        url.searchParams.append("page", window.currentPage);  // Use window.currentPage
         if (jobType) {
             url.searchParams.append("jobType", jobType);
         }
@@ -59,20 +65,59 @@ document.addEventListener("DOMContentLoaded", () => {
     
         try {
             const response = await fetch(url);
-    
             if (!response.ok) {
                 const text = await response.text();
                 throw new Error(`Server Error: ${response.status} - ${text}`);
             }
     
-            const vacancies = await response.json();
-            renderJobCards(vacancies);
+            const data = await response.json();
+            renderJobCards(data.vacancies);
+            renderPagination(data.currentPage, data.totalPages);
         } catch (error) {
             console.error("Error fetching vacancies:", error);
             alert("Error fetching job postings. Please try again.");
         }
     }
     
+    // Add pagination rendering function
+    function renderPagination(currentPage, totalPages) {
+        const paginationContainer = document.getElementById("pagination");
+        paginationContainer.innerHTML = "";
+    
+        // Previous button
+        if (currentPage > 1) {
+            const prevButton = document.createElement("button");
+            prevButton.textContent = "Previous";
+            prevButton.addEventListener("click", () => {
+                window.currentPage--;  // Use window to ensure global scope
+                loadJobCards();
+            });
+            paginationContainer.appendChild(prevButton);
+        }
+    
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement("button");
+            pageButton.textContent = i;
+            pageButton.classList.toggle("active", i === currentPage);
+            pageButton.addEventListener("click", () => {
+                window.currentPage = i;  // Use window to ensure global scope
+                loadJobCards();
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+    
+        // Next button
+        if (currentPage < totalPages) {
+            const nextButton = document.createElement("button");
+            nextButton.textContent = "Next";
+            nextButton.addEventListener("click", () => {
+                window.currentPage++;  // Use window to ensure global scope
+                loadJobCards();
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+    }
 
   // Render job cards on the page
   function renderJobCards(vacancies) {
@@ -259,10 +304,12 @@ searchButton.addEventListener("click", async () => {
     });
 
     jobTypeDropdown.addEventListener('change', () => {
+        currentPage = 1;
         loadJobCards();
     });
 
     sortDropdown.addEventListener('change', () => {
+        currentPage = 1;
         loadJobCards();
     });
 
