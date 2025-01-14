@@ -9,7 +9,7 @@ import (
 type VacancyRepository interface {
 	CreateVacancy(vacancy entities.Vacancy) error
 	ReadVacancy(id uint) (entities.Vacancy, error)
-	ReadVacancies() ([]entities.Vacancy, error)
+	ReadVacancies(filterBy string, sortBy string) ([]entities.Vacancy, error)
 	UpdateVacancy(id uint, updated entities.Vacancy) error
 	DeleteVacancy(id uint) error
 }
@@ -28,10 +28,36 @@ func (repo *VacancyRepo) ReadVacancy(id uint) (entities.Vacancy, error) {
 	return vacancy, err
 }
 
-func (repo *VacancyRepo) ReadVacancies() ([]entities.Vacancy, error) {
+func (repo *VacancyRepo) ReadVacancies(filterBy string, sortBy string) ([]entities.Vacancy, error) {
 	var vacancies []entities.Vacancy
-	err := repo.DB.Limit(9).Find(&vacancies).Error
-	return vacancies, err
+
+	// Start building the query
+	query := repo.DB.Model(&entities.Vacancy{})
+
+	// Apply filtering if jobType is not "none"
+	if filterBy != "none" {
+		query = query.Where("jobtype = ?", filterBy)
+	}
+
+	// Apply sorting if sortBy is not "none"
+	if sortBy != "none" {
+		switch sortBy {
+		case "salary-asc":
+			query = query.Order("salary ASC")
+		case "salary-desc":
+			query = query.Order("salary DESC")
+		default:
+			break
+		}
+	}
+
+	// Fetch the results, limit to 9 records
+	err := query.Limit(9).Find(&vacancies).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return vacancies, nil
 }
 
 func (repo *VacancyRepo) UpdateVacancy(id uint, updated entities.Vacancy) error {

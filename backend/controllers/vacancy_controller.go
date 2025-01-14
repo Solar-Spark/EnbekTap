@@ -13,6 +13,11 @@ type VacancyController struct {
 	Service *services.VacancyService
 }
 
+type Options struct {
+	FilterBy string `json:"filterBy"`
+	SortBy   string `json:"sortBy"`
+}
+
 func (c *VacancyController) CreateVacancy(ctx *gin.Context) {
 	if ctx.Request.Method != http.MethodPost {
 		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
@@ -67,12 +72,18 @@ func (c *VacancyController) GetAllVacancies(ctx *gin.Context) {
 		return
 	}
 
-	vacancies, err := c.Service.GetAllVacancies()
+	// Retrieve query parameters with default values of "none"
+	filterBy := ctx.DefaultQuery("jobType", "none")
+	sortBy := ctx.DefaultQuery("sort", "none")
+
+	// Call the service to fetch vacancies with the filter and sort options
+	vacancies, err := c.Service.GetAllVacancies(filterBy, sortBy)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch vacancies"})
 		return
 	}
 
+	// Return the filtered and sorted vacancies
 	ctx.JSON(http.StatusOK, vacancies)
 }
 

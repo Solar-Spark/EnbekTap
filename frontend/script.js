@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             alert(result.message);
             form.reset();
-            loadJobCards();
         } catch (error) {
             console.error("Error submitting form:", error);
             alert("Error submitting the form. Please try again.");
@@ -257,6 +256,14 @@ searchButton.addEventListener("click", async () => {
         jobTypeDropdown.selectedIndex = 0;  // Reset job type dropdown to the default option
         sortDropdown.selectedIndex = 0;  // Reset sort dropdown to the default option
         loadJobCards();  // Reload all job cards without any filters
+    });
+
+    jobTypeDropdown.addEventListener('change', () => {
+        loadJobCards();
+    });
+
+    sortDropdown.addEventListener('change', () => {
+        loadJobCards();
     });
 
     loadJobCards();
