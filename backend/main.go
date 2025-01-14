@@ -5,25 +5,92 @@ import (
 	"enbektap/infra"
 	"enbektap/router"
 	"enbektap/services"
-	"log"
 	"net/http"
+	"os"
+	"path/filepath"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
-func main() {
-	db, error := infra.ConnectDB()
+func setupLogger() {
+	// Create logs directory if it doesn't exist
+	logDir := "logs"
+	if err := os.MkdirAll(logDir, 0755); err != nil {
+		log.Fatal().Err(err).Msg("Failed to create log directory")
+	}
 
-	if error != nil {
+	// Create log file with timestamp
+	logFile := filepath.Join(logDir, time.Now().Format("2006-01-02")+".json")
+	file, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal().Err(err).Msg("Failed to create log file")
+	}
+
+	// Configure console output
+	consoleWriter := zerolog.ConsoleWriter{
+		Out:        os.Stdout,
+		TimeFormat: time.RFC3339,
+	}
+
+	// Create multi-writer for both console and file
+	multi := zerolog.MultiLevelWriter(consoleWriter, file)
+
+	// Configure global logger
+	log.Logger = zerolog.New(multi).
+		With().
+		Timestamp().
+		Caller().
+		Logger()
+}
+
+func main() {
+	setupLogger()
+
+	db, err := infra.ConnectDB()
+	if err != nil {
+		log.Error().
+			Err(err).
+			Msg("Failed to connect to database")
 		return
 	}
+	log.Info().Msg("Database connection established")
 
 	repo := &infra.VacancyRepo{DB: db}
 	service := &services.VacancyService{Repo: repo}
 	controller := &controllers.VacancyController{Service: service}
 
 	r := gin.Default()
+
+	// Add logging middleware
+	r.Use(func(c *gin.Context) {
+		start := time.Now()
+
+		// Add request ID for tracking
+		requestID := c.GetHeader("X-Request-ID")
+		if requestID == "" {
+			requestID = uuid.New().String()
+		}
+
+		c.Next()
+
+		// Enhanced structured logging
+		log.Info().
+			Str("request_id", requestID).
+			Str("method", c.Request.Method).
+			Str("path", c.Request.URL.Path).
+			Str("query", c.Request.URL.RawQuery).
+			Str("client_ip", c.ClientIP()).
+			Int("status", c.Writer.Status()).
+			Dur("latency", time.Since(start)).
+			Int("body_size", c.Writer.Size()).
+			Str("user_agent", c.Request.UserAgent()).
+			Msg("Request processed")
+	})
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"}, // You can set specific origins here
@@ -34,7 +101,10 @@ func main() {
 
 	router.SetupRoutes(controller, r)
 
-	// Start server
-	log.Println("Server running on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Info().Msg("Server starting on port 8080")
+	if err := http.ListenAndServe(":8080", r); err != nil {
+		log.Fatal().
+			Err(err).
+			Msg("Server failed to start")
+	}
 }

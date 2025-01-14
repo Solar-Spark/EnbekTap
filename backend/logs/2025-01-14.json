@@ -1,0 +1,2 @@
+{"level":"info","time":"2025-01-14T15:34:52+05:00","caller":"C:/Users/R0onen/Github/EnbekTap/backend/main.go:61","message":"Database connection established"}
+{"level":"info","time":"2025-01-14T15:34:52+05:00","caller":"C:/Users/R0onen/Github/EnbekTap/backend/main.go:104","message":"Server starting on port 8080"}
