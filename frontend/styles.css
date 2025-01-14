@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,15 +10,17 @@ body {
 }
 
 #content-wrap {
-    padding-bottom: 150px;    /* Footer height */
-  }
+    padding-bottom: 150px;
+    /* Footer height */
+}
 
 nav {
     background-color: #333;
     padding: 5px;
     color: white;
     display: flex;
-    justify-content: space-between; /* This spaces the left and right containers apart */
+    justify-content: space-between;
+    /* This spaces the left and right containers apart */
     position: fixed;
     top: 0;
     width: 100%;
@@ -27,18 +28,21 @@ nav {
     box-sizing: border-box;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
     display: flex;
     align-items: center;
 }
 
 .nav-left {
     padding-left: 20px;
-    flex-grow: 1; /* Allow this side to take up remaining space */
+    flex-grow: 1;
+    /* Allow this side to take up remaining space */
 }
 
 .nav-right {
-    justify-content: flex-end; /* Align the items in the right section to the end */
+    justify-content: flex-end;
+    /* Align the items in the right section to the end */
     padding-right: 20px;
 }
 
@@ -49,23 +53,23 @@ nav button {
     border-radius: 4px;
     cursor: pointer;
     width: 150px;
-    
+
 }
 
 #logo {
-    color:white;
+    color: white;
     text-decoration: none;
-  
+
 }
 
-#logo:hover{
-  text-decoration: underline;
+#logo:hover {
+    text-decoration: underline;
 }
 
 .search-form {
     display: flex;
     align-items: center;
-    justify-content: flex-start;   
+    justify-content: flex-start;
 }
 
 .search-form input {
@@ -74,11 +78,11 @@ nav button {
     border-radius: 4px;
     border: 1px solid #ccc;
     width: 400px;
-   
+
 }
 
 .search-form button {
-    padding:10px;
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -96,24 +100,29 @@ button:hover {
     text-decoration: none;
     font-size: 20px;
     margin-left: 40px;
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: nowrap;
+    /* Prevent text from wrapping */
 }
 
 .login-link:hover {
     text-decoration: underline;
 }
 
-#login-form, #signup-form{
-    margin-top:15%;
+#login-container,
+#signup-container {
+    margin-top: 15%;
 }
 
 
-#sign-up, #log-in{
-    float: right; /*positions sign up link on right side of div element*/
+#sign-up,
+#log-in {
+    float: right;
+    /*positions sign up link on right side of div element*/
 }
 
 .container {
-    margin-top: 80px; /* Offset the fixed nav */
+    margin-top: 80px;
+    /* Offset the fixed nav */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -129,11 +138,12 @@ h1 {
 }
 
 form label {
- 
+
     margin: 5px 0;
 }
 
-form div input, form textarea {
+form div input,
+form textarea {
     width: 100%;
     padding-top: 5px;
     padding-bottom: 10px;
@@ -172,10 +182,14 @@ form button {
 #jobCards {
     margin-top: 20px;
 }
+
 .job-cards-container {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
-    gap: 20px; /* Space between columns and rows */
+    display: grid;
+    /* Use grid layout */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 equal-width columns */
+    gap: 20px;
+    /* Space between columns and rows */
     margin-top: 20px;
     padding: 20px;
     background-color: white;
@@ -189,7 +203,8 @@ form button {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
     display: flex;
     flex-direction: column;
 }
@@ -242,38 +257,47 @@ button {
 /* Style for radio buttons on the same line */
 form .radio-group {
     display: flex;
-    justify-content: flex-start;  /* Align items to the start */
+    justify-content: flex-start;
+    /* Align items to the start */
     align-items: center;
 }
 
 form .radio-group label {
-    margin-right: 20px; /* Optional: space between the labels */
-    display: inline-flex; /* Ensures that both radio buttons and their labels are inline */
+    margin-right: 20px;
+    /* Optional: space between the labels */
+    display: inline-flex;
+    /* Ensures that both radio buttons and their labels are inline */
     align-items: center;
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    white-space: nowrap;
+    /* Prevent text from wrapping to the next line */
 }
 
 form .radio-group input {
-    margin-right: 5px; /* Adds some space between the radio button and label */
+    margin-right: 5px;
+    /* Adds some space between the radio button and label */
 }
 
 /* Modal Styles */
 .modal {
-    display: none; /* Hide the modal by default */
+    display: none;
+    /* Hide the modal by default */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1001; /* Make sure the modal is above other content */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    z-index: 1001;
+    /* Make sure the modal is above other content */
 }
 
 .modal-content {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the modal */
+    transform: translate(-50%, -50%);
+    /* Center the modal */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -282,7 +306,8 @@ form .radio-group input {
 }
 
 /* Close button for the modal */
-#closeEditModal, #closeCreateModal {
+#closeEditModal,
+#closeCreateModal {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -293,21 +318,32 @@ form .radio-group input {
 
 /* Style for both dropdowns */
 .dropdown {
-    width: 100%; /* Make the dropdown take up the full width of the container */
-    padding: 10px; /* Add padding inside dropdown */
-    font-size: 14px; /* Set font size */
-    margin-bottom: 10px; /* Space between dropdowns */
+    width: 100%;
+    /* Make the dropdown take up the full width of the container */
+    padding: 10px;
+    /* Add padding inside dropdown */
+    font-size: 14px;
+    /* Set font size */
+    margin-bottom: 10px;
+    /* Space between dropdowns */
 }
 
 /* Style for the reset button */
 .reset-btn {
-    width: 100%; /* Full width for the button */
-    padding: 10px; /* Add padding for the button */
-    font-size: 14px; /* Set font size */
-    background-color: #4CAF50; /* Green background color */
-    color: white; /* White text */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners */
+    width: 100%;
+    /* Full width for the button */
+    padding: 10px;
+    /* Add padding for the button */
+    font-size: 14px;
+    /* Set font size */
+    background-color: #4CAF50;
+    /* Green background color */
+    color: white;
+    /* White text */
+    border: none;
+    /* Remove border */
+    border-radius: 4px;
+    /* Rounded corners */
     cursor: pointer;
 }
 
@@ -317,7 +353,7 @@ form .radio-group input {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 20px ;
+    padding: 20px;
     width: 100%;
 }
 

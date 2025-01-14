@@ -20,15 +20,15 @@
                 <button id="search" type="button">Search</button>
 
             </form>
-            <button id="createPost" type = "button">Create a Post</button>
+            <button id="createPost" type="button">Create a Post</button>
             <a href="login.html" class="login-link">Login</a>
         </div>
     </nav><br>
-     <!--Log inform-->
-    <div class="container" id = "login-form" style="display: block;">
+    <!--Log in form-->
+    <div class="container" id="login-container" style="display: block;">
         <h1>Log in</h1>
-        <form>
-            <div >
+        <form id="loginForm">
+            <div>
                 <label for="username">Username:</label><br>
                 <input type="text " id="username" name="Username" required><br><br>
 
@@ -39,38 +39,38 @@
 
             <input type="checkbox" id="rememberMe" name="rememberMe">
             <label for="rememberMe">Organization</label>
-            <a href = "#" id = "sign-up">Sign up</a><br><br>
+            <a href="#" id="sign-up">Sign up</a><br><br>
 
             <button type="submit">Log in</button>
         </form>
     </div><br>
 
     <!--Sign up form-->
-    <div class="container" id = "signup-form" style="display:none"">
+    <div class="container" id="signup-container" style="display:none"">
         <h1>Sign up</h1>
-        <form>
-            <div >
-                <label for="username">Username:</label><br>
-                <input type="text " id="username" name="Username" required><br><br>
+        <form  id = " signupForm">
+        <div>
+            <label for="username">Username:</label><br>
+            <input type="text " id="username" name="Username" required><br><br>
 
-                <label for="password">Password:</label><br>
-                <input id="passwordFirst" name="Password" type="password" required><br><br>
+            <label for="password">Password:</label><br>
+            <input id="passwordFirst" name="Password" type="password" required><br><br>
 
-                <label for="password">Password:</label><br>
-                <input id="passwordSecond" name="Password" type="password" required><br><br>
-            </div>
+            <label for="password">Password:</label><br>
+            <input id="passwordSecond" name="Password" type="password" required><br><br>
+        </div>
 
 
-            <input type="checkbox" id="rememberMe" name="rememberMe">
-            <label for="rememberMe">Organization</label>
-            <a  href = "#" id = "log-in">Log in</a><br><br>
+        <input type="checkbox" id="rememberMe" name="rememberMe">
+        <label for="rememberMe">Organization</label>
+        <a href="#" id="log-in">Log in</a><br><br>
 
-            <button type="submit">Sign up</button>
+        <button type="submit">Sign up</button>
         </form>
     </div><br>
 
 
-    <script src="script.js"></script>
+    <script src="./modules/loginPage.js"></script>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2025 EnbekTap. All rights reserved.</p>
