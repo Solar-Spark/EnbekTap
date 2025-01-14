@@ -10,37 +10,35 @@ import (
 	"path/filepath"
 	"time"
 
+	"enbektap/middleware"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"golang.org/x/time/rate"
 )
 
 func setupLogger() {
-	// Create logs directory if it doesn't exist
 	logDir := "logs"
 	if err := os.MkdirAll(logDir, 0755); err != nil {
 		log.Fatal().Err(err).Msg("Failed to create log directory")
 	}
 
-	// Create log file with timestamp
 	logFile := filepath.Join(logDir, time.Now().Format("2006-01-02")+".json")
 	file, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to create log file")
 	}
 
-	// Configure console output
 	consoleWriter := zerolog.ConsoleWriter{
 		Out:        os.Stdout,
 		TimeFormat: time.RFC3339,
 	}
 
-	// Create multi-writer for both console and file
 	multi := zerolog.MultiLevelWriter(consoleWriter, file)
 
-	// Configure global logger
 	log.Logger = zerolog.New(multi).
 		With().
 		Timestamp().
@@ -65,12 +63,37 @@ func main() {
 	controller := &controllers.VacancyController{Service: service}
 
 	r := gin.Default()
+	limiter := middleware.NewIPRateLimiter(rate.Every(time.Second/1), 1)
 
-	// Add logging middleware
+	r.Use(func(c *gin.Context) {
+		ip := c.ClientIP()
+		limiter := limiter.GetLimiter(ip)
+
+		now := time.Now()
+		reservation := limiter.Reserve()
+
+		if !reservation.OK() {
+			log.Warn().
+				Str("ip", ip).
+				Msg("Rate limit exceeded")
+
+			delay := reservation.Delay()
+			retryAfter := now.Add(delay)
+
+			c.Header("X-RateLimit-Limit", "3")
+			c.Header("X-RateLimit-Retry-After", retryAfter.Format(time.RFC1123))
+			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{
+				"error":               "Rate limit exceeded. Please try again later.",
+				"retry_after_seconds": delay.Seconds(),
+			})
+			return
+		}
+
+		c.Next()
+	})
 	r.Use(func(c *gin.Context) {
 		start := time.Now()
 
-		// Add request ID for tracking
 		requestID := c.GetHeader("X-Request-ID")
 		if requestID == "" {
 			requestID = uuid.New().String()
@@ -78,7 +101,6 @@ func main() {
 
 		c.Next()
 
-		// Enhanced structured logging
 		log.Info().
 			Str("request_id", requestID).
 			Str("method", c.Request.Method).
