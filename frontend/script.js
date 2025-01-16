@@ -315,3 +315,34 @@ searchButton.addEventListener("click", async () => {
 
     loadJobCards();
 });
+
+document.getElementById('supportForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('subject', document.getElementById('subject').value);
+    formData.append('message', document.getElementById('message').value);
+    
+    const attachments = document.getElementById('attachments').files;
+    for (let i = 0; i < attachments.length; i++) {
+        formData.append('attachments', attachments[i]);
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/support/contact', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to send message');
+        }
+
+        const result = await response.json();
+        alert(result.message);
+        document.getElementById('supportForm').reset();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again.');
+    }
+});

@@ -5,11 +5,15 @@ go 1.23.3
 require (
 	github.com/google/uuid v1.6.0
 	golang.org/x/time v0.9.0
+	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12
 )
 
-require github.com/mattn/go-colorable v0.1.13 // indirect
+require (
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
+)
 
 require (
 	github.com/bytedance/sonic v1.12.6 // indirect

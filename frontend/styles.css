@@ -311,3 +311,29 @@ form .radio-group input {
 .pagination button:hover:not(.active) {
     background-color: #ddd;
 }
+
+.support-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#supportForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#supportForm select,
+#supportForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#supportForm textarea {
+    min-height: 150px;
+}

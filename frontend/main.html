@@ -75,6 +75,26 @@
                 </form>
             </div>
         </div>
+        <div class="support-section">
+            <h2>Contact Support</h2>
+            <form id="supportForm">
+                <label for="subject">Subject:</label>
+                <select id="subject" required>
+                    <option value="technical">Technical Issue</option>
+                    <option value="vacancy">Vacancy Posting Issue</option>
+                    <option value="account">Account Related</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+
+                <label for="attachments">Attachments:</label>
+                <input type="file" id="attachments" multiple>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
     <div class="container">
         <h2>Filtering and Sorting</h2>
