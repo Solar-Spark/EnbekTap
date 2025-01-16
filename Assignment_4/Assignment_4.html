@@ -1,0 +1,771 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment #4</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="14b6e0d1-7843-81a3-9bf3-f118030003f3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">✅</span></div><h1 class="page-title">Assignment #4</h1><p class="page-description"></p></header><div class="page-body"><p id="1666e0d1-7843-8083-ab55-fb8c536f4f7e" class="">
+</p><h3 id="1666e0d1-7843-80f9-9526-c546ab481891" class="">Important information:</h3><ol type="1" id="1666e0d1-7843-800b-834c-e42ecd85472f" class="numbered-list" start="1"><li>We are continuing with your team-based <mark class="highlight-orange_background">project work</mark>. Remember, the project topic is assigned to you until the end of the trimester, and each new task will build on the <mark class="highlight-orange_background">previous</mark> one. The team composition will remain unchanged throughout the trimester.</li></ol><ol type="1" id="1666e0d1-7843-8078-a0f7-e3a65bec9ce3" class="numbered-list" start="2"><li>Make sure to commit your updated projects and tasks to your repository and keep the <code>README.md</code> file up to date. Ensure your repository contains everything needed—code, images, and other materials—and that it is <mark class="highlight-orange_background">public access</mark>.</li></ol><ol type="1" id="1666e0d1-7843-8012-b16e-e5050119e861" class="numbered-list" start="3"><li>It&#x27;s important to remember that tasks sometimes need to be <mark class="highlight-orange_background">adjusted</mark> to fit your unique project. The examples provided in the file are just guidelines—you’re free to modify them or take a different approach that works best for your team.</li></ol><ol type="1" id="1666e0d1-7843-80c1-81f4-d82feab09dbe" class="numbered-list" start="4"><li>Deadline — <mark class="highlight-orange_background">by 21:00 on 12 February 2025</mark>. If you encounter any issues with the Moodle system, submit your work through Teams. Don&#x27;t forget to include the names of your team members. One team — one link.</li></ol><ol type="1" id="1666e0d1-7843-8004-97ba-f0a77cf554ba" class="numbered-list" start="5"><li>You can defend your project until the <mark class="highlight-orange_background">end of the 10th week</mark>. Presentations are not required, just show and tell us about your work. If you can&#x27;t make it for valid reasons, there&#x27;s an option to submit everything online. Contact me on Teams for more details.</li></ol><ol type="1" id="1666e0d1-7843-8023-83a0-e704f8ccaabe" class="numbered-list" start="6"><li>If the team does not attach the GitHub link in Moodle or send it through Teams, and also does not defend the project, unfortunately, that will result in <mark class="highlight-orange_background">0 points</mark>.</li></ol><h3 id="1666e0d1-7843-80e0-9837-fa2548b4db9e" class="">Tasks:</h3><p id="1666e0d1-7843-80df-8d89-facfc5f284a6" class="">In this assessment we will cover the following topics: </p><ul id="1666e0d1-7843-8034-917b-cd59774d5675" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Microservices </mark>(50 points)</summary><h3 id="14b6e0d1-7843-813b-93c1-d024d5230a24" class="">Microservices: Transaction Management with Fiscal Receipt Generation</h3><figure id="1686e0d1-7843-80d6-be12-ce8c99c2d1bd" class="image" style="text-align:center"><a href="Assignment_4/97f6a6f2-9ac5-4221-8c04-2c7a3fdd66b5.png"><img style="width:393.2338308457712px" src="Assignment_4/97f6a6f2-9ac5-4221-8c04-2c7a3fdd66b5.png"/></a></figure><p id="1686e0d1-7843-801c-ac1b-d17dcbbf3d2e" class=""><mark class="highlight-yellow_background">Microservices</mark> are a software architecture approach where an application is divided into small, <mark class="highlight-yellow_background">independent services.</mark> Each microservice is responsible for a specific functionality and communicates with others through APIs. This approach makes it easier to develop, scale, and deploy services independently. For example, if <strong>Kaspi Bank</strong> builds <strong>Kaspi Travel</strong> and <strong>Kaspi Shop</strong> as separate microservices, a failure in one service will not affect the functionality of the others. This ensures that users can still access other features without interruption.</p><h3 id="1686e0d1-7843-801d-85d4-d067e41f1ec4" class="">Goal:</h3><p id="1686e0d1-7843-8073-a3ef-ec0cf47b59c4" class="">Create a microservice for managing transactions related to purchasing products, services, or premium subscriptions. The microservice should also generate a fiscal receipt and send it to the customer via email.</p><h3 id="1686e0d1-7843-8053-8e7b-ed779d011c78" class="">Tasks for the Main Server:</h3><ol type="1" id="1686e0d1-7843-80d7-87ba-e82ed2c0c475" class="numbered-list" start="1"><li><strong>Create a Cart Page </strong><em><strong>(if necessary):</strong></em><p id="1686e0d1-7843-8092-a867-dbc5a72b9ff8" class="">Add the necessary pages for order processing and create new database tables for the shopping cart.</p></li></ol><ol type="1" id="1686e0d1-7843-809e-8977-dbaeb7a8cc5d" class="numbered-list" start="2"><li><strong>Add a Payment Button:</strong><p id="1686e0d1-7843-80b4-b4d2-eda7a70bd218" class="">Implement functionality to process payments. For example, allow users to pay for their cart (if it’s an online store) or subscribe to a premium plan (if a store-like logic isn’t applicable).</p></li></ol><ol type="1" id="1686e0d1-7843-8020-a716-c71f878eb2c9" class="numbered-list" start="3"><li><strong>Create a Transaction Table:</strong><p id="1686e0d1-7843-8000-9d8c-e7e3564ee582" class="">After the cart is prepared, create a separate table for transactions. This table should include the transaction ID, cart ID, and transaction status (e.g., &quot;Pending Payment,&quot; &quot;Paid,&quot; &quot;Declined&quot;). This will help track the transaction’s progress and determine whether the payment was successful.</p></li></ol><ol type="1" id="1686e0d1-7843-80ab-b7fa-c72aaea5e173" class="numbered-list" start="4"><li><strong>Send a POST Request from the Main Server to the Microservice:</strong><p id="1686e0d1-7843-80f0-a13e-eef5987b89bf" class="">After the payment button is clicked and a transaction ID is created, send a POST request from the main server to the microservice. The request should include cart and customer details to create a corresponding record in the microservice database. Example request:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1686e0d1-7843-800d-a804-c813c9db25a5" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+  &quot;cartItems&quot;: [
+    {
+      &quot;id&quot;: &quot;1&quot;,
+      &quot;name&quot;: &quot;Product 1&quot;,
+      &quot;price&quot;: 100
+    },
+    {
+      &quot;id&quot;: &quot;2&quot;,
+      &quot;name&quot;: &quot;Product 2&quot;,
+      &quot;price&quot;: 200
+    }
+  ],
+  &quot;customer&quot;: {
+    &quot;id&quot;: &quot;123&quot;,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john.doe@example.com&quot;
+  }
+}</code></pre><p id="1686e0d1-7843-8011-9866-d4f2a3bab854" class="">These details will be used in future tasks.</p></li></ol><ol type="1" id="1686e0d1-7843-806b-a67c-fc5bf175b8f1" class="numbered-list" start="5"><li><strong>Handle the Microservice Response:</strong><p id="1686e0d1-7843-8002-b453-ed07944f46ba" class="">Based on the response from the microservice (<code>true</code> or <code>false</code>), display the relevant information to the user. For example, update the user’s profile page with the transaction status.</p></li></ol><h3 id="1686e0d1-7843-809a-bf28-cb34cc4f6a07" class="">Tasks for the Microservice:</h3><ol type="1" id="1686e0d1-7843-80f6-9f93-e20e6890e0f1" class="numbered-list" start="1"><li><strong>Create the Microservice:</strong><p id="1686e0d1-7843-8077-9675-ca0c2376cc68" class="">Develop a separate microservice using Go (<mark class="highlight-yellow_background">or any other language</mark>). Ensure it <mark class="highlight-yellow_background">runs independently of the main server</mark>, for example,<mark class="highlight-yellow_background"> on port 8081</mark>.</p></li></ol><ol type="1" id="1686e0d1-7843-80f3-95b0-f0dd14be9670" class="numbered-list" start="2"><li><strong>Database Management:</strong><p id="1686e0d1-7843-803a-9cf1-d387d5bd695e" class="">Ideally, the microservice should have its own database. However, for this small project, you can <mark class="highlight-yellow_background">use the same database but ensure the tables are separate</mark>. Make sure there are no foreign key dependencies between the main server tables and the microservice tables.</p></li></ol><ol type="1" id="1686e0d1-7843-80bb-850d-d3e665519655" class="numbered-list" start="3"><li><strong>Payment Form:</strong><p id="1686e0d1-7843-8030-a5c6-eabb7426eb99" class="">After receiving a POST request from the main server, the microservice should present the user with a payment form to input payment details (e.g., card number, expiration date, etc.). For testing purposes, <mark class="highlight-yellow_background">use mock data</mark> and return either a successful result (<code>true</code>) or a failed result (<code>false</code>) depending on the input (e.g., expired card data).</p><p id="1686e0d1-7843-805a-be9d-decdaeb22fa1" class="">Example of a payment form:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1686e0d1-7843-80a6-8896-dd678b20e2d7" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+    &quot;paymentForm&quot;: {
+        &quot;cardNumber&quot;: &quot;1234 5678 9012 3456&quot;,
+        &quot;expirationDate&quot;: &quot;12/24&quot;,
+        &quot;cvv&quot;: &quot;123&quot;,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;address&quot;: &quot;123 Main Street&quot;
+    }
+}</code></pre><p id="1686e0d1-7843-808e-a07b-fd9836b18ce4" class="">The payment result should be <mark class="highlight-yellow_background">sent back to the main server</mark>, which will update the transaction table accordingly:</p><ul id="1686e0d1-7843-8015-9f9b-ecd9eb129295" class="bulleted-list"><li style="list-style-type:disc">&quot;Pending Payment&quot; → &quot;Paid&quot; (if <code>true</code>)</li></ul><ul id="1686e0d1-7843-8051-ae25-cc5124ae9199" class="bulleted-list"><li style="list-style-type:disc">&quot;Pending Payment&quot; → &quot;Declined&quot; (if <code>false</code>)</li></ul></li></ol><ol type="1" id="1686e0d1-7843-80f7-a741-ca539f356f83" class="numbered-list" start="4"><li><strong>Generate a Fiscal Receipt:</strong><p id="1686e0d1-7843-80f0-ab70-f84f48fe6a60" class="">After a successful payment, <mark class="highlight-yellow_background">generate a fiscal receipt in PDF format</mark>. The receipt should include the following details:</p><ul id="1686e0d1-7843-8051-a7a7-ee05b9ffcac2" class="bulleted-list"><li style="list-style-type:disc">Company or project name</li></ul><ul id="1686e0d1-7843-80d0-acc9-de2ebe678c1a" class="bulleted-list"><li style="list-style-type:disc">Transaction ID</li></ul><ul id="1686e0d1-7843-8096-8dbf-e72621842e93" class="bulleted-list"><li style="list-style-type:disc">Order date and time</li></ul><ul id="1686e0d1-7843-80d9-8cce-fbc60064c36b" class="bulleted-list"><li style="list-style-type:disc">Product or service names</li></ul><ul id="1686e0d1-7843-8083-a5df-c45601b988a2" class="bulleted-list"><li style="list-style-type:disc">Price per unit</li></ul><ul id="1686e0d1-7843-80b2-a2cd-e5d14f56f503" class="bulleted-list"><li style="list-style-type:disc">Quantity</li></ul><ul id="1686e0d1-7843-800b-9f0e-dc3ea628626d" class="bulleted-list"><li style="list-style-type:disc">Total amount</li></ul><ul id="1686e0d1-7843-80ff-a17a-d504271e63a2" class="bulleted-list"><li style="list-style-type:disc">Customer&#x27;s full name</li></ul><ul id="1686e0d1-7843-8093-96ef-c105077fa0f4" class="bulleted-list"><li style="list-style-type:disc">Payment method (with encrypted card details)</li></ul><div id="1686e0d1-7843-80f6-b51a-c819bc9028e8" class="column-list"><div id="a8210f6a-187f-4938-b1aa-a5c39863dcf2" style="width:68.75%" class="column"><figure id="c49f6426-6e60-474c-830c-8cdae7a15264" class="image" style="text-align:center"><a href="Assignment_4/Untitled.png"><img style="width:432px" src="Assignment_4/Untitled.png"/></a></figure></div><div id="e49e6a40-002b-4fb2-b21b-768df4be4412" style="width:31.25%" class="column"><figure id="9fb91f0e-ed49-47cf-8edb-88d1ffc327f4" class="image"><a href="Assignment_4/Untitled%201.png"><img style="width:192px" src="Assignment_4/Untitled%201.png"/></a></figure></div></div></li></ol><ol type="1" id="1686e0d1-7843-8085-b581-c75ea5e2e0a2" class="numbered-list" start="5"><li><strong>Send the Receipt:</strong><p id="1686e0d1-7843-801c-ab10-fc8d8ae440fb" class=""><mark class="highlight-yellow_background">Send the generated PDF receipt to the customer’s email</mark> using the microservice.</p></li></ol><ol type="1" id="1686e0d1-7843-8084-bb6e-d343ad1f83f2" class="numbered-list" start="6"><li><strong>Finalize the Transaction:</strong><p id="1686e0d1-7843-808f-8a70-c05bcf9b84ac" class="">Update the transaction status to &quot;Completed&quot; after successful payment. Ensure that all changes are correctly reflected in both the database and the user interface.</p></li></ol></details></li></ul><ul id="1666e0d1-7843-8045-8b73-e2d60a2f8553" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Websocket</mark> (50 points)</summary><h3 id="1696e0d1-7843-8084-acd1-df61a2a72652" class="">Goal:</h3><p id="1696e0d1-7843-80c3-8798-c1767588995b" class="">Enhance the functionality of your current project by implementing a real-time chat feature where clients can interact with support (administrator). This chat can be useful for quick communication, such as resolving issues with orders or subscriptions.</p><h3 id="1696e0d1-7843-8097-9bf2-f94ee8bb5d1f" class="">Steps:</h3><ol type="1" id="1696e0d1-7843-801b-9a3f-d4c78884484a" class="numbered-list" start="1"><li><strong>Building on Your Existing Project:</strong><p id="1696e0d1-7843-8097-a8c8-c606391f2705" class="">Use your current project, which already includes an admin panel and a client page, and extend it to include chat functionality.</p></li></ol><ol type="1" id="1696e0d1-7843-8030-a3cd-e0abc97b41cd" class="numbered-list" start="2"><li><strong>Core Chat Features:</strong><p id="1696e0d1-7843-80f7-9c39-ff6a35889da1" class="">To implement the chat, follow these steps:</p><ol type="1" id="1696e0d1-7843-80c0-aca2-ffcac130910a" class="numbered-list" start="1"><li><strong>Assigning a Unique Identifier:</strong><p id="1696e0d1-7843-800f-8d3d-f408b8f2795b" class="">When a client opens a chat, a unique chat ID should be automatically generated for them.</p></li></ol><ol type="1" id="1696e0d1-7843-8072-8c6d-dfedd57de6a6" class="numbered-list" start="2"><li><strong>Limiting to One Active Chat:</strong><p id="1696e0d1-7843-80d3-9cbe-ef17b85d0c8e" class="">Each client can only have one active chat at a time.</p></li></ol><ol type="1" id="1696e0d1-7843-8052-9021-f69ee36ea85f" class="numbered-list" start="3"><li><strong>Displaying Chat Links:</strong><ul id="1696e0d1-7843-80ab-afe6-f854cc4a31e2" class="bulleted-list"><li style="list-style-type:disc">Clients should see a link to their active chat in their profile.</li></ul><ul id="1696e0d1-7843-806a-b7eb-fc06116d46e3" class="bulleted-list"><li style="list-style-type:disc">Administrators should see links to chats from different clients in their admin panel.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-8036-b75e-cf148b5e6d1c" class="numbered-list" start="4"><li><strong>Saving Chat History:</strong><p id="1696e0d1-7843-8070-9af7-e704ddfe3538" class="">Chat messages should be saved so that the history remains accessible even after re-login, page refresh, or session expiration. The chat history should be stored in a database or a text file and tied to the unique chat ID.</p></li></ol><ol type="1" id="1696e0d1-7843-8097-96a4-cd35ca9c1100" class="numbered-list" start="5"><li><strong>Closing Chats by the Administrator:</strong><ul id="1696e0d1-7843-80e6-bf9d-cff6c2398c90" class="bulleted-list"><li style="list-style-type:disc">Administrators should have the ability to close a chat with a client.</li></ul><ul id="1696e0d1-7843-80b9-b4bf-c37e58e45cff" class="bulleted-list"><li style="list-style-type:disc">Once a chat is closed:<ul id="1696e0d1-7843-80fe-90c1-ed8db4231bb0" class="bulleted-list"><li style="list-style-type:circle">The chat history becomes unavailable.</li></ul><ul id="1696e0d1-7843-80d1-a5e8-eb7613420742" class="bulleted-list"><li style="list-style-type:circle">The chat status changes to &quot;Active&quot; or &quot;Inactive.&quot;</li></ul><ul id="1696e0d1-7843-806e-9b2e-eab4dd28e9ce" class="bulleted-list"><li style="list-style-type:circle">Links to the closed chat disappear from both the admin panel and the client profile.</li></ul><ul id="1696e0d1-7843-80ef-90b0-dfcea1e6f847" class="bulleted-list"><li style="list-style-type:circle">The client sees a button to start a new chat.</li></ul></li></ul></li></ol><ol type="1" id="1696e0d1-7843-80f8-9e90-f4eae857de73" class="numbered-list" start="6"><li><strong>Creating a New Chat:</strong><ul id="1696e0d1-7843-80e5-963b-fbf2af0d452d" class="bulleted-list"><li style="list-style-type:disc">After a chat is closed, the client can create a new one.</li></ul><ul id="1696e0d1-7843-80d1-b983-c075ea1f7d17" class="bulleted-list"><li style="list-style-type:disc">A new chat ID is generated, a corresponding record is created in the database, and the process repeats.</li></ul></li></ol></li></ol><ol type="1" id="1696e0d1-7843-8036-9636-fcc0a50ae961" class="numbered-list" start="3"><li><strong>Project Updates:</strong><p id="1696e0d1-7843-8093-b56c-e9628c3b595d" class="">Implement the following changes in your project:</p><ol type="1" id="1696e0d1-7843-80eb-ab64-e3d59cc8a50e" class="numbered-list" start="1"><li><strong>Chat Page:</strong><ul id="1696e0d1-7843-804a-873b-d52796e15ae8" class="bulleted-list"><li style="list-style-type:disc">The chat should have standard features: showing the sender, timestamp, message content, and a send button.</li></ul><ul id="1696e0d1-7843-80ff-94a8-eb870d4c9685" class="bulleted-list"><li style="list-style-type:disc">The interface should be simple and user-friendly.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-8062-a703-d81187680637" class="numbered-list" start="2"><li><strong>Client Profile Updates:</strong><ul id="1696e0d1-7843-8080-8601-c2a8652053ca" class="bulleted-list"><li style="list-style-type:disc">If a client has an active chat, display a link to it.</li></ul><ul id="1696e0d1-7843-800e-a47d-c19a68ddfabb" class="bulleted-list"><li style="list-style-type:disc">If no chat is active, show a button to create a new chat.</li></ul><ul id="1696e0d1-7843-807e-ad4a-d2016b47adcd" class="bulleted-list"><li style="list-style-type:disc">Do not display links to inactive chats.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-80bd-95cf-ce92a9a046b0" class="numbered-list" start="3"><li><strong>Admin Panel Updates:</strong><ul id="1696e0d1-7843-80e3-9b9e-c137aa90e477" class="bulleted-list"><li style="list-style-type:disc">Add a section or table listing links to all active client chats.</li></ul><ul id="1696e0d1-7843-80ae-b138-d84ffecaf131" class="bulleted-list"><li style="list-style-type:disc">Include a button to close each chat.</li></ul></li></ol></li></ol><h3 id="1696e0d1-7843-80ea-8490-d49e5c7914d7" class=""><strong>Additional Notes:</strong></h3><ul id="1696e0d1-7843-809c-9d10-e2c89cb0639c" class="bulleted-list"><li style="list-style-type:disc">Use the <code><strong>github.com/gorilla/websocket</strong></code> library to work with WebSockets.</li></ul><ul id="1696e0d1-7843-80e2-bb40-e9763cf6260a" class="bulleted-list"><li style="list-style-type:disc">On the server: create a <code>/ws</code> handler to manage WebSocket connections, sending, and receiving messages.<p id="1696e0d1-7843-805a-a766-e0243cec6d76" class=""><strong>Example Code:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-8084-ac32-c1f7cc97c57b" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">var upgrader = websocket.Upgrader{
+    CheckOrigin: func(r *http.Request) bool { return true },
+}
+
+func handleConnections(w http.ResponseWriter, r *http.Request) {
+    ws, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    defer ws.Close()
+}</code></pre><p id="1696e0d1-7843-804f-8eb5-c5d92427b2f9" class="">Ensure the server listens on a specific port:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-802a-af68-e799806392cb" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">http.HandleFunc(&quot;/ws&quot;, handleConnections)
+log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))</code></pre></li></ul><ul id="1696e0d1-7843-80ca-974e-cfa2541c6b16" class="bulleted-list"><li style="list-style-type:disc">On the client: use the <code>WebSocket</code> API to connect to the server and send/receive messages. In your HTML file, establish the WebSocket connection:<p id="1696e0d1-7843-80fe-b519-e0b833363df0" class=""><strong>Example Code:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-8058-bb20-ee651dbcd880" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">const socket = new WebSocket(&#x27;ws://localhost:8080/ws&#x27;);
+
+socket.onmessage = function(event) {
+    const message = JSON.parse(event.data);
+    console.log(`${message.username}: ${message.content}`);
+};</code></pre><p id="1696e0d1-7843-8011-883b-f8a4c8727336" class="">Send a message to the server:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-80ce-98c0-c6fce8e6afd0" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">socket.send(JSON.stringify({ username: &quot;John&quot;, content: &quot;Hello!&quot; }));</code></pre></li></ul></details></li></ul><hr id="1666e0d1-7843-8093-b29d-db2ff094cb44"/><h3 id="1666e0d1-7843-805d-a75e-e86659ff2bd3" class="">Важная информация:</h3><ol type="1" id="1666e0d1-7843-80f2-abee-e2e7411e5644" class="numbered-list" start="1"><li>Продолжаем командную работу над <mark class="highlight-orange_background">вашим проектом</mark>. Напоминаю, что тема закреплена за вами до конца триместра, и каждое новое задание будет <mark class="highlight-orange_background">продолжением</mark> предыдущего. Состав команд остаётся неизменным до конца триместра.</li></ol><ol type="1" id="1666e0d1-7843-80b1-99f5-c37b8e937b40" class="numbered-list" start="2"><li>Не забудьте коммитить обновлённые проекты и задания в ваш репозиторий, а также обновлять информацию в <code>README.md</code>. Убедитесь, что в репозитории есть всё необходимое, включая код, изображения и другие материалы, и что он доступен для просмотра <mark class="highlight-orange_background">(public access)</mark>.</li></ol><ol type="1" id="1666e0d1-7843-8043-8dcc-e535e3d96540" class="numbered-list" start="3"><li>Помните, что задания могут потребовать <mark class="highlight-orange_background">адаптации</mark> под ваш уникальный проект. Примеры, представленные в данном файле, являются ориентиром, но вы можете их изменять или использовать другой подход, удобный для вашей команды.</li></ol><ol type="1" id="1666e0d1-7843-8043-bb0f-df63f28090ce" class="numbered-list" start="4"><li>Дедлайн — <mark class="highlight-orange_background">до 21:00 12 февраля 2025 года</mark>. Если возникнут проблемы с системой мудл, отправьте работы через Teams. Не забудьте указать имена участников команды. Одна команда — одна ссылка.</li></ol><ol type="1" id="1666e0d1-7843-8045-91c4-df9ead9119cc" class="numbered-list" start="5"><li>Вы можете защищать проект <mark class="highlight-orange_background">до конца 10-ой недели</mark>. Презентации не нужны — достаточно показать и рассказать о своей работе. Если не сможете присутствовать на защите по уважительным причинам, проект можно сдать в онлайн-формате. Для уточнения деталей пишите в Teams.</li></ol><ol type="1" id="1666e0d1-7843-8044-a405-c65b1266cb99" class="numbered-list" start="6"><li>Если команда не приложит ссылку на GitHub в Moodle или не отправит её через Teams, а также не защитит проект, то, к сожалению, это <mark class="highlight-orange_background">0 баллов</mark>.</li></ol><h3 id="1666e0d1-7843-8004-a8a6-ca9431dd9ec2" class="">Задания:</h3><p id="1666e0d1-7843-80fc-9155-c8f04b243ff8" class="">В этом ассайнменте мы рассмотрим следующие темы.</p><ul id="1666e0d1-7843-803a-abf6-ee93aec036ff" class="toggle"><li><details open=""><summary><mark class="highlight-yellow_background">Microservices </mark>(50 баллов)</summary><h3 id="1686e0d1-7843-80e2-910f-e760770769d0" class="">Микросервис: Управление транзакциями с генерацией фискального чека</h3><figure id="1666e0d1-7843-8082-aecb-ddec297f9ac4" class="image" style="text-align:center"><a href="Assignment_4/97f6a6f2-9ac5-4221-8c04-2c7a3fdd66b5.png"><img style="width:393.2338308457712px" src="Assignment_4/97f6a6f2-9ac5-4221-8c04-2c7a3fdd66b5.png"/></a></figure><p id="1686e0d1-7843-8083-9f08-d3de09c1be3c" class=""><mark class="highlight-yellow_background">Микросервисы</mark> — это подход к архитектуре программного обеспечения, при котором приложение разделяется на небольшие, <mark class="highlight-yellow_background">независимые сервисы</mark>. Каждый микросервис отвечает за определённую функциональность и взаимодействует с другими через API. Это позволяет разрабатывать, масштабировать и развертывать микросервисы независимо. Например, если <strong>Kaspi Bank</strong> реализует <strong>Kaspi Travel</strong> и <strong>Kaspi Магазин</strong> как отдельные микросервисы, то при сбое одного из них остальные продолжат работать без сбоев.</p><h3 id="1686e0d1-7843-807b-9390-e95bf5b42f10" class="">Цель:</h3><p id="1686e0d1-7843-80c1-9226-cce64d7ecf58" class="">Разработать микросервис для управления транзакциями при покупке товаров, услуг или премиум подписок с возможностью генерации фискального чека и отправки его на электронную почту клиента.</p><h3 id="1686e0d1-7843-802e-8db5-f819b8b1144f" class="">Задачи на основном сервере:</h3><ol type="1" id="1686e0d1-7843-80ae-bce8-f9f1fcbde45c" class="numbered-list" start="1"><li><strong>Создание страницы корзины </strong><em><strong>(при необходимости):</strong></em><p id="1686e0d1-7843-806c-b177-fa9f5861d760" class="">Добавьте необходимые страницы для оформления заказов и новые таблицы для корзины.</p></li></ol><ol type="1" id="1686e0d1-7843-805f-a4cd-d695a5db9496" class="numbered-list" start="2"><li><strong>Создание кнопки:</strong><p id="1686e0d1-7843-80a9-8ee8-ce8f094db1f8" class="">Реализуйте функциональность оплаты услуг (например, оплатить корзину, если это магазин, или оформить премиум подписку, если логика магазина не подходит).</p></li></ol><ol type="1" id="1686e0d1-7843-80c6-b058-fe996fe2f881" class="numbered-list" start="3"><li><strong>Создание транзакции:</strong><p id="1686e0d1-7843-8045-9835-c89811240745" class="">После формирования корзины создайте отдельную таблицу для транзакций, которая будет содержать ID транзакции, ID корзины и их статус (например, &quot;в ожидании оплаты&quot;, &quot;оплачено&quot;, &quot;отклонено&quot;). Это позволит отслеживать статус заявки и понять, был ли счет оплачен.</p></li></ol><ol type="1" id="1686e0d1-7843-8034-93df-df329b0a0492" class="numbered-list" start="4"><li><strong>POST-запрос с основного сервера → в микросервис:</strong><p id="1686e0d1-7843-809d-9297-d9e8661c2bef" class="">После нажатия кнопки оплаты и создания ID транзакции отправьте POST-запрос из основного сервера в микросервис с данными корзины и клиента для создания записи в базе данных микросервиса. Пример запроса:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1686e0d1-7843-800f-9856-de58bda89e38" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+  &quot;cartItems&quot;: [
+    {
+      &quot;id&quot;: &quot;1&quot;,
+      &quot;name&quot;: &quot;Product 1&quot;,
+      &quot;price&quot;: 100
+    },
+    {
+      &quot;id&quot;: &quot;2&quot;,
+      &quot;name&quot;: &quot;Product 2&quot;,
+      &quot;price&quot;: 200
+    }
+  ],
+  &quot;customer&quot;: {
+    &quot;id&quot;: &quot;123&quot;,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john.doe@example.com&quot;
+  }
+}</code></pre><p id="1686e0d1-7843-807c-aefe-d967b6c996ae" class="">Эти данные понадобятся в следующих заданиях.</p></li></ol><ol type="1" id="1686e0d1-7843-80c5-93be-e10271874292" class="numbered-list" start="5"><li><strong>Получение ответа от микросервиса:</strong><p id="1686e0d1-7843-80c5-9d67-d36a0f416a18" class="">В зависимости от ответа микросервиса (&quot;true&quot; или &quot;false&quot;), отображайте соответствующую информацию, например, на странице профиля пользователя.</p></li></ol><h3 id="1686e0d1-7843-800b-b7c7-cdc56d447d0b" class="">Задачи на микросервисе:</h3><ol type="1" id="1686e0d1-7843-804e-9e8c-debdfb65b239" class="numbered-list" start="1"><li><strong>Создание микросервиса:</strong><p id="1686e0d1-7843-80aa-9af5-cb1c2a8e570c" class="">Разработайте отдельный микросервис на Go (<mark class="highlight-yellow_background">или другом языке</mark>). Убедитесь, что он запускается <mark class="highlight-yellow_background">отдельно от основного сервера</mark>, например, <mark class="highlight-yellow_background">на порту 8081</mark>.</p></li></ol><ol type="1" id="1686e0d1-7843-8045-af93-d8c633651ac7" class="numbered-list" start="2"><li><strong>Работа с базой данных:</strong><p id="1686e0d1-7843-80fc-a8cd-c359391ba22d" class="">Микросервис должен на самом деле иметь собственную базу данных. Однако, для нашего небольшого проекта <mark class="highlight-yellow_background">можно использовать ту же базу данных, но с разделением таблиц</mark>. Убедитесь, что нет зависимостей (foreign key) между таблицами основного сервера и микросервиса.</p></li></ol><ol type="1" id="1686e0d1-7843-80d8-936d-c6662a5aae70" class="numbered-list" start="3"><li><strong>Форма оплаты:</strong><p id="1686e0d1-7843-80b0-9960-e99a638fa044" class="">После получения POST-запроса от основного сервера микросервис должен предоставить пользователю форму для ввода данных оплаты (номер карты, срок действия и т.д.). Для тестирования <mark class="highlight-yellow_background">используйте фиктивные данные</mark>, возвращая успешный результат (<code>true</code>) или отказ в оплате (<code>false</code>) в зависимости от введённых данных (например, истекший срок действия карты).</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1686e0d1-7843-807d-9df0-f8d5765d9072" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">&quot;paymentForm&quot;: {
+    &quot;cardNumber&quot;: &quot;1234 5678 9012 3456&quot;,
+    &quot;expirationDate&quot;: &quot;12/24&quot;,
+    &quot;cvv&quot;: &quot;123&quot;,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;address&quot;: &quot;123 Main Street&quot;
+}</code></pre><p id="1686e0d1-7843-80b3-b168-c805497eac87" class="">Результат оплаты необходимо <mark class="highlight-yellow_background">вернуть основному серверу</mark>, который обновляет статус в таблице транзакций:</p><ul id="1686e0d1-7843-801f-80c3-c4d0e063664d" class="bulleted-list"><li style="list-style-type:disc">&quot;в ожидании оплаты&quot; → &quot;оплачено&quot; (если <code>true</code>),</li></ul><ul id="1686e0d1-7843-8024-a0dc-c066e77e7806" class="bulleted-list"><li style="list-style-type:disc">&quot;в ожидании оплаты&quot; → &quot;отклонено&quot; (если <code>false</code>).</li></ul></li></ol><ol type="1" id="1686e0d1-7843-8095-853b-e98f4ca9aa70" class="numbered-list" start="4"><li><strong>Генерация фискального чека:</strong><p id="1686e0d1-7843-804f-9744-c25b70e4e581" class="">После успешной оплаты <mark class="highlight-yellow_background">сгенерируйте фискальный чек в формате PDF</mark>. Чек должен содержать следующую информацию:</p><ul id="1686e0d1-7843-80aa-b352-f58f063615aa" class="bulleted-list"><li style="list-style-type:disc">Название компании или проекта,</li></ul><ul id="1686e0d1-7843-801e-824f-f058ec078faf" class="bulleted-list"><li style="list-style-type:disc">Номер транзакции,</li></ul><ul id="1686e0d1-7843-8061-a7d3-d588e39873c4" class="bulleted-list"><li style="list-style-type:disc">Дата и время оформления заказа,</li></ul><ul id="1686e0d1-7843-8023-b910-cf90f511bff4" class="bulleted-list"><li style="list-style-type:disc">Наименование товаров/услуг,</li></ul><ul id="1686e0d1-7843-80e6-be2f-fbe23c52f91f" class="bulleted-list"><li style="list-style-type:disc">Цена за единицу,</li></ul><ul id="1686e0d1-7843-80c5-b05e-c51ac119561a" class="bulleted-list"><li style="list-style-type:disc">Количество,</li></ul><ul id="1686e0d1-7843-8022-b5d8-c7c7153f352f" class="bulleted-list"><li style="list-style-type:disc">Общая сумма,</li></ul><ul id="1686e0d1-7843-8027-81a6-dfe3b7b470bd" class="bulleted-list"><li style="list-style-type:disc">ФИО клиента,</li></ul><ul id="1686e0d1-7843-80bf-9127-e689d9e1dc0a" class="bulleted-list"><li style="list-style-type:disc">Способ оплаты (с зашифрованными данными карты).</li></ul><div id="1686e0d1-7843-8049-ab9e-dd1cd8da8ff1" class="column-list"><div id="1b2dbadc-3446-4e73-b70d-1ebbcd25439f" style="width:68.75%" class="column"><figure id="31428dda-ff91-47e4-9ea6-5b0c0bea5d44" class="image" style="text-align:center"><a href="Assignment_4/Untitled.png"><img style="width:432px" src="Assignment_4/Untitled.png"/></a></figure></div><div id="bc40c3e5-1e2e-4415-b721-fbd10e342a35" style="width:31.25%" class="column"><figure id="f375d16b-6feb-4021-a0d0-c7ad29c751fe" class="image"><a href="Assignment_4/Untitled%201.png"><img style="width:192px" src="Assignment_4/Untitled%201.png"/></a></figure></div></div><div id="1686e0d1-7843-80c2-959f-d5c8a8bc2357" class="column-list"></div></li></ol><ol type="1" id="1686e0d1-7843-8021-92b0-e82f9afeaade" class="numbered-list" start="5"><li><strong>Отправка чека:</strong><p id="1686e0d1-7843-8040-bdab-c9de5d8889ba" class="">Отправьте сгенерированный PDF-чек на <mark class="highlight-yellow_background">электронную почту клиента</mark> через микросервис.</p></li></ol><ol type="1" id="1686e0d1-7843-809a-b165-d97e37054698" class="numbered-list" start="6"><li><strong>Завершение транзакции:</strong><p id="1686e0d1-7843-80c4-9d52-c7dd8a078d58" class="">Обновите статус транзакции как завершённый после успешной оплаты. Убедитесь, что изменения корректно отражены как в базе данных, так и в интерфейсе пользователя.</p></li></ol></details></li></ul><div id="14b6e0d1-7843-81f4-9d7c-d47cb55952c9" class="column-list"></div><ul id="1666e0d1-7843-806b-b8ef-e4bb2e844e42" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Websocket</mark> (50 баллов)</summary><h3 id="1596e0d1-7843-80bd-a21f-d5e2a5201ee8" class="">Цель:</h3><p id="1596e0d1-7843-8099-b7bc-d6bfa1784caf" class="">Расширить функциональность вашего текущего проекта, реализовать чат, в котором клиенты могут создавать чат с поддержкой и общаться с администратором в режиме реального времени. Этот чат может быть полезен для быстрого взаимодействия клиентов с поддержкой, например, для решения вопросов по заказам или подпискам.</p><h3 id="1696e0d1-7843-8056-a455-e99b8cbcbc35" class="">Шаги:</h3><ol type="1" id="1696e0d1-7843-8047-a137-f92e29da1f96" class="numbered-list" start="1"><li><strong>Использование текущего проекта:</strong><p id="1696e0d1-7843-801e-a074-e978323dc963" class="">Проект уже включает административную панель и клиентскую страницу, их нужно дополнить функциями для реализации чата.</p></li></ol><ol type="1" id="1696e0d1-7843-8025-afd6-f1fd634aaf2d" class="numbered-list" start="2"><li><strong>Основные функции чата:</strong><p id="1696e0d1-7843-803a-a022-e7b3a1c8c22e" class="">Для реализации чата необходимо выполнить следующие шаги:</p><ol type="1" id="1696e0d1-7843-80ef-8d96-d2a264040267" class="numbered-list" start="1"><li><strong>Присвоение уникального идентификатора:</strong><p id="1696e0d1-7843-803f-937f-fca47a5a7a88" class="">Когда клиент открывает чат, ему автоматически присваивается уникальный идентификатор чата.</p></li></ol><ol type="1" id="1696e0d1-7843-807c-ad71-d8eb79e0b873" class="numbered-list" start="2"><li><strong>Ограничение на один активный чат:</strong><p id="1696e0d1-7843-80db-a043-db5ee05a9094" class="">Клиент может иметь только один активный чат одновременно.</p></li></ol><ol type="1" id="1696e0d1-7843-80f3-be49-f4a9824b3c57" class="numbered-list" start="3"><li><strong>Отображение ссылок на чат:</strong><ul id="1696e0d1-7843-80f1-8545-ff0e91df1309" class="bulleted-list"><li style="list-style-type:disc">Клиент видит ссылку на свой чат в личном профиле.</li></ul><ul id="1696e0d1-7843-803e-9f45-ebecd4e62f31" class="bulleted-list"><li style="list-style-type:disc">Администратор видит ссылки на чаты от разных клиентов в своей панели.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-8013-8fc6-e28d39099bf4" class="numbered-list" start="4"><li><strong>Сохранение истории переписки:</strong><p id="1696e0d1-7843-8030-9ee8-d013f4dce959" class="">Чат должен сохранять историю сообщений, чтобы она была доступна после повторной авторизации, обновления страницы или завершения сессии. История должна сохраняться в базе данных или текстовом файле и быть привязана к уникальному идентификатору чата.</p></li></ol><ol type="1" id="1696e0d1-7843-805d-a8fa-df211ba6cbbd" class="numbered-list" start="5"><li><strong>Закрытие чата администратором:</strong><ul id="1696e0d1-7843-80a0-a0f3-c7020d3b80d4" class="bulleted-list"><li style="list-style-type:disc">Администратор может закрыть чат с клиентом.</li></ul><ul id="1696e0d1-7843-804d-8497-d54e40a73b42" class="bulleted-list"><li style="list-style-type:disc">После закрытия:<ul id="1696e0d1-7843-809b-9512-dd99c9f17564" class="bulleted-list"><li style="list-style-type:circle">История переписки становится недоступной.</li></ul><ul id="1696e0d1-7843-80a4-8d56-cb568f70a6fb" class="bulleted-list"><li style="list-style-type:circle">Устанавливается статус чата: «Активный» или «Неактивный».</li></ul><ul id="1696e0d1-7843-80e3-827e-da988b86ab34" class="bulleted-list"><li style="list-style-type:circle">У администратора исчезает ссылка на закрытый чат.</li></ul><ul id="1696e0d1-7843-808e-894c-e2f24a854870" class="bulleted-list"><li style="list-style-type:circle">У клиента исчезает ссылка на чат, и снова появляется кнопка для создания нового чата.</li></ul></li></ul></li></ol><ol type="1" id="1696e0d1-7843-80f4-924f-ce0a85cb0ced" class="numbered-list" start="6"><li><strong>Создание нового чата:</strong><ul id="1696e0d1-7843-80c2-93be-cf89cffde2a2" class="bulleted-list"><li style="list-style-type:disc">После закрытия старого чата клиент может создать новый.</li></ul><ul id="1696e0d1-7843-80c9-ac12-ca74eadaa48f" class="bulleted-list"><li style="list-style-type:disc">Для нового чата генерируется уникальный идентификатор, создается новая запись в базе данных, и процесс повторяется.</li></ul></li></ol></li></ol><ol type="1" id="1696e0d1-7843-80f0-9ae1-c477e6e667f7" class="numbered-list" start="3"><li><strong>Обновления в проекте:</strong><p id="1696e0d1-7843-8029-9fa4-dcc7360c6bdf" class="">Для реализации чата потребуется два изменения в текущем проекте и одна новая страница:</p><ol type="1" id="1696e0d1-7843-8020-8065-eb203c8725c2" class="numbered-list" start="1"><li><strong>Страница чата:</strong><ul id="1696e0d1-7843-8009-8d7d-c2ef647593ea" class="bulleted-list"><li style="list-style-type:disc">В чате должны быть стандартные функции: отображение отправителя сообщения, времени отправки, содержания сообщения.</li></ul><ul id="1696e0d1-7843-806e-976d-f5f74fc021ca" class="bulleted-list"><li style="list-style-type:disc">Обязательна кнопка отправки сообщения.</li></ul><ul id="1696e0d1-7843-803d-9594-ce015ef746c9" class="bulleted-list"><li style="list-style-type:disc">Визуально и функционально чат должен быть классическим и понятным.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-8025-8964-f182d4fb903e" class="numbered-list" start="2"><li><strong>Изменения в профиле клиента:</strong><ul id="1696e0d1-7843-80ad-9672-f1bd9756558c" class="bulleted-list"><li style="list-style-type:disc">Если у клиента есть активный чат, показывать ссылку на него.</li></ul><ul id="1696e0d1-7843-804c-97ca-c742ff721408" class="bulleted-list"><li style="list-style-type:disc">Если активного чата нет, отображать кнопку для создания нового чата.</li></ul><ul id="1696e0d1-7843-801c-99c6-cd3809b569bb" class="bulleted-list"><li style="list-style-type:disc">Не показывать ссылки на неактивные чаты.</li></ul></li></ol><ol type="1" id="1696e0d1-7843-80d1-94ab-c785715cea53" class="numbered-list" start="3"><li><strong>Изменения в админке:</strong><ul id="1696e0d1-7843-8034-a9d2-e369e4ef55e3" class="bulleted-list"><li style="list-style-type:disc">Добавить вкладку или таблицу с ссылками на все активные чаты клиентов.</li></ul><ul id="1696e0d1-7843-800b-93dd-dd583eb4bb80" class="bulleted-list"><li style="list-style-type:disc">Добавить кнопку для закрытия чатов рядом с каждой ссылкой.</li></ul></li></ol></li></ol><h3 id="1596e0d1-7843-800d-afdb-e1c5c730a0e0" class=""><strong>Дополнительно:</strong></h3><ul id="1596e0d1-7843-802b-b95a-f4e266ae3b78" class="bulleted-list"><li style="list-style-type:disc">Для работы с веб-сокетами используйте библиотеку <code>github.com/gorilla/websocket</code>.</li></ul><ul id="1696e0d1-7843-802a-8878-da44c929745e" class="bulleted-list"><li style="list-style-type:disc">На сервере: создайте обработчик <code>/ws</code>, принимайте и отправляйте сообщения через <code>gorilla/websocket</code>. <p id="1696e0d1-7843-80a1-85e9-c65842d1267a" class=""><strong>Пример кода:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-80d0-b6ba-d2b46a319c3f" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">var upgrader = websocket.Upgrader{
+    CheckOrigin: func(r *http.Request) bool { return true },
+}
+
+func handleConnections(w http.ResponseWriter, r *http.Request) {
+    ws, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+    defer ws.Close()
+}</code></pre><p id="1696e0d1-7843-8007-a03e-ebfe7f5ab398" class="">Убедитесь, что сервер слушает определённый порт:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-8031-806f-d32169bb7c97" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">http.HandleFunc(&quot;/ws&quot;, handleConnections)
+log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))
+</code></pre></li></ul><ul id="1696e0d1-7843-80a3-acec-c7782441b1d0" class="bulleted-list"><li style="list-style-type:disc">На клиенте: используйте <code>WebSocket</code> API для подключения к серверу и отправки/приёма сообщений. В HTML-файле создайте подключение к веб-сокету:<p id="1696e0d1-7843-809f-89a7-f863aa385caf" class=""><strong>Пример кода:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-80e3-a747-d9a2f3b76709" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">const socket = new WebSocket(&#x27;ws://localhost:8080/ws&#x27;);
+
+socket.onmessage = function(event) {
+    const message = JSON.parse(event.data);
+    console.log(`${message.username}: ${message.content}`);
+};</code></pre><p id="1696e0d1-7843-8085-9a5e-cb8c6206210e" class="">Отправьте сообщение на сервер:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1696e0d1-7843-8009-90c3-c3b756e84a2e" class="code"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">socket.send(JSON.stringify({ username: &quot;John&quot;, content: &quot;Hello!&quot; }));</code></pre></li></ul></details></li></ul><p id="1696e0d1-7843-8076-8147-c30116d83f4e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
