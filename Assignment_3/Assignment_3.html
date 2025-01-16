@@ -1,0 +1,843 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assignment #3</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="14b6e0d1-7843-8116-85a8-c4482a217ca6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">✅</span></div><h1 class="page-title">Assignment #3</h1><p class="page-description"></p></header><div class="page-body"><h3 id="15f6e0d1-7843-8011-97ae-d64c09c2930a" class="">Important information:</h3><ol type="1" id="15f6e0d1-7843-80e5-aedc-f57a7adccde1" class="numbered-list" start="1"><li>We are continuing with your team-based <mark class="highlight-orange_background">project work</mark>. Remember, the project topic is assigned to you until the end of the trimester, and each new task will build on the <mark class="highlight-orange_background">previous</mark> one. The team composition will remain unchanged throughout the trimester.</li></ol><ol type="1" id="15f6e0d1-7843-807a-b305-d02f1d013fce" class="numbered-list" start="2"><li>Make sure to commit your updated projects and tasks to your repository and keep the <code>README.md</code> file up to date. Ensure your repository contains everything needed—code, images, and other materials—and that it is <mark class="highlight-orange_background">public access</mark>.</li></ol><ol type="1" id="15f6e0d1-7843-801e-93a6-dcd2b66bdc4d" class="numbered-list" start="3"><li>It&#x27;s important to remember that tasks sometimes need to be <mark class="highlight-orange_background">adjusted</mark> to fit your unique project. The examples provided in the file are just guidelines—you’re free to modify them or take a different approach that works best for your team.</li></ol><ol type="1" id="15f6e0d1-7843-80c6-84f1-dd6d4a2c282f" class="numbered-list" start="4"><li>Deadline — <mark class="highlight-orange_background">by 21:00 on 24 January 2025</mark>. If you encounter any issues with the Moodle system, submit your work through Teams. Don&#x27;t forget to include the names of your team members. One team — one link.</li></ol><ol type="1" id="15f6e0d1-7843-801b-9d9a-f59977cca2d9" class="numbered-list" start="5"><li>You can defend your project until the <mark class="highlight-orange_background">end of the 7th week</mark>. Presentations are not required, just show and tell us about your work. If you can&#x27;t make it for valid reasons, there&#x27;s an option to submit everything online. Contact me on Teams for more details.</li></ol><ol type="1" id="15f6e0d1-7843-80e8-8d63-e8dda9096ee5" class="numbered-list" start="6"><li>If the team does not attach the GitHub link in Moodle or send it through Teams, and also does not defend the project, unfortunately, that will result in <mark class="highlight-orange_background">0 points</mark>.</li></ol><ol type="1" id="15f6e0d1-7843-8042-8af7-d3bb4f744fdb" class="numbered-list" start="7"><li>Please try to submit your projects on time, as late submissions are subject to penalties. A delay of 1-2 days will result in a 5% deduction from the remaining amount, 3-7 days — a 15% deduction, up to 2 weeks — a 30% deduction, and over 2 weeks — a 50% deduction.</li></ol><h3 id="14b6e0d1-7843-81c6-ba57-dbe7e6bd9f15" class="">Tasks:</h3><p id="14b6e0d1-7843-8135-8101-d14fdd9c7693" class="">In this assessment we will cover the following topics: </p><ul id="14b6e0d1-7843-8171-bd81-ea0dd4a75f75" class="toggle"><li><details open=""><summary><mark class="highlight-orange_background">Auth</mark><mark class="highlight-yellow_background"> </mark>(40 points)</summary><p id="1666e0d1-7843-8051-9691-f3dca84e8f06" class="">For this assignment, you need to expand the range of pages in your project. Some of these pages might already exist (such as an admin panel or a product list). Ensure that by the end of the task, the following pages and features are included or updated as needed:</p><ol type="1" id="1666e0d1-7843-800f-b332-d4190f22ea16" class="numbered-list" start="1"><li><strong>Home Page (Index) </strong><em><strong>(if necessary)</strong></em><ul id="1666e0d1-7843-80d0-b4c8-edc49d7d55ef" class="bulleted-list"><li style="list-style-type:disc">Include general information about your website and links to key sections.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-80d2-b6a5-d05bdcc76d67" class="numbered-list" start="2"><li>✅<strong>Sign Up (Registration)</strong><ul id="1666e0d1-7843-807d-8b47-dd474e5231f1" class="bulleted-list"><li style="list-style-type:disc">Create an account with email verification to confirm the registration.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-80b4-b11c-cfa2490b27fb" class="numbered-list" start="3"><li>✅<strong>Login (Authorization)</strong><ul id="1666e0d1-7843-807d-bf12-d0d48bc3c82b" class="bulleted-list"><li style="list-style-type:disc">Allow users to log in with their username and password.</li></ul><ul id="1666e0d1-7843-809b-ab13-d612dc95d300" class="bulleted-list"><li style="list-style-type:disc">Ensure security measures are in place (password hashing, validation, etc.).</li></ul></li></ol><ol type="1" id="1666e0d1-7843-800e-9a67-f656ca4f01a6" class="numbered-list" start="4"><li><strong>User Profile </strong><em><strong>(if necessary)</strong></em><ul id="1666e0d1-7843-806b-bf95-ff9a278ef3d5" class="bulleted-list"><li style="list-style-type:disc">Manage personal information (name, email, password).</li></ul><ul id="1666e0d1-7843-80ee-a3af-d41fa332b6af" class="bulleted-list"><li style="list-style-type:disc">Add features like password changes or profile photo uploads if needed.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-80ef-a6fb-c3a15fb0ee50" class="numbered-list" start="5"><li>✅<strong>Admin Panel</strong><ul id="1666e0d1-7843-80f5-81f1-ddfae2f88d31" class="bulleted-list"><li style="list-style-type:disc">Add, edit, and delete content (CRUD operations).</li></ul><ul id="1666e0d1-7843-8080-89c3-d1456b59c3fc" class="bulleted-list"><li style="list-style-type:disc">Manage users, orders, products, and other site aspects.</li></ul><ul id="1666e0d1-7843-803e-8806-cfada36371d1" class="bulleted-list"><li style="list-style-type:disc">Include filtering, sorting, pagination, and action logging where possible.</li></ul><ul id="1666e0d1-7843-80eb-a9c8-ee4b771d99f2" class="bulleted-list"><li style="list-style-type:disc"><strong>Roles and Permissions</strong>: Define user roles such as administrator, manager, and regular user. Ensure only authorized roles can access specific actions.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-8086-bb6b-fc9e23fc6132" class="numbered-list" start="6"><li>✅<strong>Catalog / Product List</strong><ul id="1666e0d1-7843-8087-84b0-c6a01981974c" class="bulleted-list"><li style="list-style-type:disc">Display all available products with detailed information (description, price, images, etc.).</li></ul><ul id="1666e0d1-7843-800b-aeb7-fb228dae4b4c" class="bulleted-list"><li style="list-style-type:disc">Include features like filtering, sorting, pagination, and logging.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-80ce-9af4-d17c4428bb15" class="numbered-list" start="7"><li><strong>Shopping Cart </strong><em><strong>(if necessary)</strong></em><ul id="1666e0d1-7843-802d-95e8-ecd94081c222" class="bulleted-list"><li style="list-style-type:disc">Allow users to view and edit selected items before purchase (add/remove/change quantities).</li></ul></li></ol><ol type="1" id="1666e0d1-7843-8047-96d3-ccdfbece4373" class="numbered-list" start="8"><li><strong>Checkout </strong><em><strong>(required for Assignment #4)</strong></em><ul id="1666e0d1-7843-8033-a6ab-e8df5fe465db" class="bulleted-list"><li style="list-style-type:disc">Finalize the purchase process: choose a payment method and confirm the order.</li></ul></li></ol><h2 id="1666e0d1-7843-8065-87f9-f277f43c1ca6" class=""><mark class="highlight-orange_background">6. Auth</mark></h2><p id="1666e0d1-7843-8092-9798-f1856ded92c8" class=""><strong>Goal:</strong> Expand the functionality of your current project by implementing a registration system with email verification, as well as user authentication and authorization. Ensure role-based access control to differentiate user permissions.</p><figure id="1666e0d1-7843-804a-b604-dda764e2032b" class="image" style="text-align:center"><a href="Assignment_3/f1eebc8c-a2f5-488b-8075-722e2d7c398d.png"><img style="width:604.1297935103245px" src="Assignment_3/f1eebc8c-a2f5-488b-8075-722e2d7c398d.png"/></a></figure><p id="1666e0d1-7843-80bc-8d4d-cf17d97c26e9" class="block-color-default_background">
+</p><p id="14b6e0d1-7843-81cc-b08d-d75634487806" class="">To complete this task, you need to:</p><ol type="1" id="14b6e0d1-7843-8186-847c-eb1cee814c33" class="numbered-list" start="1"><li><strong>(10 points) </strong>Develop a <mark class="highlight-orange_background">registration</mark> confirmation system via email.</li></ol><ol type="1" id="14b6e0d1-7843-81fb-affa-e753950d5cb0" class="numbered-list" start="2"><li><strong>(20 points) </strong>Implement a mechanism for issuing tokens upon successful <mark class="highlight-orange_background">authentication</mark> and use them for authorization requests to protected resources.<ul id="14b6e0d1-7843-8164-a914-f15109051167" class="bulleted-list"><li style="list-style-type:disc"><em>Or</em> implement <mark class="highlight-orange_background">authentication</mark> via OAuth (e.g., using Google, Facebook, GitHub) to allow users to log in using their accounts from other services.</li></ul><ul id="14b6e0d1-7843-8193-97c7-ffe5c4ab0814" class="bulleted-list"><li style="list-style-type:disc"><em>Or</em> implement password <mark class="highlight-orange_background">authentication</mark>, develop a system for sending one-time passwords (OTP) for an additional layer of security.</li></ul><ul id="14b6e0d1-7843-8196-a06a-e0e1df436758" class="bulleted-list"><li style="list-style-type:disc"><em>Or</em> implement <mark class="highlight-orange_background">authentication</mark> via SMS, develop a system for sending SMS messages, similar to what is used in banks for online operations.</li></ul></li></ol><ol type="1" id="14b6e0d1-7843-81da-af53-dca450d3ca16" class="numbered-list" start="3"><li><strong>(10 points) </strong>Expand the <mark class="highlight-orange_background">authorization</mark> system to manage user roles and permissions. Develop an administrative interface for role management and permission assignment.</li></ol><figure id="1666e0d1-7843-80cd-bb7d-df397e7056b1" class="image" style="text-align:center"><a href="Assignment_3/image.png"><img style="width:528px" src="Assignment_3/image.png"/></a></figure><p id="14b6e0d1-7843-81fb-8ea8-f161fab752df" class="">
+</p></details></li></ul><ul id="14b6e0d1-7843-81b0-b26a-d0e414778e09" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Testing</mark> (25 points)</summary><h2 id="14b6e0d1-7843-81f5-bc75-f900b484a063" class=""><mark class="highlight-red_background">7. Testing</mark></h2><p id="14b6e0d1-7843-8176-91e0-fe0a956b06ac" class="">For testing your project, it is necessary to conduct <mark class="highlight-red_background">unit tests</mark>, <mark class="highlight-red_background">integration tests</mark>, and <mark class="highlight-red_background">end-to-end tests</mark>. It is important to implement each of them and write at least one test for each type. Of course, the tests should not be random or from examples; they should be conducted within the scope of your project theme.</p><ul id="1606e0d1-7843-80fe-bc35-d936364b4079" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.1 Unit tests (8 points)</strong></mark></summary><p id="14b6e0d1-7843-8121-940f-e1afac93cf13" class="">Unit tests help verify individual components of your code for correctness. This allows you to detect and fix errors early in the development process, improves code readability, and facilitates future maintenance.</p><p id="14b6e0d1-7843-810d-8dc9-f88b2fe9900d" class=""><strong>Example:</strong> Testing a function that calculates discounts on a product.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8199-afe5-d3ad38415dff" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func CalculateDiscount(price int, discountPercent int) int {
+    return price - (price * discountPercent / 100)
+}
+
+// Test for CalculateDiscount function
+func TestCalculateDiscount(t *testing.T) {
+    price := 100
+    discountPercent := 10
+
+    discountedPrice := CalculateDiscount(price, discountPercent)
+
+    expectedPrice := 90
+    if discountedPrice != expectedPrice {
+        t.Errorf(&quot;Incorrect discounted price. Expected: %d, Got: %d&quot;, expectedPrice, discountedPrice)
+    }
+}</code></pre><p id="14b6e0d1-7843-8111-8fc2-c6952475052f" class=""><strong>Console output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-811e-85eb-f53001a3fa1b" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running unit tests...
+Test passed: CalculateDiscount</code></pre><p id="14b6e0d1-7843-810b-ac80-c7a570d771af" class=""><strong>Goal:</strong> This test verifies the correctness of the discount calculation function. It ensures that the function correctly calculates the discount based on the price and discount percentage.</p><p id="14b6e0d1-7843-81e7-987a-d604301dcec2" class=""><strong>Assessment:</strong> If the test passes successfully, it means that the CalculateDiscount function works correctly, and it can be used in the project for discount calculations.</p></details></li></ul><ul id="1606e0d1-7843-8063-9c65-ecbd67946192" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.2 Integration tests (8 points)</strong></mark></summary><p id="14b6e0d1-7843-812d-b553-f86890bdd276" class="">Integration tests are necessary to verify the interaction between different components of your project. They help ensure that your API routes handle requests correctly, and the database returns the expected results.</p><p id="14b6e0d1-7843-8149-ab4f-f6502a4c2d48" class=""><strong>Example:</strong> Testing the API endpoint for retrieving information about a product.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81c7-a228-c11a4438312e" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func TestGetProduct(t *testing.T) {
+    request, _ := http.NewRequest(&quot;GET&quot;, &quot;/products/1&quot;, nil)
+    response := httptest.NewRecorder()
+
+    GetProduct(response, request)
+
+    // Checking the status of the response code
+    if response.Code != http.StatusOK {
+        t.Errorf(&quot;Incorrect status code. Expected: %d, Got: %d&quot;, http.StatusOK, response.Code)
+    }
+    // Checking response content
+    expected := `{&quot;id&quot;:1,&quot;name&quot;:&quot;Product Name&quot;,&quot;price&quot;:100}`
+    if response.Body.String() != expected {
+        t.Errorf(&quot;Incorrect response body. Expected: %s, Got: %s&quot;, expected, response.Body.String())g
+    }
+}</code></pre><p id="14b6e0d1-7843-8198-83bf-d0cf7dcc41e3" class=""><strong>Console output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81c1-92fa-f930822e48bb" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running integration tests...
+Test passed: GetProduct</code></pre><p id="14b6e0d1-7843-81b5-82fb-c53b311b5517" class=""><strong>Goal:</strong> This test verifies that the API endpoint for retrieving information about a product works correctly. It sends a request to the server and checks that the expected result is returned.</p><p id="14b6e0d1-7843-81aa-9f3b-c3a28162f586" class=""><strong>Assessment:</strong> Successful completion of the test means that the API endpoint correctly responds to requests and returns the expected data, which is important for the proper functioning of the client-side application.</p></details></li></ul><ul id="1606e0d1-7843-8072-8ef5-e67cd2a71102" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.3 End-to-End tests (9 points)</strong></mark></summary><p id="14b6e0d1-7843-81ba-889b-ebef21299107" class=""><a href="https://www.zenrows.com/blog/selenium-golang#scrape-with-selenium-in-golang">End-to-End tests </a>allow you to verify the entire user interaction path with your project. They detect issues that may arise due to incorrect operation of all system components as a whole.</p><p id="14b6e0d1-7843-81e3-ad6a-ebafc9ae8691" class=""><strong>Example:</strong> Testing interaction with the user interface.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-814a-ab3e-fb468096205f" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">package main
+
+import (
+    &quot;testing&quot;
+    &quot;github.com/tebeka/selenium&quot;
+    &quot;github.com/tebeka/selenium/chrome&quot;
+)
+
+func TestProductSearch(t *testing.T) {
+    caps := selenium.Capabilities{&quot;browserName&quot;: &quot;chrome&quot;}
+    chromeCaps := chrome.Capabilities{
+        Path: &quot;&quot;,
+    }
+    caps.AddChrome(chromeCaps)
+
+    wd, err := selenium.NewRemote(caps, &quot;&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    defer wd.Quit()
+
+    wd.Get(&quot;http://localhost:8080&quot;)
+    searchInput, err := wd.FindElement(selenium.ByID, &quot;search-input&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    searchInput.SendKeys(&quot;iPhone&quot;)
+
+    searchButton, err := wd.FindElement(selenium.ByID, &quot;search-button&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    searchButton.Click()
+
+    searchResults, err := wd.FindElements(selenium.ByClassName, &quot;search-result&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    if len(searchResults) == 0 {
+        t.Error(&quot;No search results found&quot;)
+    }
+}</code></pre><p id="14b6e0d1-7843-813c-b7b5-db6c8d1db0c6" class=""><strong>Console output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81b4-a4db-c306b139e0ab" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running end-to-end tests...
+Test passed: ProductSearch</code></pre><p id="14b6e0d1-7843-817f-a5fa-c90ed967ca3e" class=""><strong>Goal:</strong> This test verifies product search through the web interface. It emulates user actions and checks that after entering the product name, the product itself is displayed.</p><p id="14b6e0d1-7843-81ab-990c-e53498d7d42b" class=""><strong>Assessment:</strong> Successful completion of the test means that logging into the system via the web interface works correctly, which is important for the usability of the application.</p></details></li></ul></details></li></ul><ul id="14b6e0d1-7843-819a-a70f-ccd174b6f8ad" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background">Deployment</mark> (35 points)</summary><h2 id="1666e0d1-7843-8017-bd44-e612e008f3bf" class=""><mark class="highlight-teal_background">8. Deployment</mark></h2><ol type="1" id="1666e0d1-7843-80cf-9b26-d1782d8fe3db" class="numbered-list" start="1"><li><strong>Choosing a Platform:</strong><p id="1666e0d1-7843-807c-abca-d1eb30ad11c3" class="">Decide on the platform to deploy your project. Some options include:</p><ul id="1666e0d1-7843-8058-b521-d7f074a1e015" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway</strong>: A free platform with built-in CI/CD and database integration.</li></ul><ul id="1666e0d1-7843-80fc-a25d-ce3d0cfcd0cd" class="bulleted-list"><li style="list-style-type:disc"><strong>Render</strong>: Great for web applications, offering a free plan for testing.</li></ul><ul id="1666e0d1-7843-80b7-abdc-e0de5ae6085d" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok Free</strong>: Ideal for exposing local servers to the internet, useful for testing and demonstrations.</li></ul><ul id="1666e0d1-7843-80a6-8325-e859ade1d874" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker</strong>: A versatile solution for packaging your application in a container for deployment.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-80de-9d29-c9f0082b752f" class="numbered-list" start="2"><li><strong>Server Setup:</strong> <em>(Choose the method that suits you best)</em><p id="1666e0d1-7843-806c-8af2-ea13ca7fc8e1" class="">Follow the steps for your chosen platform:</p><ul id="1666e0d1-7843-80c5-b579-f36986914eb4" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway:</strong><ul id="1666e0d1-7843-806d-b8de-ff1d9c7b749e" class="bulleted-list"><li style="list-style-type:circle">Create an account on <a href="https://railway.app/">Railway</a>.</li></ul><ul id="1666e0d1-7843-8074-9134-e316e92786c4" class="bulleted-list"><li style="list-style-type:circle">Start a new project using the Railway CLI or the web interface.</li></ul></li></ul><ul id="1666e0d1-7843-8028-a395-c7e3b72ae199" class="bulleted-list"><li style="list-style-type:disc"><strong>Render:</strong><ul id="1666e0d1-7843-8072-9324-dbecfa35ce77" class="bulleted-list"><li style="list-style-type:circle">Sign up at <a href="https://render.com/">Render</a>.</li></ul><ul id="1666e0d1-7843-8006-93c9-e47c2edccb6e" class="bulleted-list"><li style="list-style-type:circle">Create a new service and link it to your project repository.</li></ul></li></ul><ul id="1666e0d1-7843-8006-9618-d22dc2240163" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok Free:</strong><ul id="1666e0d1-7843-8012-af4f-ee24c4570000" class="bulleted-list"><li style="list-style-type:circle">Install the <a href="https://ngrok.com/download">Ngrok CLI</a>.</li></ul><ul id="1666e0d1-7843-804e-84a8-e16933e6519b" class="bulleted-list"><li style="list-style-type:circle">Run the command <code>ngrok http 8080</code> (replace 8080 with your application’s port).</li></ul></li></ul><ul id="1666e0d1-7843-8089-b096-fa4c2604353b" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker:</strong><ul id="1666e0d1-7843-8092-94c2-fbecd51ecb14" class="bulleted-list"><li style="list-style-type:circle">Install Docker.</li></ul><ul id="1666e0d1-7843-808f-a9a7-ea8da23ba209" class="bulleted-list"><li style="list-style-type:circle">Create a <code>Dockerfile</code> and, if needed, a <code>docker-compose.yml</code>.</li></ul></li></ul></li></ol><ol type="1" id="1666e0d1-7843-8080-aa48-d5dfde36c612" class="numbered-list" start="3"><li><strong>Environment Configuration:</strong><ul id="1666e0d1-7843-80ff-8892-cbc1f59d2ecb" class="bulleted-list"><li style="list-style-type:disc">Ensure all environment variables are properly configured, including:<ul id="1666e0d1-7843-80f4-9e2e-db90c5e02d15" class="bulleted-list"><li style="list-style-type:circle">Database connection details.</li></ul><ul id="1666e0d1-7843-80f9-a01d-f1eb42dbffd5" class="bulleted-list"><li style="list-style-type:circle">Secret keys and tokens.</li></ul><ul id="1666e0d1-7843-80f4-b977-c804109e23f4" class="bulleted-list"><li style="list-style-type:circle">API keys and other sensitive data.</li></ul></li></ul><ul id="1666e0d1-7843-80c9-a67a-f42da2a0dc4e" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway</strong> and <strong>Render</strong>: <ul id="1666e0d1-7843-80b9-a6c3-eebe5a107728" class="bulleted-list"><li style="list-style-type:circle">Use their built-in environment variable management tools.</li></ul></li></ul><ul id="1666e0d1-7843-80da-b42b-e6ec8d9dd555" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok</strong>: <ul id="1666e0d1-7843-80f5-b583-e85b7ade5247" class="bulleted-list"><li style="list-style-type:circle">Verify your local <code>.env</code> files.</li></ul></li></ul><ul id="1666e0d1-7843-8054-87cf-d470dc7d17dd" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker</strong>: <ul id="1666e0d1-7843-8009-a369-e60165a5f90c" class="bulleted-list"><li style="list-style-type:circle">Define environment variables in <code>docker-compose.yml</code> or pass them via the CLI.</li></ul></li></ul></li></ol><ol type="1" id="1666e0d1-7843-8065-9a63-e23d166b6ad7" class="numbered-list" start="4"><li><strong>Building the Project:</strong><p id="1666e0d1-7843-8091-8608-ec34628ccecc" class="">Prepare your project for deployment by gathering all required files and dependencies:</p><ul id="1666e0d1-7843-80ab-8f6d-e15ec312d0c1" class="bulleted-list"><li style="list-style-type:disc">Ensure all dependencies are installed.</li></ul><ul id="1666e0d1-7843-804b-90be-d8f5b3ae7870" class="bulleted-list"><li style="list-style-type:disc">For <strong>Docker</strong>, create a <code>Dockerfile</code>. Example:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1666e0d1-7843-8079-9643-f948b252eaa3" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">FROM golang:1.20
+WORKDIR /app
+COPY . .
+RUN go build -o main .
+CMD [&quot;./main&quot;]</code></pre></li></ul><ul id="1666e0d1-7843-8068-8824-c9891dde80ef" class="bulleted-list"><li style="list-style-type:disc">For other platforms, make sure the repository contains executable code.</li></ul></li></ol><ol type="1" id="1666e0d1-7843-8048-b8bf-df3367f61aaa" class="numbered-list" start="5"><li><strong>Deploying the Project:</strong><ul id="1666e0d1-7843-8030-909f-e98c42cbc1d6" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway:</strong><ul id="1666e0d1-7843-800d-af51-c57ee8a2508e" class="bulleted-list"><li style="list-style-type:circle">Link your repository to Railway and set up automatic deployment.</li></ul></li></ul><ul id="1666e0d1-7843-8026-a21b-ede71ee7ccb3" class="bulleted-list"><li style="list-style-type:disc"><strong>Render:</strong><ul id="1666e0d1-7843-8056-aea2-ffaeb1eb1ba0" class="bulleted-list"><li style="list-style-type:circle">Connect your project to Render via GitHub or GitLab.</li></ul></li></ul><ul id="1666e0d1-7843-80cc-a041-fc5158e4be35" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok:</strong><ul id="1666e0d1-7843-8087-8c4b-fd58c1525573" class="bulleted-list"><li style="list-style-type:circle">Start your local server and use the <code>ngrok http 8080</code> command to expose it.</li></ul></li></ul><ul id="1666e0d1-7843-8073-8a60-cd54cc12efb2" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker:</strong><ul id="1666e0d1-7843-809c-8fa6-fa195a8e3bbf" class="bulleted-list"><li style="list-style-type:circle">Build and run your containers with <code>docker-compose up</code>. Ensure remote access is configured if teammates need access to the deployed site.</li></ul></li></ul></li></ol><ol type="1" id="1666e0d1-7843-8033-89b4-c09b9c19981d" class="numbered-list" start="6"><li><strong>Launching the Project:</strong><p id="1666e0d1-7843-8014-babf-d62a6a2a9c26" class="">Verify functionality based on your chosen platform:</p><ul id="1666e0d1-7843-8041-9196-cae356a41d59" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway and Render:</strong><ul id="1666e0d1-7843-8046-993e-ca03de7f85f9" class="bulleted-list"><li style="list-style-type:circle">Ensure your application is accessible via the provided URL.</li></ul></li></ul><ul id="1666e0d1-7843-8009-8ef0-fc4e7aae766d" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok:</strong><ul id="1666e0d1-7843-80a1-ab27-f0b95f0f3efb" class="bulleted-list"><li style="list-style-type:circle">Use the generated Ngrok URL for testing.</li></ul></li></ul><ul id="1666e0d1-7843-8062-9ef5-fae7f5ab4930" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker:</strong><ul id="1666e0d1-7843-807f-8c37-d67733c6a732" class="bulleted-list"><li style="list-style-type:circle">Check running containers using the <code>docker ps</code> command.</li></ul></li></ul></li></ol><ol type="1" id="1666e0d1-7843-807a-91f9-ec89a02cebf7" class="numbered-list" start="7"><li><strong>Testing:</strong><ul id="1666e0d1-7843-8079-8bb4-c3507636f8e5" class="bulleted-list"><li style="list-style-type:disc">After deployment, test your application:<ul id="1666e0d1-7843-80ad-98b2-efdfadfee584" class="bulleted-list"><li style="list-style-type:circle">Open the application’s URL in a browser.</li></ul><ul id="1666e0d1-7843-805d-b3b8-c96979af8370" class="bulleted-list"><li style="list-style-type:circle">Use API testing tools (e.g., Postman) to validate endpoints.</li></ul></li></ul><ul id="1666e0d1-7843-8053-b378-ccda2fe9d271" class="bulleted-list"><li style="list-style-type:disc">For <strong>Ngrok</strong>, confirm that the application is accessible from the internet.</li></ul></li></ol></details></li></ul><hr id="15f6e0d1-7843-80dc-b649-c608e98abb2c"/><h3 id="15f6e0d1-7843-80e9-b42e-f1c9913f5593" class="">Важная информация:</h3><ol type="1" id="15f6e0d1-7843-809d-9555-d0bf21b7af01" class="numbered-list" start="1"><li>Продолжаем командную работу над <mark class="highlight-orange_background">вашим проектом</mark>. Напоминаю, что тема закреплена за вами до конца триместра, и каждое новое задание будет <mark class="highlight-orange_background">продолжением</mark> предыдущего. Состав команд остаётся неизменным до конца триместра.</li></ol><ol type="1" id="15f6e0d1-7843-8005-8254-e012748eb683" class="numbered-list" start="2"><li>Не забудьте коммитить обновлённые проекты и задания в ваш репозиторий, а также обновлять информацию в <code>README.md</code>. Убедитесь, что в репозитории есть всё необходимое, включая код, изображения и другие материалы, и что он доступен для просмотра <mark class="highlight-orange_background">(public access)</mark>.</li></ol><ol type="1" id="15f6e0d1-7843-8016-8bd3-f12243f658ff" class="numbered-list" start="3"><li>Помните, что задания могут потребовать <mark class="highlight-orange_background">адаптации</mark> под ваш уникальный проект. Примеры, представленные в данном файле, являются ориентиром, но вы можете их изменять или использовать другой подход, удобный для вашей команды.</li></ol><ol type="1" id="15f6e0d1-7843-8096-a33d-f2c98e40de01" class="numbered-list" start="4"><li>Дедлайн — <mark class="highlight-orange_background">до 21:00 24 января 2025 года</mark>. Если возникнут проблемы с системой мудл, отправьте работы через Teams. Не забудьте указать имена участников команды. Одна команда — одна ссылка.</li></ol><ol type="1" id="15f6e0d1-7843-805c-b3e4-d0d89e630724" class="numbered-list" start="5"><li>Вы можете защищать проект <mark class="highlight-orange_background">до конца 7-й недели</mark>. Презентации не нужны — достаточно показать и рассказать о своей работе. Если не сможете присутствовать на защите по уважительным причинам, проект можно сдать в онлайн-формате. Для уточнения деталей пишите в Teams.</li></ol><ol type="1" id="15f6e0d1-7843-8005-8cb5-c9cfc97fa862" class="numbered-list" start="6"><li>Если команда не приложит ссылку на GitHub в Moodle или не отправит её через Teams, а также не защитит проект, то, к сожалению, это <mark class="highlight-orange_background">0 баллов</mark>.</li></ol><ol type="1" id="15f6e0d1-7843-8077-b192-eb68e4e5f867" class="numbered-list" start="7"><li>Постарайтесь сдавать проекты <mark class="highlight-orange_background">вовремя</mark>, поскольку за опоздание предусмотрены штрафы. За опоздание на 1-2 дня — штраф 5% от остатка, на 3-7 дней — 15% от остатка, на срок до 2 недель — 30% от остатка, свыше 2 недель — 50% от остатка.</li></ol><h3 id="15f6e0d1-7843-80d1-b1bd-e0349f50aa1d" class="">Задания:</h3><p id="14b6e0d1-7843-8151-8446-eb3d897aff70" class="">В этом ассайнменте мы рассмотрим следующие темы.</p><ul id="14b6e0d1-7843-8116-b8f0-cf5cfe83a3e4" class="toggle"><li><details open=""><summary><mark class="highlight-orange_background">Auth</mark><mark class="highlight-yellow_background"> </mark>(40 баллов)</summary><p id="1656e0d1-7843-8043-b3a7-cff08d0cf612" class="">Для выполнения этого задания вам необходимо расширить набор страниц в вашем проекте. Некоторые из этих страниц могут у вас уже быть (например, админка или список товаров). Проверьте, чтобы в конечном итоге присутствовали (или были актуализированы) следующие страницы и функции:</p><ol type="1" id="1656e0d1-7843-80d7-8bfc-f80948e37808" class="numbered-list" start="1"><li><strong>Главная (index) </strong><em><strong>(при необходимости)</strong></em><ul id="1656e0d1-7843-8030-a68d-d29eb11dedd0" class="bulleted-list"><li style="list-style-type:disc">Может содержать общую информацию о вашем сайте, ссылки на основные разделы.</li></ul></li></ol><ol type="1" id="1656e0d1-7843-802e-b97c-cd364484074d" class="numbered-list" start="2"><li>✅<strong>Регистрация (Sign Up)</strong><ul id="1656e0d1-7843-804e-9d91-ccf8dde6b89c" class="bulleted-list"><li style="list-style-type:disc">Создание аккаунта с подтверждением по электронной почте (email verification).</li></ul></li></ol><ol type="1" id="1656e0d1-7843-8049-abf4-d74a94a2b5d5" class="numbered-list" start="3"><li>✅<strong>Авторизация (Login)</strong><ul id="1656e0d1-7843-8093-ba9e-d75542d7f402" class="bulleted-list"><li style="list-style-type:disc">Вход в систему с помощью логина и пароля. Не забудьте про безопасность (хеширование паролей, валидация и т. д.).</li></ul></li></ol><ol type="1" id="1656e0d1-7843-803b-8c06-f3e2eacd4fb4" class="numbered-list" start="4"><li><strong>Профиль пользователя (User Profile) </strong><em><strong>(при необходимости)</strong></em><ul id="1656e0d1-7843-809f-9c3e-c58b18d6f185" class="bulleted-list"><li style="list-style-type:disc">Управление личными данными (имя, email, пароль).</li></ul><ul id="1656e0d1-7843-806c-9d7a-dbf1e5024beb" class="bulleted-list"><li style="list-style-type:disc">Возможна смена пароля, фотография профиля и т. п.</li></ul></li></ol><ol type="1" id="1656e0d1-7843-80f2-ae2f-ceeef21194ac" class="numbered-list" start="5"><li>✅<strong>Административная панель (Admin Panel)</strong><ul id="1656e0d1-7843-80d6-a10b-cd246affb18d" class="bulleted-list"><li style="list-style-type:disc">Добавление, редактирование и удаление контента (CRUD-операции).</li></ul><ul id="1656e0d1-7843-80fc-9823-e6172f96891f" class="bulleted-list"><li style="list-style-type:disc">Управление пользователями, заказами, товарами и другими аспектами сайта.</li></ul><ul id="1656e0d1-7843-8040-9e67-e696251f8a56" class="bulleted-list"><li style="list-style-type:disc">Реализуйте также фильтрацию, сортировку, пагинацию и логирование действий (по возможности).</li></ul><ul id="1656e0d1-7843-80e8-8b3f-e00b9431b09e" class="bulleted-list"><li style="list-style-type:disc"><strong>Роли и права доступа</strong>: например, администратор (admin), менеджер (manager), пользователь (user). Убедитесь, что соответствующие действия доступны только пользователям с нужными правами.</li></ul></li></ol><ol type="1" id="1656e0d1-7843-80f8-8ee6-dd87e430f624" class="numbered-list" start="6"><li>✅<strong>Каталог / Список товаров (Catalog)</strong><ul id="1656e0d1-7843-80d3-9f28-fdd2310b309c" class="bulleted-list"><li style="list-style-type:disc">Отображение всех доступных товаров, детальная информация (описание, цена, изображения и пр.).</li></ul><ul id="1656e0d1-7843-8024-9efc-d3776b7d1cf1" class="bulleted-list"><li style="list-style-type:disc">Фильтрация, сортировка, пагинация, логирование.</li></ul></li></ol><ol type="1" id="1656e0d1-7843-80b4-929e-ed3f73008ba9" class="numbered-list" start="7"><li><strong>Корзина (Cart) </strong><em><strong>(при необходимости)</strong></em><ul id="1656e0d1-7843-8049-b928-e98faeb367c3" class="bulleted-list"><li style="list-style-type:disc">Просмотр и редактирование выбранных товаров перед покупкой (добавление/удаление/изменение количества).</li></ul></li></ol><ol type="1" id="1656e0d1-7843-808e-9547-d4cb97c0d268" class="numbered-list" start="8"><li><strong>Оформление заказа (Checkout) </strong><em><strong>(понадобится для Assignment №4)</strong></em><ul id="1656e0d1-7843-807e-b149-fff45375c073" class="bulleted-list"><li style="list-style-type:disc">Финализация покупки: выбор способа оплаты, подтверждение заказа.</li></ul></li></ol><h2 id="1656e0d1-7843-8020-a76b-d64ac4d5448c" class=""><mark class="highlight-orange_background">6. Auth</mark></h2><p id="1656e0d1-7843-808b-b05e-f2a35c4d6517" class=""><strong>Цель</strong>: Расширить функционал вашего текущего проекта, добавив систему регистрации с подтверждением через электронную почту, аутентификацию и авторизацию пользователей (разделение прав доступа на основе ролей).</p><figure id="1656e0d1-7843-8088-9304-c40d034dc9ba" class="image" style="text-align:center"><a href="Assignment_3/f1eebc8c-a2f5-488b-8075-722e2d7c398d.png"><img style="width:604.1297935103245px" src="Assignment_3/f1eebc8c-a2f5-488b-8075-722e2d7c398d.png"/></a></figure><p id="1656e0d1-7843-8058-aac9-ce1a5826b346" class="block-color-default_background">
+</p><p id="14b6e0d1-7843-8163-a94a-d625b6ebb221" class="">Для выполнения данной задачи вам необходимо:</p><ul id="14b6e0d1-7843-81c5-9a78-eb5ee94037ab" class="bulleted-list"><li style="list-style-type:disc"><strong>(10 баллов)</strong> Разработать систему подтверждения <mark class="highlight-orange_background">регистрации</mark> через email, </li></ul><ul id="14b6e0d1-7843-81cf-83a1-cee4de75fbcb" class="bulleted-list"><li style="list-style-type:disc"><strong>(20 баллов)</strong> Разработать механизм выдачи токенов при успешной <mark class="highlight-orange_background">аутентификации</mark> и использовать для авторизации запросов к защищенным ресурсам. <ul id="14b6e0d1-7843-81a2-8fa0-d37dda96aacd" class="bulleted-list"><li style="list-style-type:circle"><em>Или</em> реализовать механизм <mark class="highlight-orange_background">аутентификации</mark> через OAuth (например, с использованием Google, Facebook, GitHub), чтобы позволить пользователям входить в систему с использованием своих учетных записей из других сервисов. </li></ul><ul id="14b6e0d1-7843-815b-becc-df50de8d78eb" class="bulleted-list"><li style="list-style-type:circle"><em>Или</em> реализовать <mark class="highlight-orange_background">аутентификацию</mark> по паролям, разработать систему отправки одноразовых паролей (OTP) для дополнительного слоя безопасности. </li></ul><ul id="14b6e0d1-7843-81e9-a6f1-ca953319d852" class="bulleted-list"><li style="list-style-type:circle"><em>Или</em> реализовать <mark class="highlight-orange_background">аутентификацию</mark> по SMS, разработать систему отправки SMS-сообщении, например, аналогичной той, что используется в банках при онлайн операциях.</li></ul></li></ul><ul id="14b6e0d1-7843-81ef-935e-f1241461a46a" class="bulleted-list"><li style="list-style-type:disc"><strong>(10 баллов)</strong> Расширить систему <mark class="highlight-orange_background">авторизации</mark> для управления ролями и разрешениями пользователей. Разработать административный интерфейс для управления ролями и назначения разрешений.</li></ul><figure id="1656e0d1-7843-80fa-8b34-da888ac8b938" class="image" style="text-align:center"><a href="Assignment_3/image.png"><img style="width:528px" src="Assignment_3/image.png"/></a></figure></details></li></ul><ul id="14b6e0d1-7843-81bd-8239-daaabb4aaa79" class="toggle"><li><details open=""><summary><mark class="highlight-red_background">Testing</mark> (25 баллов)</summary><h2 id="14b6e0d1-7843-81b4-924c-c077269bfb32" class=""><mark class="highlight-red_background">7. Testing</mark></h2><p id="14b6e0d1-7843-8145-b78e-cd9bab0bd443" class="">Для тестирования вашего проекта необходимо провести <mark class="highlight-red_background">unit тесты</mark>, <mark class="highlight-red_background">интеграционные тесты</mark> и <mark class="highlight-red_background">тесты end-to-end</mark>. Важно реализовать каждый из них и написать как минимум один тест для каждого вида. Разумеется тесты выполняются не рандомные, не из примеров, а строго в рамках темы вашего проекта. </p><ul id="1606e0d1-7843-8058-826e-fee39cffd10c" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.1 Unit тесты (8 баллов)</strong></mark></summary><p id="14b6e0d1-7843-812e-a8db-c015515b42eb" class="">Unit тесты помогают проверить отдельные компоненты вашего кода на корректность работы. Это позволяет обнаружить и исправить ошибки на ранних этапах разработки, улучшает читаемость кода и облегчает его поддержку в будущем.</p><p id="14b6e0d1-7843-819c-a5f1-e15805a9ec59" class=""><strong>Пример:</strong> Проверка функции вычисления скидки на товар.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-814c-ad6e-f23d24061359" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func CalculateDiscount(price int, discountPercent int) int {
+    return price - (price * discountPercent / 100)
+}
+
+// Test for CalculateDiscount function
+func TestCalculateDiscount(t *testing.T) {
+    price := 100
+    discountPercent := 10
+
+    discountedPrice := CalculateDiscount(price, discountPercent)
+
+    expectedPrice := 90
+    if discountedPrice != expectedPrice {
+        t.Errorf(&quot;Incorrect discounted price. Expected: %d, Got: %d&quot;, expectedPrice, discountedPrice)
+    }
+}</code></pre><p id="14b6e0d1-7843-81d8-98fa-d770c16d5b4f" class=""><strong>Вывод на консоль:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8171-a6de-f29a2d013af7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running unit tests...
+Test passed: CalculateDiscount</code></pre><p id="14b6e0d1-7843-81f5-957f-ed430ae5e7ba" class=""><strong>Цель:</strong> Этот тест проверяет корректность функции вычисления скидки. Он убеждается, что функция правильно рассчитывает скидку на основе цены и процента скидки.</p><p id="14b6e0d1-7843-816b-bb2b-ecd41d8868b8" class=""><strong>Оценка:</strong> Если тест проходит успешно, это означает, что функция CalculateDiscount работает правильно, и она может быть использована в проекте для расчетов скидок.</p></details></li></ul><ul id="1606e0d1-7843-8084-ae96-d2989cc2d690" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.2 Интеграционные тесты (8 баллов)</strong></mark></summary><p id="14b6e0d1-7843-81cc-9600-e95ac4e22386" class="">Интеграционные тесты необходимы для проверки взаимодействия между различными компонентами вашего проекта. Они помогают убедиться, что ваши API-маршруты корректно обрабатывают запросы, а база данных возвращает ожидаемые результаты.</p><p id="14b6e0d1-7843-8108-919a-e989af3d1c4a" class=""><strong>Пример:</strong> Тестирование API эндпоинта для получения информации о товаре.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8162-9e89-dd1ef2a8091c" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">func TestGetProduct(t *testing.T) {
+    request, _ := http.NewRequest(&quot;GET&quot;, &quot;/products/1&quot;, nil)
+    response := httptest.NewRecorder()
+
+    GetProduct(response, request)
+
+    // Checking the status of the response code
+    if response.Code != http.StatusOK {
+        t.Errorf(&quot;Incorrect status code. Expected: %d, Got: %d&quot;, http.StatusOK, response.Code)
+    }
+    // Checking response content
+    expected := `{&quot;id&quot;:1,&quot;name&quot;:&quot;Product Name&quot;,&quot;price&quot;:100}`
+    if response.Body.String() != expected {
+        t.Errorf(&quot;Incorrect response body. Expected: %s, Got: %s&quot;, expected, response.Body.String())
+    }
+}</code></pre><p id="14b6e0d1-7843-812d-bcb5-eceb6329c70f" class=""><strong>Вывод на консоль:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-815d-a7c6-e53676faa51f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running integration tests...
+Test passed: GetProduct</code></pre><p id="14b6e0d1-7843-812d-b95d-faf9385ea806" class=""><strong>Цель:</strong> Этот тест проверяет, что API эндпоинт для получения информации о товаре работает правильно. Он отправляет запрос на сервер и проверяет, что возвращается ожидаемый результат.</p><p id="14b6e0d1-7843-81ab-b50b-f3f9e8b455b2" class=""><strong>Оценка:</strong> Успешное прохождение теста означает, что API эндпоинт корректно отвечает на запросы и возвращает ожидаемые данные, что важно для правильной работы клиентской части приложения.</p></details></li></ul><ul id="1606e0d1-7843-8015-8686-d67b0e1421dd" class="toggle"><li><details open=""><summary><mark class="highlight-red_background"><strong>7.3 End-to-End тесты (9 баллов)</strong></mark></summary><p id="14b6e0d1-7843-8180-a569-e184211af97a" class=""><a href="https://www.zenrows.com/blog/selenium-golang#scrape-with-selenium-in-golang">End-to-End тесты</a> позволяют проверить весь путь взаимодействия пользователя с вашим проектом. Они обнаруживают проблемы, которые могут возникнуть из-за некорректной работы всех компонентов системы в целом.</p><p id="14b6e0d1-7843-813d-9c99-d3c9a0300adb" class=""><strong>Пример:</strong> Тестирование взаимодействия с пользовательским интерфейсом.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-81a0-ad7f-f62ed3c73a19" class="code"><code class="language-Go" style="white-space:pre-wrap;word-break:break-all">package main
+
+import (
+    &quot;testing&quot;
+    &quot;github.com/tebeka/selenium&quot;
+    &quot;github.com/tebeka/selenium/chrome&quot;
+)
+
+func TestProductSearch(t *testing.T) {
+    caps := selenium.Capabilities{&quot;browserName&quot;: &quot;chrome&quot;}
+    chromeCaps := chrome.Capabilities{
+        Path: &quot;&quot;,
+    }
+    caps.AddChrome(chromeCaps)
+
+    wd, err := selenium.NewRemote(caps, &quot;&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    defer wd.Quit()
+
+    wd.Get(&quot;http://localhost:8080&quot;)
+    searchInput, err := wd.FindElement(selenium.ByID, &quot;search-input&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    searchInput.SendKeys(&quot;iPhone&quot;)
+
+    searchButton, err := wd.FindElement(selenium.ByID, &quot;search-button&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    searchButton.Click()
+
+    searchResults, err := wd.FindElements(selenium.ByClassName, &quot;search-result&quot;)
+    if err != nil {
+        t.Fatal(err)
+    }
+    if len(searchResults) == 0 {
+        t.Error(&quot;No search results found&quot;)
+    }
+}</code></pre><p id="14b6e0d1-7843-812f-9759-d2b423dc7224" class=""><strong>Вывод на консоль:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14b6e0d1-7843-8191-a5c1-d7d24723d7a8" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Running end-to-end tests...
+Test passed: ProductSearch</code></pre><p id="14b6e0d1-7843-81f6-8cd1-ccd073cf3f1b" class=""><strong>Цель:</strong> Этот тест проверяет поиск продуктов через веб-интерфейс. Он эмулирует действия пользователя и проверяет, что после ввода названия продукта отображается сам продукт.</p><p id="14b6e0d1-7843-8122-8773-e69b9254055f" class=""><strong>Оценка:</strong> Успешное прохождение теста означает, что вход в систему через веб-интерфейс работает корректно, что важно для удобства использования приложения.</p></details></li></ul></details></li></ul><ul id="14b6e0d1-7843-81c7-afce-cf4464c38178" class="toggle"><li><details open=""><summary><mark class="highlight-teal_background">Deployment</mark> (35 баллов)</summary><h2 id="14b6e0d1-7843-81f7-8042-f9e3a0f67b07" class=""><mark class="highlight-teal_background">8. Deployment</mark></h2><ol type="1" id="14b6e0d1-7843-8156-8382-f59478c3243c" class="numbered-list" start="1"><li><strong>Выбор платформы:</strong><ul id="1666e0d1-7843-8001-b6f8-f3d096ab0a02" class="bulleted-list"><li style="list-style-type:disc">Определитесь с платформой для развертывания проекта. Это могут быть:<ul id="1666e0d1-7843-80f4-8aea-cd07183bbf2c" class="bulleted-list"><li style="list-style-type:circle"><strong>Railway</strong>: Бесплатная платформа с поддержкой CI/CD и интеграцией баз данных.</li></ul><ul id="1666e0d1-7843-803f-bf2c-e84dcfc3dc2b" class="bulleted-list"><li style="list-style-type:circle"><strong>Render</strong>: Подходит для веб-приложений, предлагает бесплатный тариф для тестирования.</li></ul><ul id="1666e0d1-7843-80c8-96f7-d474af62b12a" class="bulleted-list"><li style="list-style-type:circle"><strong>Ngrok Free</strong>: Используется для проксирования локальных серверов, удобно для тестирования и демонстрации.</li></ul><ul id="1666e0d1-7843-80a4-880c-c909a52942a9" class="bulleted-list"><li style="list-style-type:circle"><strong>Docker</strong>: Позволяет упаковать приложение в контейнер для универсального развертывания.</li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-81d5-a6fe-cc0f6973b1da" class="numbered-list" start="2"><li><strong>Настройка сервера: </strong><em>(выберите удобный для вас способ деплоймента)</em><ul id="1666e0d1-7843-80e4-9ec0-c4282750709f" class="bulleted-list"><li style="list-style-type:disc">Выберите платформу и выполните следующие шаги:<ul id="1666e0d1-7843-8049-bbf9-ca7c40d3a4aa" class="bulleted-list"><li style="list-style-type:circle">Для <strong>Railway</strong>:<ul id="1666e0d1-7843-80ec-985b-c04e8b01b578" class="bulleted-list"><li style="list-style-type:square">Создайте аккаунт на <a href="https://railway.app/">Railway</a>.</li></ul><ul id="1666e0d1-7843-807f-aac7-c9f75d7855a9" class="bulleted-list"><li style="list-style-type:square">Инициализируйте новый проект через Railway CLI или веб-интерфейс.</li></ul></li></ul><ul id="1666e0d1-7843-8093-a8d5-d53cd6bc20ef" class="bulleted-list"><li style="list-style-type:circle">Для <strong>Render</strong>:<ul id="1666e0d1-7843-808c-b3f4-f8238d07be44" class="bulleted-list"><li style="list-style-type:square">Зарегистрируйтесь на <a href="https://render.com/">Render</a>.</li></ul><ul id="1666e0d1-7843-80fc-8619-c15d10702687" class="bulleted-list"><li style="list-style-type:square">Создайте новый сервис, указав репозиторий вашего проекта.</li></ul></li></ul><ul id="1666e0d1-7843-805c-af54-c10df1d79900" class="bulleted-list"><li style="list-style-type:circle">Для <strong>Ngrok Free</strong>:<ul id="1666e0d1-7843-80d3-87fb-ce7f6e1462db" class="bulleted-list"><li style="list-style-type:square">Установите <a href="https://ngrok.com/download">Ngrok CLI</a>.</li></ul><ul id="1666e0d1-7843-8089-a3a9-c0cc7c0984b3" class="bulleted-list"><li style="list-style-type:square">Выполните команду <code>ngrok http 8080</code> (замените порт на используемый вашим приложением).</li></ul></li></ul><ul id="1666e0d1-7843-8067-80ea-ca8580f8f114" class="bulleted-list"><li style="list-style-type:circle">Для <strong>Docker</strong>:<ul id="1666e0d1-7843-80be-8f85-f9aefd197c81" class="bulleted-list"><li style="list-style-type:square">Установите Docker.</li></ul><ul id="1666e0d1-7843-8084-bf37-d2baa600d69e" class="bulleted-list"><li style="list-style-type:square">Создайте <code>Dockerfile</code> и <code>docker-compose.yml</code> (если требуется).</li></ul></li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-81dd-8d14-cf77a8ab5c00" class="numbered-list" start="3"><li><strong>Конфигурация окружения:</strong><ul id="14b6e0d1-7843-8152-95f3-c8243d57543a" class="bulleted-list"><li style="list-style-type:disc">Убедитесь, что все переменные окружения настроены корректно. Это включает:<ul id="1666e0d1-7843-80f6-8840-db5c390e0ff2" class="bulleted-list"><li style="list-style-type:circle">Параметры подключения к базе данных.</li></ul><ul id="1666e0d1-7843-80a5-8288-d56c58e3afb7" class="bulleted-list"><li style="list-style-type:circle">Секретные ключи и токены.</li></ul><ul id="1666e0d1-7843-8004-ba2b-e9e918bebd5e" class="bulleted-list"><li style="list-style-type:circle">API-ключи и другие конфиденциальные данные.</li></ul></li></ul><ul id="1666e0d1-7843-804a-b6f8-e13c11021be6" class="bulleted-list"><li style="list-style-type:disc">Для <strong>Railway</strong> и <strong>Render</strong>:<ul id="1666e0d1-7843-8055-9da9-f59b4614e485" class="bulleted-list"><li style="list-style-type:circle">Используйте встроенные инструменты управления переменными окружения.</li></ul></li></ul><ul id="1666e0d1-7843-80c1-8910-ece7bdb6d6e1" class="bulleted-list"><li style="list-style-type:disc">Для <strong>Ngrok</strong>:<ul id="1666e0d1-7843-8037-80bf-f1a7f34c7ca1" class="bulleted-list"><li style="list-style-type:circle">Проверьте локальные файлы <code>.env</code>.</li></ul></li></ul><ul id="1666e0d1-7843-806b-bf44-e7038e7ca53d" class="bulleted-list"><li style="list-style-type:disc">Для <strong>Docker</strong>:<ul id="1666e0d1-7843-80cb-9ccf-e1501253ab72" class="bulleted-list"><li style="list-style-type:circle">Определите переменные окружения в <code>docker-compose.yml</code> или передавайте их через CLI.</li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-8182-b9f4-e09cc2606c81" class="numbered-list" start="4"><li><strong>Сборка проекта:</strong><ul id="14b6e0d1-7843-81eb-9d18-d46b71d21381" class="bulleted-list"><li style="list-style-type:disc">Подготовьте проект к деплою, собрав все необходимые файлы и зависимости в один исполняемый пакет или директорию.</li></ul><ul id="1666e0d1-7843-80f2-b0b4-dc0452ded339" class="bulleted-list"><li style="list-style-type:disc">Подготовьте проект для развертывания:<ul id="1666e0d1-7843-802e-b34f-d762d4dc0afa" class="bulleted-list"><li style="list-style-type:circle">Убедитесь, что все зависимости установлены.</li></ul><ul id="1666e0d1-7843-807a-9f71-c809663ca147" class="bulleted-list"><li style="list-style-type:circle">Для <strong>Docker</strong> создайте файл <code>Dockerfile</code>, например:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1666e0d1-7843-8046-802b-d99beed35ac3" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">FROM golang:1.20
+WORKDIR /app
+COPY . .
+RUN go build -o main .
+CMD [&quot;./main&quot;]</code></pre></li></ul><ul id="1666e0d1-7843-801f-affe-efc863f45753" class="bulleted-list"><li style="list-style-type:circle">Для других платформ убедитесь, что репозиторий содержит исполняемый код.</li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-81c3-8422-fc2fda3b30f0" class="numbered-list" start="5"><li><strong>Развертывание проекта:</strong><ul id="1666e0d1-7843-8090-a862-edfa66f91a63" class="bulleted-list"><li style="list-style-type:disc"><strong>Railway:</strong><ul id="1666e0d1-7843-80b9-a86f-ebd30d00b0a5" class="bulleted-list"><li style="list-style-type:circle">Свяжите ваш репозиторий с платформой и настройте автоматический деплой.</li></ul></li></ul><ul id="1666e0d1-7843-808d-b57a-c02f5d590c14" class="bulleted-list"><li style="list-style-type:disc"><strong>Render:</strong><ul id="1666e0d1-7843-8003-b7a1-ee308c95fb0f" class="bulleted-list"><li style="list-style-type:circle">Подключите проект к Render через GitHub или GitLab.</li></ul></li></ul><ul id="1666e0d1-7843-800b-bc88-d4d90adc7007" class="bulleted-list"><li style="list-style-type:disc"><strong>Ngrok:</strong><ul id="1666e0d1-7843-80ce-b9f9-cef590d89551" class="bulleted-list"><li style="list-style-type:circle">Запустите локальный сервер и используйте команду <code>ngrok http 8080</code> для доступа.</li></ul></li></ul><ul id="1666e0d1-7843-80be-a730-c28242a03765" class="bulleted-list"><li style="list-style-type:disc"><strong>Docker:</strong><ul id="1666e0d1-7843-8038-8c8a-e7b1bdb83cd4" class="bulleted-list"><li style="list-style-type:circle">Соберите и запустите контейнеры с помощью команды <code>docker-compose up</code>. Убедитесь что открыли доступ для своих тиммейтов, для удаленного доступа к сайту. </li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-8165-b27b-f5c40a8d583c" class="numbered-list" start="6"><li><strong>Запуск проекта:</strong><ul id="1666e0d1-7843-80df-9d3b-c699c7820ae7" class="bulleted-list"><li style="list-style-type:disc">Проверьте работоспособность:<ul id="1666e0d1-7843-807f-8db3-e87d9a13c5d0" class="bulleted-list"><li style="list-style-type:circle"><strong>Railway и Render:</strong><ul id="1666e0d1-7843-80c5-8b9d-f9c99609c33b" class="bulleted-list"><li style="list-style-type:square">Убедитесь, что приложение доступно по предоставленному URL.</li></ul></li></ul><ul id="1666e0d1-7843-8036-9722-df08ce246549" class="bulleted-list"><li style="list-style-type:circle"><strong>Ngrok:</strong><ul id="1666e0d1-7843-8025-bfe1-ee613de3a27f" class="bulleted-list"><li style="list-style-type:square">Используйте выданный Ngrok URL для тестирования.</li></ul></li></ul><ul id="1666e0d1-7843-80e7-ae5b-d080a8d46d4c" class="bulleted-list"><li style="list-style-type:circle"><strong>Docker:</strong><ul id="1666e0d1-7843-80c6-961e-f9efcf50ba42" class="bulleted-list"><li style="list-style-type:square">Проверьте контейнер с помощью команды <code>docker ps</code>.</li></ul></li></ul></li></ul></li></ol><ol type="1" id="14b6e0d1-7843-8161-98f6-f53a9e415231" class="numbered-list" start="7"><li><strong>Тестирование:</strong><ul id="1666e0d1-7843-80eb-847f-f129f974b9da" class="bulleted-list"><li style="list-style-type:disc">После развертывания выполните тесты:<ul id="1666e0d1-7843-802e-b58e-c652accfcade" class="bulleted-list"><li style="list-style-type:circle">Откройте URL вашего приложения в браузере.</li></ul><ul id="1666e0d1-7843-80a6-8c18-f125fb87b1b6" class="bulleted-list"><li style="list-style-type:circle">Используйте инструменты тестирования API (например, Postman) для проверки эндпоинтов.</li></ul></li></ul><ul id="1666e0d1-7843-80ef-9009-c4131040bdd3" class="bulleted-list"><li style="list-style-type:disc">Для <strong>Ngrok</strong>, убедитесь, что приложение доступно из интернета.</li></ul></li></ol></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
