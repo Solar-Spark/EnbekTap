@@ -3,6 +3,7 @@ package main
 import (
 	"enbektap/controllers"
 	"enbektap/infra"
+	"enbektap/middleware"
 	"enbektap/router"
 	"enbektap/services"
 	"net/http"
@@ -18,29 +19,24 @@ import (
 )
 
 func setupLogger() {
-	// Create logs directory if it doesn't exist
 	logDir := "logs"
 	if err := os.MkdirAll(logDir, 0755); err != nil {
 		log.Fatal().Err(err).Msg("Failed to create log directory")
 	}
 
-	// Create log file with timestamp
 	logFile := filepath.Join(logDir, time.Now().Format("2006-01-02")+".json")
 	file, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to create log file")
 	}
 
-	// Configure console output
 	consoleWriter := zerolog.ConsoleWriter{
 		Out:        os.Stdout,
 		TimeFormat: time.RFC3339,
 	}
 
-	// Create multi-writer for both console and file
 	multi := zerolog.MultiLevelWriter(consoleWriter, file)
 
-	// Configure global logger
 	log.Logger = zerolog.New(multi).
 		With().
 		Timestamp().
@@ -66,11 +62,11 @@ func main() {
 
 	r := gin.Default()
 
-	// Add logging middleware
+	r.Use(middleware.RateLimiterMiddleware())
+
 	r.Use(func(c *gin.Context) {
 		start := time.Now()
 
-		// Add request ID for tracking
 		requestID := c.GetHeader("X-Request-ID")
 		if requestID == "" {
 			requestID = uuid.New().String()
@@ -78,7 +74,6 @@ func main() {
 
 		c.Next()
 
-		// Enhanced structured logging
 		log.Info().
 			Str("request_id", requestID).
 			Str("method", c.Request.Method).

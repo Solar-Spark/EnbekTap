@@ -4,6 +4,7 @@ go 1.23.3
 
 require (
 	github.com/google/uuid v1.6.0
+	golang.org/x/time v0.9.0
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12
 )
