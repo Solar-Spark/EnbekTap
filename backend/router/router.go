@@ -12,5 +12,5 @@ func SetupRoutes(controller *controllers.VacancyController, r *gin.Engine) {
 	r.GET("/vacancy", controller.GetVacancy)
 	r.DELETE("/deletevacancy", controller.DeleteVacancy)
 	r.PUT("/updatevacancy", controller.UpdateVacancy)
-	r.POST("/support/contact", controllers.NewSupportController().HandleSupportMessage)
+	r.POST("/support/contact", controllers.ContactSupportHandler)
 }

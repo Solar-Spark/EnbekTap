@@ -1,87 +1,115 @@
 package controllers
 
 import (
-	"crypto/tls"
 	"fmt"
-	"log"
+	"io"
 	"net/http"
+	"net/mail"
+	"os"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"gopkg.in/gomail.v2"
 )
 
-type SupportController struct {
-	supportEmail string
-	smtpHost     string
-	smtpPort     int
-	smtpUser     string
-	smtpPass     string
-}
-
-func NewSupportController() *SupportController {
-	return &SupportController{
-		supportEmail: "erni100105@gmail.com",
-		smtpHost:     "smtp.gmail.com",
-		smtpPort:     587,
-		smtpUser:     "erni100105@gmail.com",
-		smtpPass:     "qthe fpnb vivg zotd",
-	}
-}
-
-func (sc *SupportController) HandleSupportMessage(c *gin.Context) {
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Methods", "POST, OPTIONS")
-	c.Header("Access-Control-Allow-Headers", "Content-Type")
-
-	if c.Request.Method == "OPTIONS" {
-		c.Status(http.StatusOK)
+func ContactSupportHandler(c *gin.Context) {
+	if err := c.Request.ParseMultipartForm(10 << 20); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Unable to parse form data"})
 		return
 	}
 
-	subject := c.PostForm("subject")
-	message := c.PostForm("message")
+	subject := c.Request.FormValue("subject")
+	message := c.Request.FormValue("message")
 
 	if subject == "" || message == "" {
-		log.Printf("Validation failed: subject or message empty")
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Subject and message are required"})
 		return
 	}
 
+	attachments := []string{}
+	formFiles := c.Request.MultipartForm.File["attachments"]
+	for _, fileHeader := range formFiles {
+		file, err := fileHeader.Open()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error reading file"})
+			return
+		}
+		defer file.Close()
+
+		tempDir := "uploads"
+		if _, err := os.Stat(tempDir); os.IsNotExist(err) {
+			os.Mkdir(tempDir, os.ModePerm)
+		}
+
+		filePath := filepath.Join(tempDir, fileHeader.Filename)
+		out, err := os.Create(filePath)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error saving file"})
+			return
+		}
+		defer out.Close()
+
+		_, err = io.Copy(out, file)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error copying file"})
+			return
+		}
+
+		attachments = append(attachments, filePath)
+	}
+
+	if err := sendEmail(subject, message, attachments); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send email"})
+		return
+	}
+
+	for _, file := range attachments {
+		os.Remove(file)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Message sent successfully"})
+}
+
+func sendEmail(subject, message string, attachments []string) error {
+	from := "erni100105@gmail.com"
+	password := "lwgv hdie kzjq jqim"
+	to := "erni100105@gmail.com"
+	smtpHost := "smtp.gmail.com"
+	smtpPort := 587
+
+	if _, err := mail.ParseAddress(from); err != nil {
+		return fmt.Errorf("invalid sender email address: %w", err)
+	}
+
 	m := gomail.NewMessage()
-	m.SetHeader("From", sc.smtpUser)
-	m.SetHeader("To", sc.supportEmail)
-	m.SetHeader("Subject", "Support Request: "+subject)
+	m.SetHeader("From", from)
+	m.SetHeader("To", to)
+	m.SetHeader("Subject", subject)
 	m.SetBody("text/plain", message)
 
-	d := gomail.NewDialer(sc.smtpHost, sc.smtpPort, sc.smtpUser, sc.smtpPass)
-
-	// Configure TLS properly
-	d.TLSConfig = &tls.Config{
-		ServerName:         "smtp.gmail.com",
-		InsecureSkipVerify: false,
-		MinVersion:         tls.VersionTLS12,
+	if err := attachFiles(m, attachments); err != nil {
+		return fmt.Errorf("failed to attach files: %w", err)
 	}
 
-	// Test SMTP connection first
-	s, err := d.Dial()
-	if err != nil {
-		log.Printf("SMTP connection error: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": "Failed to connect to email server",
-		})
-		return
-	}
-	s.Close()
+	d := gomail.NewDialer(smtpHost, smtpPort, from, password)
 
-	// Send email
 	if err := d.DialAndSend(m); err != nil {
-		log.Printf("Email sending error: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": fmt.Sprintf("Failed to send email: %v", err),
-		})
-		return
+		return fmt.Errorf("failed to send email: %w", err)
 	}
 
-	log.Printf("Email sent successfully")
-	c.JSON(http.StatusOK, gin.H{"message": "Support message sent successfully"})
+	return nil
+}
+
+func attachFiles(m *gomail.Message, attachments []string) error {
+	for _, file := range attachments {
+		// Проверяем, существует ли файл
+		if _, err := os.Stat(file); os.IsNotExist(err) {
+			return fmt.Errorf("attachment not found: %s", file)
+		}
+
+		m.Attach(file, gomail.SetHeader(map[string][]string{
+			"Content-Disposition": {fmt.Sprintf(`attachment; filename="%s"`, filepath.Base(file))},
+		}))
+	}
+	return nil
 }
