@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeCreateModal = document.getElementById("closeCreateModal");
 
 
+    const contactSupportButton = document.querySelector("#contactSupport");
+    const supportModal = document.getElementById("supportModal");
+    const closeSupportModal = document.getElementById("closeSupportModal");
+
+
     const jobTypeDropdown = document.getElementById("jobTypeDropdown");
     const sortDropdown = document.getElementById("sortDropdown");
     const resetButton = document.getElementById("reset");
@@ -28,7 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     closeCreateModal.addEventListener("click", () => {
-        createModal.style.display = "none";
+        Modal.style.display = "none";
+    });
+
+
+    contactSupportButton.addEventListener("click", ()=> {
+        supportModal.style.display = "block";
+
+    })
+
+    closeSupportModal.addEventListener("click", () => {
+        supportModal.style.display = "none";
     });
 
     form.addEventListener("submit", async (event) => {
@@ -301,6 +316,8 @@ searchButton.addEventListener("click", async () => {
             <p><strong>Salary:</strong> $${vacancy.Salary}</p>
             <p><strong>Type:</strong> ${vacancy.JobType}</p>
             <p>${vacancy.Description}</p>
+            <button class="edit-button" data-id="${vacancy.VacancyID}">Edit</button>
+            <button class="delete-button" data-id="${vacancy.VacancyID}">Delete</button>
         `;
         jobCardsContainer.appendChild(card);
     }

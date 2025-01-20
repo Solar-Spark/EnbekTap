@@ -22,6 +22,7 @@
                         <button id="search" type="button">Search</button>
                     </form>
                     <button id="createPost" type="button">Create a Post</button>
+                    <button id="contactSupport" type="button">Contact Support</button>
                     <a href="login.html" class="login-link">Login</a>
                 </div>
             </nav><br><br>
@@ -92,60 +93,63 @@
                     </form>
                 </div>
             </div>
-        <div class="support-section">
-            <h2>Contact Support</h2>
-            <form id="supportForm">
-                <label for="subject">Subject:</label>
-                <select id="subject" required>
-                    <option value="technical">Technical Issue</option>
-                    <option value="vacancy">Vacancy Posting Issue</option>
-                    <option value="account">Account Related</option>
-                    <option value="other">Other</option>
+            <!--Support modal-->
+            <div id="supportModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span id="closeSupportModal">&times;</span>
+                    <h2>Contact Support</h2>
+                    <form id="supportForm">
+                        <label for="subject">Subject:</label>
+                        <select id="subject" required>
+                            <option value="technical">Technical Issue</option>
+                            <option value="vacancy">Vacancy Posting Issue</option>
+                            <option value="account">Account Related</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" required></textarea>
+
+                        <label for="attachments">Attachments:</label>
+                        <input type="file" id="attachments" multiple>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+                <h2>Filtering and Sorting</h2>
+                <!-- Job Type Dropdown -->
+                <select id="jobTypeDropdown" class="dropdown">
+                    <option value="none">Select Job Type</option>
+                    <option value="Full Time">Full-Time</option>
+                    <option value="Part Time">Part-Time</option>
                 </select>
 
-                <label for="message">Message:</label>
-                <textarea id="message" required></textarea>
+                <!-- Sorting Dropdown -->
+                <select id="sortDropdown" class="dropdown">
+                    <option value="none">Sort By</option>
+                    <option value="salary-asc">Salary: Low to High</option>
+                    <option value="salary-desc">Salary: High to Low</option>
+                </select>
 
-                <label for="attachments">Attachments:</label>
-                <input type="file" id="attachments" multiple>
+                <!-- Reset Button -->
+                <button type="reset" id="reset" class="reset-btn">Reset</button>
+            </div>
+            <div class="job-cards-container" id="jobCards">
 
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </div>
-    <div class="container">
-        <h2>Filtering and Sorting</h2>
-        <!-- Job Type Dropdown -->
-        <select id="jobTypeDropdown" class="dropdown">
-            <option value="none">Select Job Type</option>
-            <option value="Full Time">Full-Time</option>
-            <option value="Part Time">Part-Time</option>
-        </select>
-    
-        <!-- Sorting Dropdown -->
-        <select id="sortDropdown" class="dropdown">
-            <option value="none">Sort By</option>
-            <option value="salary-asc">Salary: Low to High</option>
-            <option value="salary-desc">Salary: High to Low</option>
-        </select>
-        
-        <!-- Reset Button -->
-        <button type="reset" id="reset" class="reset-btn">Reset</button>
-    </div>
-    <div class="job-cards-container" id="jobCards">
-        
-        <!-- Job cards will be dynamically added here -->
-    </div>
-    
-    <div id="pagination" class="pagination"></div>
+                <!-- Job cards will be dynamically added here -->
+            </div>
 
-    
+            <div id="pagination" class="pagination"></div>
 
-    <script type="module" src="script.js"></script>
+
+
+            <script type="module" src="script.js"></script>
 </body>
 <footer class="footer">
     <div class="footer-content">
-        <p>&copy; 2025  EnbekTap. All rights reserved.</p>
+        <p>&copy; 2025 EnbekTap. All rights reserved.</p>
     </div>
 </footer>
 
