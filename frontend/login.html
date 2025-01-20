@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Card Creator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-left">
+            <h2><a href="main.html" id="logo">EnbekTap</a></h2>
+        </div>
+        <div class="nav-right">
+            <form class="search-form">
+                <input id="search" type="text" placeholder="Search...">
+                <button id="search" type="button">Search</button>
+
+            </form>
+            <button id="createPost" type="button">Create a Post</button>
+            <a href="login.html" class="login-link">Login</a>
+        </div>
+    </nav><br>
+    <!--Log in form-->
+    <div class="container" id="login-container" style="display: block;">
+        <h1>Log in</h1>
+        <form id="loginForm">
+            <div>
+                <label for="loginEmail">Email:</label><br>
+                <input type="text " id="loginEmail" name="loginEmail" required><br><br>
+
+                <label for="password">Password:</label><br>
+                <input id="loginPassword" name="Password" type="password" required><br><br>
+            </div>
+
+            <div style = "float:right">
+            <a >Don't have an account? </a>
+            <a href="#" id="sign-up-tag">Sign up</a><br><br>
+            </div>
+
+            <button type="submit" id = "log-in-bttn">Log in</button>
+        </form>
+    </div><br>
+
+    <!--Sign up form-->
+    <div class="container" id="signup-container" style="display:none">
+        <h1>Sign up</h1>
+        <form  id = " signupForm">
+        <div>
+            <label for="signupEmail">Email:</label><br>
+            <input type="text " id="signupEmail" name="signUpEmail" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input id="passwordFirst" name="Password" type="password" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input id="passwordSecond" name="Password" type="password" required><br><br>
+        </div>
+
+        <!-- User Full Name (Default View) -->
+        <div id="user-section">
+            <label for="userFullName">Full Name:</label><br>
+            <input type="text" id="userFulllName" name="userFullName" required><br><br>
+        </div>
+
+        <!-- Company Name (Hidden Initially) -->
+        <div id="company-section" style="display: none;">
+            <label for="companyName">Company Name:</label><br>
+            <input type="text" id="companyName" name="companyName"><br><br>
+        </div>
+    
+
+        <input type="checkbox" id="Orgz_checkbox" name="Orgz_checkbox">
+        <label for="Orgz_checkbox">Organization</label>
+        <div style = "float:right">
+        <a >Have an account? </a>
+        <a href="#" id="log-in-tag">Log in</a><br><br>
+        </div>
+
+        <button type="button" id = "sign-up-bttn">Sign up</button>
+        </form>
+    </div><br>
+
+  <!--Authentication code-->
+    <div class="container" id="auth-container" style="display:none">
+        <h1>Authentication code</h1>
+        <form  id = "authForm">
+        <div>
+            <input id="authCode" name="authCode" type="password" required><br><br>
+
+             <button id = "auth-code-bttn" type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 EnbekTap. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="./loginHandler.js"></script>
+</body>
+</html>

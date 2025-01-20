@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeEditModal = document.getElementById("closeEditModal");
     const editForm = document.getElementById("editForm");
 
+    const createPostButton = document.querySelector("#createPost");
+    const createModal = document.getElementById("createModal");
+    const closeCreateModal = document.getElementById("closeCreateModal");
+
+
     const jobTypeDropdown = document.getElementById("jobTypeDropdown");
     const sortDropdown = document.getElementById("sortDropdown");
     const resetButton = document.getElementById("reset");
@@ -15,6 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add these variables at the top of your script
     let currentPage = 1;
     const pageSize = 9;
+
+
+    createPostButton.addEventListener("click", ()=> {
+        createModal.style.display = "block";
+
+    })
+
+    closeCreateModal.addEventListener("click", () => {
+        createModal.style.display = "none";
+    });
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -42,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
             alert(result.message);
+            createModal.style.display = "none";
             form.reset();
         } catch (error) {
             console.error("Error submitting form:", error);

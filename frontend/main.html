@@ -1,80 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Card Creator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-     <!-- Navigation Bar -->
-     <nav>
-        <div class="nav-left">
-            <h2>EnbekTap</h2>
-        </div>
-        <div class="nav-right">
-            <form  class="search-form">
-                <input id="search" type="text" placeholder="Search...">
-                <button id="search" type="button">Search</button>
-            </form>
-            <a href="#" class="login-link">Login</a>
-        </div>
-    </nav><br>
+    <div id="page-container">
+        <div id="content-wrap">
+            <!-- Navigation Bar -->
+            <nav>
+                <div class="nav-left">
+                    <h2><a href="main.html" id="logo">EnbekTap</a></h2>
+                </div>
+                <div class="nav-right">
+                    <form class="search-form">
+                        <input id="search" type="text" placeholder="Search...">
+                        <button id="search" type="button">Search</button>
+                    </form>
+                    <button id="createPost" type="button">Create a Post</button>
+                    <a href="login.html" class="login-link">Login</a>
+                </div>
+            </nav><br><br>
 
-    <div class="container">
-        <h1>Create a Job Posting</h1>
-        <form id="jobForm">
-            <label for="jobName">Job Name:</label>
-            <input type="text" id="jobName" name="Vacancy" required><br><br>
+            <div id="createModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span id="closeCreateModal">&times;</span>
+                    <h2>Create a Job Posting</h2>
+                    <form id="jobForm">
+                        <div>
+                            <label for="jobName">Job Name:</label>
+                            <input type="text" id="jobName" name="Vacancy" required><br><br>
 
-            <label for="salary">Salary:</label>
-            <input type="number" id="salary" name="Salary" required><br><br>
+                            <label for="salary">Salary:</label>
+                            <input type="number" id="salary" name="Salary" required><br><br>
 
-            <label>Job Type:</label><br>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" id="fullTime" name="JobType" value="Full Time" required> Full Time
-                </label>
-                <label>
-                    <input type="radio" id="partTime" name="JobType" value="Part Time" required> Part Time
-                </label>
+                            <label>Job Type:</label><br>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" id="fullTime" name="JobType" value="Full-Time" required>
+                                    Full-Time
+                                </label>
+                                <label>
+                                    <input type="radio" id="partTime" name="JobType" value="Part-Time" required>
+                                    Part-Time
+                                </label>
+                            </div>
+
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="Description" required></textarea><br><br>
+
+                            <button type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <!-- Edit Modal -->
+            <div id="editModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span id="closeEditModal">&times;</span>
+                    <h2>Edit Job</h2>
+                    <form id="editForm">
+                        <div>
+                            <input type="hidden" id="editVacancyID">
+                            <label for="editJobName">Job Name:</label>
+                            <input type="text" id="editJobName" required><br><br>
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="Description" required></textarea><br><br>
+                            <label for="editSalary">Salary:</label>
+                            <input type="number" id="editSalary" required><br><br>
 
-            <button type="submit">Create</button>
-        </form>
-        <!-- Edit Modal -->
-        <div id="editModal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span id="closeEditModal">&times;</span>
-                <h2>Edit Job</h2>
-                <form id="editForm">
-                    <input type="hidden" id="editVacancyID">
-                    <label for="editJobName">Job Name:</label>
-                    <input type="text" id="editJobName" required><br><br>
+                            <label>Job Type:</label><br>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" id="editFullTime" name="EditJobType" value="Full-Time" required>
+                                    Full-Time
+                                </label>
+                                <label>
+                                    <input type="radio" id="editPartTime" name="EditJobType" value="Part-Time" required>
+                                    Part-Time
+                                </label>
+                            </div><br><br>
 
-                    <label for="editSalary">Salary:</label>
-                    <input type="number" id="editSalary" required><br><br>
+                            <label for="editDescription">Description:</label>
+                            <textarea id="editDescription" required></textarea><br><br>
 
-                    <label>Job Type:</label><br>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" id="editFullTime" name="EditJobType" value="Full Time" required> Full Time
-                        </label>
-                        <label>
-                            <input type="radio" id="editPartTime" name="EditJobType" value="Part Time" required> Part Time
-                        </label>
-                    </div><br><br>
-
-                    <label for="editDescription">Description:</label>
-                    <textarea id="editDescription" required></textarea><br><br>
-
-                    <button type="submit">Save Changes</button>
-                </form>
+                            <button type="submit">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
         <div class="support-section">
             <h2>Contact Support</h2>
             <form id="supportForm">
