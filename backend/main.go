@@ -129,13 +129,23 @@ func main() {
 	})
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "ngrok-skip-browser-warning"},
-		AllowCredentials: true,
-		AllowWildcard:    true,
-		AllowFiles:       true,
+		AllowOrigins:     []string{"*"},                                       // Allow all origins (restrict in production)
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, // Allow essential HTTP methods
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "ngrok-skip-browser-warning", "Accept", "X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length", "Content-Type"}, // Allow client-side access to these headers
+		AllowCredentials: true,                                       // Allow cookies/auth credentials if needed
+		AllowWildcard:    true,                                       // Support wildcard subdomains
+		AllowFiles:       true,                                       // Allow file uploads
+		MaxAge:           12 * time.Hour,                             // Cache preflight requests for 12 hours
 	}))
+
+	r.OPTIONS("/*path", func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization, ngrok-skip-browser-warning, Accept, X-Requested-With")
+		c.Header("Access-Control-Allow-Credentials", "true")
+		c.Status(http.StatusOK)
+	})
 
 	router.SetupRoutes(vacancyController, userController, r)
 

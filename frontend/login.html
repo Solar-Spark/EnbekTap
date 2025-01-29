@@ -48,7 +48,7 @@
     <!--Sign up form-->
     <div class="container" id="signup-container" style="display:none">
         <h1>Sign up</h1>
-        <form  id = " signupForm">
+        <form  id = "signupForm">
         <div>
             <label for="signupEmail">Email:</label><br>
             <input type="text " id="signupEmail" name="signUpEmail" required><br><br>
@@ -58,24 +58,14 @@
 
             <label for="password">Password:</label><br>
             <input id="passwordSecond" name="Password" type="password" required><br><br>
+        
+            <label for="fullName">Full Name:</label><br>
+            <input id="fullName" name="fullName" type="text" required><br><br>
         </div>
-
-        <!-- User Full Name (Default View) -->
-        <div id="user-section">
-            <label for="userFullName">Full Name:</label><br>
-            <input type="text" id="userFulllName" name="userFullName" required><br><br>
-        </div>
-
-        <!-- Company Name (Hidden Initially) -->
-        <div id="company-section" style="display: none;">
-            <label for="companyName">Company Name:</label><br>
-            <input type="text" id="companyName" name="companyName"><br><br>
-        </div>
-    
-
-        <input type="checkbox" id="Orgz_checkbox" name="Orgz_checkbox">
-        <label for="Orgz_checkbox">Organization</label>
-        <div style = "float:right">
+        <select id="role" name="role" required>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
         <a >Have an account? </a>
         <a href="#" id="log-in-tag">Log in</a><br><br>
         </div>

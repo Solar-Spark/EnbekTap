@@ -9,7 +9,7 @@ import (
 type UserRepository interface {
 	CreateUser(user entities.User) error
 	ReadUser(id uint) (entities.User, error)
-	ReadUsers(filterBy string, sortBy string, page int, pageSize int) ([]entities.User, int64, error)
+	ReadUsers() ([]entities.User, error)
 	ReadUserByEmail(email string) (entities.User, error)
 	UpdateUser(id uint, updated entities.User) error
 	DeleteUser(id uint) error
@@ -29,15 +29,16 @@ func (repo *UserRepo) ReadUser(id uint) (entities.User, error) {
 	return user, err
 }
 
-func (repo *UserRepo) ReadUsers(filterBy string, sortBy string, page int, pageSize int) ([]entities.User, int64, error) {
-	var users []entities.User
-	var total int64
-	if filterBy != "" {
-		repo.DB = repo.DB.Where(filterBy)
+func (repo *UserRepo) ReadUsers() ([]entities.User, error) {
+	var user []entities.User
+
+	query := repo.DB.Model(&entities.User{})
+	err := query.Find(&user).Error
+	if err != nil {
+		return nil, err
 	}
-	repo.DB.Find(&users).Count(&total)
-	err := repo.DB.Limit(pageSize).Offset((page - 1) * pageSize).Order(sortBy).Find(&users).Error
-	return users, total, err
+
+	return user, nil
 }
 
 func (repo *UserRepo) ReadUserByEmail(email string) (entities.User, error) {

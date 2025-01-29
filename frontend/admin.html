@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+
+        <button id="openCreateModal">Create New User</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Verified</th>
+                    <th>Verification Code</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Create User Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeCreateModal">&times;</span>
+            <h2>Create User</h2>
+            <input type="text" id="createUsername" placeholder="Username">
+            <input type="email" id="createEmail" placeholder="Email">
+            <input type="password" id="createPassword" placeholder="Password">
+            <select id="createRole">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <select id="createVerified">
+                <option value="0">Verified</option>
+                <option value="1">Not Verified</option>
+            </select>
+            <input type="text" id="createVerificationCode" placeholder="Verification Code">
+            <button id="createUser">Create</button>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeEditModal">&times;</span>
+            <h2>Edit User</h2>
+            <input type="hidden" id="editUserId">
+            <input type="text" id="editUsername" placeholder="Username">
+            <input type="email" id="editEmail" placeholder="Email">
+            <input type="password" id="editPassword" placeholder="Password">
+            <select id="editRole">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <select id="editVerified">
+                <option value="0">Verified</option>
+                <option value="1">Not Verified</option>
+            </select>
+            <input type="text" id="editVerificationCode" placeholder="Verification Code">
+            <button id="updateUser">Update</button>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -17,8 +17,8 @@ func (s *UserService) GetUser(id uint) (entities.User, error) {
 	return s.Repo.ReadUser(id)
 }
 
-func (s *UserService) GetAllUsers(filterBy string, sortBy string, page int, pagesize int) ([]entities.User, int64, error) {
-	return s.Repo.ReadUsers(filterBy, sortBy, page, pagesize)
+func (s *UserService) GetAllUsers() ([]entities.User, error) {
+	return s.Repo.ReadUsers()
 }
 
 func (s *UserService) UpdateUser(id uint, user entities.User) error {

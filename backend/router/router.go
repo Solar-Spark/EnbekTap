@@ -14,7 +14,8 @@ func SetupRoutes(vacancyController *controllers.VacancyController, UserControlle
 	r.PUT("/updatevacancy", vacancyController.UpdateVacancy)
 	r.POST("/support/contact", controllers.ContactSupportHandler)
 	r.POST("/signup", UserController.Signup)
-	r.POST("/login", UserController.Login)
+	//r.POST("/login", UserController.Login)
+	r.POST("/send-code", UserController.SendCode)
 	//admin routes
 	r.POST("/admin/createuser", UserController.CreateUser)
 	r.GET("/admin/users", UserController.GetAllUsers)

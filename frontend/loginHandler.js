@@ -1,10 +1,9 @@
-const ngrokURL = "https://465a-2a03-32c0-3003-5d87-7d78-11a5-9b7c-3598.ngrok-free.app";  
+const ngrokURL = "https://d249-212-96-87-84.ngrok-free.app"
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const loginForm = document.getElementById("login-container");
     const signupForm = document.getElementById("signup-container");
-    // const companyForm = document.getElementById("company-container");
     const authForm = document.getElementById("auth-container")
     const loginTag = document.getElementById("log-in-tag");//login anchor tag
     const signupTag = document.getElementById("sign-up-tag");//signup anchor tag
@@ -12,11 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBttn = document.getElementById("log-in-bttn");
     const signupBttn = document.getElementById("sign-up-bttn");
 
-    const userSection = document.getElementById("user-section");
-    const companySection = document.getElementById("company-section");
-    const orgzCheckBox = document.getElementById("Orgz_checkbox");
-
-    var userType = "employee";
     let signupEmail, passwordFirst, passwordSecond, name;
 
     const authFormBttn = document.getElementById("auth-code-bttn")
@@ -36,32 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("signupForm").reset();//reset input values of signup form
 
     });
-
-
-    orgzCheckBox.addEventListener("change", () => {
-        console.log('Checkbox changed', orgzCheckBox.checked);  // Debugging line
-
-        if (orgzCheckBox.checked) {
-            // Checkbox is checked, show the company section and hide the user section
-            userSection.style.display = "none";  // Hide the user section
-            companySection.style.display = "block";  // Show the company section
-            userType = "employeer";
-        } else {
-            // Checkbox is unchecked, show the user section and hide the company section
-            userSection.style.display = "block";  // Show the user section
-            companySection.style.display = "none";  // Hide the company section
-            userType = "employee";
-        }
-    });
-
-
-    // Initialize the form state on page load (user section should be visible by default)
-    window.onload = () => {
-        userSection.style.display = "block";  // Ensure user section is visible initially
-        companySection.style.display = "none"; // Ensure company section is hidden initially
-    };
-
-
 
     //send email and login info to the server
     loginBttn.addEventListener("click", (event) => {
@@ -111,12 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         signupEmail = document.getElementById("signupEmail").value.trim();
         passwordFirst = document.getElementById("passwordFirst").value.trim();
         passwordSecond = document.getElementById("passwordSecond").value.trim();
-        
-        if (orgzCheckBox.checked) {
-           name = document.getElementById("companyName");
-        } else {
-           name = document.getElementById("userFullName");
-        }
+        name = document.getElementById("fullName").value.trim();
+        role = document.getElementById("role").value.trim();
 
 
 
@@ -142,45 +106,74 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        signupForm.style.display = "none";
-        authForm.style.display = "block";
-    });
-
-
-
-
-    authFormBttn.addEventListener("click", (event) => {
-
-        const authCode = document.getElementById("authCode").value.trim();
-        // Send data to the server
-        fetch(`${ngrokURL}/register`, {
+        fetch(`${ngrokURL}/send-code`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",  // Sending data as JSON
+                "Content-Type": "application/json",
+                "ngrok-skip-browser-warning": "true"
             },
             body: JSON.stringify({
-                name: name,
                 email: signupEmail,
-                password: passwordFirst,
-                userType: userType,
-                authCode: authCode,
             }),
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Registration failed");
+                    throw new Error("Code sending failed");
                 }
-                return response.json();  // Parse JSON from the response
+                return response.json();
             })
             .then(data => {
-                console.log("Registration successful:", data);
-              
+                console.log("Code sent successfully:", data);
             })
             .catch(error => {
-                console.error("Error during registration:", error);
+                console.error("Error during code sending:", error);
                 alert("An error occurred. Please try again.");
-            });
+        })
 
+        signupForm.style.display = "none";
+        authForm.style.display = "block";
+    });
+
+    authFormBttn.addEventListener("click", async (event) => {
+        event.preventDefault();
+    
+        const authCode = document.getElementById("authCode").value.trim();
+        
+        if (!authCode) {
+            alert("Please enter verification code");
+            return;
+        }
+    
+        try {
+            const response = await fetch(`${ngrokURL}/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true",
+                },
+                body: JSON.stringify({
+                    FullName: name,
+                    Email: signupEmail,
+                    Password: passwordFirst,
+                    Role: role,
+                    VerificationCode: authCode
+                })
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Registration failed");
+            }
+    
+            const data = await response.json();
+            console.log("Registration successful:", data);
+            alert("Registration successful! Please login.");
+            window.location.href = "./login.html";
+    
+        } catch (error) {
+            console.error("Registration error:", error);
+            alert(error.message || "Registration failed. Please try again.");
+        }
     });
 
 });
