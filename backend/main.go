@@ -6,8 +6,11 @@ import (
 	"enbektap/middleware"
 	"enbektap/router"
 	"enbektap/services"
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"time"
 
@@ -44,6 +47,41 @@ func setupLogger() {
 		Logger()
 }
 
+func startNgrok() (string, error) {
+	cmd := exec.Command("ngrok", "http", "8080", "--log", "stdout")
+
+	if err := cmd.Start(); err != nil {
+		log.Fatal().Err(err).Msg("Failed to start Ngrok")
+		return "", err
+	}
+
+	time.Sleep(3 * time.Second)
+
+	resp, err := http.Get("http://127.0.0.1:4040/api/tunnels")
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	var result map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return "", err
+	}
+
+	tunnels, ok := result["tunnels"].([]interface{})
+	if !ok || len(tunnels) == 0 {
+		return "", fmt.Errorf("no tunnels found")
+	}
+
+	firstTunnel := tunnels[0].(map[string]interface{})
+	publicURL, ok := firstTunnel["public_url"].(string)
+	if !ok {
+		return "", fmt.Errorf("failed to get public URL")
+	}
+
+	return publicURL, nil
+}
+
 func main() {
 	setupLogger()
 
@@ -56,9 +94,12 @@ func main() {
 	}
 	log.Info().Msg("Database connection established")
 
-	repo := &infra.VacancyRepo{DB: db}
-	service := &services.VacancyService{Repo: repo}
-	controller := &controllers.VacancyController{Service: service}
+	vacancyRepo := &infra.VacancyRepo{DB: db}
+	vacancyService := &services.VacancyService{Repo: vacancyRepo}
+	vacancyController := &controllers.VacancyController{Service: vacancyService}
+	userRepo := &infra.UserRepo{DB: db}
+	userService := &services.UserService{Repo: userRepo}
+	userController := &controllers.UserController{Service: userService}
 
 	r := gin.Default()
 
@@ -88,18 +129,31 @@ func main() {
 	})
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"}, // You can set specific origins here
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "ngrok-skip-browser-warning"},
 		AllowCredentials: true,
+		AllowWildcard:    true,
+		AllowFiles:       true,
 	}))
 
-	router.SetupRoutes(controller, r)
+	router.SetupRoutes(vacancyController, userController, r)
 
-	log.Info().Msg("Server starting on port 8080")
-	if err := http.ListenAndServe(":8080", r); err != nil {
-		log.Fatal().
-			Err(err).
-			Msg("Server failed to start")
+	go func() {
+		log.Info().Msg("Server starting on port 8080")
+		if err := http.ListenAndServe(":8080", r); err != nil {
+			log.Fatal().
+				Err(err).
+				Msg("Server failed to start")
+		}
+	}()
+
+	ngrokURL, err := startNgrok()
+	if err != nil {
+		log.Fatal().Err(err).Msg("Failed to start Ngrok")
 	}
+
+	log.Info().Msgf("Ngrok tunnel established: %s", ngrokURL)
+
+	select {}
 }

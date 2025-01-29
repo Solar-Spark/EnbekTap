@@ -72,7 +72,7 @@ func ContactSupportHandler(c *gin.Context) {
 
 func sendEmail(subject, message string, attachments []string) error {
 	from := "erni100105@gmail.com"
-	password := "lwgv hdie kzjq jqim"
+	password := "truf wxhe yztg apvp"
 	to := "erni100105@gmail.com"
 	smtpHost := "smtp.gmail.com"
 	smtpPort := 587

@@ -1,3 +1,5 @@
+const ngrokURL = "https://465a-2a03-32c0-3003-5d87-7d78-11a5-9b7c-3598.ngrok-free.app";  
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const loginForm = document.getElementById("login-container");
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Send login data to the server using fetch
-        fetch("http://localhost:8080/login", {
+        fetch(`${ngrokURL}/login`, {
             method: "POST",  // Use POST method for sending data
             headers: {
                 "Content-Type": "application/json",  // Send data as JSON
@@ -151,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const authCode = document.getElementById("authCode").value.trim();
         // Send data to the server
-        fetch("https://localhost:8080/register", {
+        fetch(`${ngrokURL}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",  // Sending data as JSON
