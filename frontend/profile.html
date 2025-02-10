@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+</head>
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <!-- Navigation Bar -->
+            <nav>
+                <div class="nav-left">
+                    <h2><a href="main.html" id="logo">EnbekTap</a></h2>
+                </div>
+                <div class="nav-right">
+                    <form class="search-form">
+                        <input id="search" type="text" placeholder="Search...">
+                        <button id="search" type="button">Search</button>
+                    </form>
+                    <a href="profile.html" class="profile-link">Profile</a>
+                    <a href="login.html" class="login-link" id="login-link">Login</a>
+                    <button id="logout" type="button">Logout</button>
+                </div>
+            </nav><br><br>
+            <header>
+                <h1>User Profile</h1>
+            </header>
+            <main>
+                <section class="profile">
+                    <div class="profile-info">
+                        <p>Full Name: <span id="fullname"></span></p>
+                        <p>Email: <span id="email"></span></p>
+                        <p>Role: <span id="role"></span></p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="profile.js"></script>
+</body>
+</html>

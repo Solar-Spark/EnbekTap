@@ -1,4 +1,5 @@
 const ngrokURL = "https://8c7f-212-96-87-84.ngrok-free.app";
+const localhost = "http://localhost:8080"
 const userTableBody = document.getElementById("userTableBody");
 const openCreateModal = document.getElementById("openCreateModal");
 const closeCreateModal = document.getElementById("closeCreateModal");
@@ -8,12 +9,15 @@ const createUserButton = document.getElementById("createUser");
 const closeEditModal = document.getElementById("closeEditModal");
 const editModal = document.getElementById("editModal");
 const updateUserButton = document.getElementById("updateUser");
+const logoutbttn = document.getElementById("logout")
+
+const token = localStorage.getItem('access_token')
 
 // Fetch all users
 async function fetchUsers() {
     try {
-        const response = await fetch(`${ngrokURL}/admin/users`, {
-            headers: { "ngrok-skip-browser-warning": "true" }
+        const response = await fetch(`${localhost}/admin/users`, {
+            headers: { "ngrok-skip-browser-warning": "true", "Authorization": `Bearer ${token}` }
         });
         const data = await response.json();
         
@@ -39,6 +43,46 @@ async function fetchUsers() {
     }
 }
 
+logoutbttn.addEventListener("click", async (event) => {
+    event.preventDefault();  // Prevent default form submission if applicable
+
+    try {
+        const token = localStorage.getItem("access_token"); // Make sure token is available
+
+        const response = await fetch(`${localhost}/auth/logout`, {  // ✅ Correct endpoint
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`  // ✅ Send token if required by backend
+            },
+            credentials: 'include' // ✅ Required if using cookies
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Logout failed");
+        }
+
+        // ✅ Only parse JSON if there's content
+        let data = {};
+        if (response.headers.get("content-type")?.includes("application/json")) {
+            data = await response.json();
+        }
+
+        // ✅ Clear token from localStorage
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role")
+
+        // ✅ Redirect to login page
+        window.location.href = "./login.html";
+
+    } catch (error) {
+        console.error("Logout error:", error);
+        alert(error.message || "Logout failed. Please try again.");
+    }
+});
+
 // Open Create User Modal
 openCreateModal.addEventListener("click", () => {
     createModal.style.display = "block";
@@ -59,11 +103,12 @@ createUserButton.addEventListener("click", async () => {
     const verificationToken = document.getElementById("createVerificationCode").value;
 
     try {
-        await fetch(`${ngrokURL}/admin/createuser`, {
+        await fetch(`${localhost}/admin/createuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "ngrok-skip-browser-warning": "true"
+                "ngrok-skip-browser-warning": "true",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({ FullName: username, Email: email, Password: password, Role: role, Verified: verified, VerificationToken: verificationToken })
         });
@@ -104,11 +149,12 @@ updateUserButton.addEventListener("click", async () => {
     const verificationToken = document.getElementById("editVerificationCode").value;
 
     try {
-        await fetch(`${ngrokURL}/admin/updateuser?id=${id}`, {
+        await fetch(`${localhost}/admin/updateuser?id=${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "ngrok-skip-browser-warning": "true"
+                "ngrok-skip-browser-warning": "true",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({ FullName: username, Email: email, Role: role, Password: password, Verified: verified, VerificationToken: verificationToken })
         });
@@ -122,7 +168,10 @@ updateUserButton.addEventListener("click", async () => {
 
 // Delete User
 async function deleteUser(id) {
-    await fetch(`${ngrokURL}/admin/deleteuser?id=${id}`, { method: "DELETE" });
+    await fetch(`${localhost}/admin/deleteuser?id=${id}`, { method: "DELETE", headers:{
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    } });
     fetchUsers();
 }
 

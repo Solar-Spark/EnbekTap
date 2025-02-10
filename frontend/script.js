@@ -1,4 +1,5 @@
 const ngrokURL = "https://7eec-212-96-87-84.ngrok-free.app";
+const localhost = "http://localhost:8080"
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("jobForm");
@@ -18,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const jobTypeDropdown = document.getElementById("jobTypeDropdown");
     const sortDropdown = document.getElementById("sortDropdown");
     const resetButton = document.getElementById("reset");
+    const logoutbttn = document.getElementById("logout")
+
+    const token = localStorage.getItem('access_token')
 
     // Add these variables at the top of your script
     let currentPage = 1;
@@ -33,6 +37,47 @@ document.addEventListener("DOMContentLoaded", () => {
         createModal.style.display = "none";
     });
 
+    logoutbttn.addEventListener("click", async (event) => {
+        event.preventDefault();  // Prevent default form submission if applicable
+    
+        try {
+            const token = localStorage.getItem("access_token"); // Make sure token is available
+    
+            const response = await fetch(`${localhost}/auth/logout`, {  // ✅ Correct endpoint
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`  // ✅ Send token if required by backend
+                },
+                credentials: 'include' // ✅ Required if using cookies
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Logout failed");
+            }
+    
+            // ✅ Only parse JSON if there's content
+            let data = {};
+            if (response.headers.get("content-type")?.includes("application/json")) {
+                data = await response.json();
+            }
+    
+            // ✅ Clear token from localStorage
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("email");
+            localStorage.removeItem("role")
+    
+            // ✅ Redirect to login page
+            window.location.href = "./login.html";
+    
+        } catch (error) {
+            console.error("Logout error:", error);
+            alert(error.message || "Logout failed. Please try again.");
+        }
+    });
+    
+
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const jobName = document.getElementById("jobName").value;
@@ -41,11 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("description").value;
 
         try {
-            const response = await fetch(`${ngrokURL}/createvacancy`, {
+            const response = await fetch(`${localhost}/auth/createvacancy`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "ngrok-skip-browser-warning": "true"
+                    "ngrok-skip-browser-warning": "true",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     Vacancy: jobName,
@@ -74,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadJobCards() {
         const jobType = jobTypeDropdown.value;
         const sortBy = sortDropdown.value;
-        const url = new URL(`${ngrokURL}/vacancies`);
+        const url = new URL(`${localhost}/auth/vacancies`);
         
         url.searchParams.append("page", window.currentPage);  // Use window.currentPage
         if (jobType) {
@@ -85,7 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         try {
-            const response = await fetch(url, {headers: { "ngrok-skip-browser-warning": "true" }});
+            const response = await fetch(url, {headers: { 
+                "ngrok-skip-browser-warning": "true",
+                "Authorization": `Bearer ${token}`
+            }});
             if (!response.ok) {
                 const text = await response.text();
                 throw new Error(`Server Error: ${response.status} - ${text}`);
@@ -171,8 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openEditModal(event) {
         const id = event.target.dataset.id;
-        fetch(`${ngrokURL}/vacancy?id=${id}`, {
-            headers: { "ngrok-skip-browser-warning": "true" }
+        fetch(`${localhost}/auth/vacancy?id=${id}`, {
+            headers: { 
+                "ngrok-skip-browser-warning": "true",
+                "Authorization": `Bearer ${token}`
+             }
         })
             .then(response => {
                 if (!response.ok) {
@@ -219,11 +271,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("editDescription").value;
     
         try {
-            const response = await fetch(`${ngrokURL}/updatevacancy?id=${id}`, { // Changed to use query parameter
+            const response = await fetch(`${localhost}/admin/updatevacancy?id=${id}`, { // Changed to use query parameter
                 method: "PUT",
                 headers: { 
                     "Content-Type": "application/json",
-                    "ngrok-skip-browser-warning": "true" 
+                    "ngrok-skip-browser-warning": "true",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     Vacancy: jobName,
@@ -253,11 +306,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("Are you sure you want to delete this vacancy?")) return;
     
         try {
-            const response = await fetch(`${ngrokURL}/deletevacancy?id=${id}`, { // Changed to use query parameter
+            const response = await fetch(`${localhost}/admin/deletevacancy?id=${id}`, { // Changed to use query parameter
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
-                    "ngrok-skip-browser-warning": "true"
+                    "ngrok-skip-browser-warning": "true",
+                    "Authorization": `Bearer ${token}`
                 }
             });
     
@@ -283,7 +337,7 @@ searchButton.addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`${ngrokURL}/vacancy?id=${searchQuery}`, {headers: { "ngrok-skip-browser-warning": "true" },});
+        const response = await fetch(`${localhost}/auth/vacancy?id=${searchQuery}`, {headers: { "ngrok-skip-browser-warning": "true", "Authorization": `Bearer ${token}` },});
         if (!response.ok) {
             const text = await response.text();
             throw new Error(`Server Error: ${response.status} - ${text}`);
@@ -354,9 +408,9 @@ document.getElementById('supportForm').addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch(`${ngrokURL}/support/contact`, {
+        const response = await fetch(`${localhost}/auth/support/contact`, {
             method: 'POST',
-            headers: { "ngrok-skip-browser-warning": "true" },
+            headers: { "ngrok-skip-browser-warning": "true", "Authorization": `Bearer ${token}` },
             body: formData
         });
 

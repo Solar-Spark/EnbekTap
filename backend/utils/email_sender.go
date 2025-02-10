@@ -25,14 +25,12 @@ func NewEmailConfig() *EmailConfig {
 func SendEmail(recipientEmail, message string) error {
 	config := NewEmailConfig()
 
-	// Create new message
 	m := gomail.NewMessage()
 	m.SetHeader("From", config.SenderEmail)
 	m.SetHeader("To", recipientEmail)
 	m.SetHeader("Subject", "Verification Code")
 	m.SetBody("text/plain", message)
 
-	// Create dialer
 	d := gomail.NewDialer(
 		config.SMTPHost,
 		config.SMTPPort,
@@ -40,13 +38,11 @@ func SendEmail(recipientEmail, message string) error {
 		config.SenderPass,
 	)
 
-	// Configure TLS
 	d.TLSConfig = &tls.Config{
 		InsecureSkipVerify: false,
 		ServerName:         config.SMTPHost,
 	}
 
-	// Send email
 	if err := d.DialAndSend(m); err != nil {
 		return err
 	}

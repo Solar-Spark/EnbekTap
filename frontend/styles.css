@@ -108,6 +108,18 @@ button:hover {
     text-decoration: underline;
 }
 
+.profile-link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
+}
+
 #login-container{
     margin-top: 15%;
 }

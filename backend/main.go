@@ -6,11 +6,10 @@ import (
 	"enbektap/middleware"
 	"enbektap/router"
 	"enbektap/services"
-	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
-	"os/exec"
+
+	// "os/exec"
 	"path/filepath"
 	"time"
 
@@ -47,40 +46,40 @@ func setupLogger() {
 		Logger()
 }
 
-func startNgrok() (string, error) {
-	cmd := exec.Command("ngrok", "http", "8080", "--log", "stdout")
+// func startNgrok() (string, error) {
+// 	cmd := exec.Command("ngrok", "http", "8080", "--log", "stdout")
 
-	if err := cmd.Start(); err != nil {
-		log.Fatal().Err(err).Msg("Failed to start Ngrok")
-		return "", err
-	}
+// 	if err := cmd.Start(); err != nil {
+// 		log.Fatal().Err(err).Msg("Failed to start Ngrok")
+// 		return "", err
+// 	}
 
-	time.Sleep(3 * time.Second)
+// 	time.Sleep(3 * time.Second)
 
-	resp, err := http.Get("http://127.0.0.1:4040/api/tunnels")
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
+// 	resp, err := http.Get("http://127.0.0.1:4040/api/tunnels")
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	defer resp.Body.Close()
 
-	var result map[string]interface{}
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		return "", err
-	}
+// 	var result map[string]interface{}
+// 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+// 		return "", err
+// 	}
 
-	tunnels, ok := result["tunnels"].([]interface{})
-	if !ok || len(tunnels) == 0 {
-		return "", fmt.Errorf("no tunnels found")
-	}
+// 	tunnels, ok := result["tunnels"].([]interface{})
+// 	if !ok || len(tunnels) == 0 {
+// 		return "", fmt.Errorf("no tunnels found")
+// 	}
 
-	firstTunnel := tunnels[0].(map[string]interface{})
-	publicURL, ok := firstTunnel["public_url"].(string)
-	if !ok {
-		return "", fmt.Errorf("failed to get public URL")
-	}
+// 	firstTunnel := tunnels[0].(map[string]interface{})
+// 	publicURL, ok := firstTunnel["public_url"].(string)
+// 	if !ok {
+// 		return "", fmt.Errorf("failed to get public URL")
+// 	}
 
-	return publicURL, nil
-}
+// 	return publicURL, nil
+// }
 
 func main() {
 	setupLogger()
@@ -95,10 +94,10 @@ func main() {
 	log.Info().Msg("Database connection established")
 
 	vacancyRepo := &infra.VacancyRepo{DB: db}
-	vacancyService := &services.VacancyService{Repo: vacancyRepo}
-	vacancyController := &controllers.VacancyController{Service: vacancyService}
 	userRepo := &infra.UserRepo{DB: db}
+	vacancyService := &services.VacancyService{Repo: vacancyRepo}
 	userService := &services.UserService{Repo: userRepo}
+	vacancyController := &controllers.VacancyController{VacancyService: vacancyService, UserService: userService}
 	userController := &controllers.UserController{Service: userService}
 
 	r := gin.Default()
@@ -129,7 +128,7 @@ func main() {
 	})
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},                                       // Allow all origins (restrict in production)
+		AllowOrigins:     []string{"http://127.0.0.1:5500"},                   // Allow all origins (restrict in production)
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, // Allow essential HTTP methods
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "ngrok-skip-browser-warning", "Accept", "X-Requested-With"},
 		ExposeHeaders:    []string{"Content-Length", "Content-Type"}, // Allow client-side access to these headers
@@ -139,13 +138,13 @@ func main() {
 		MaxAge:           12 * time.Hour,                             // Cache preflight requests for 12 hours
 	}))
 
-	r.OPTIONS("/*path", func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
-		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization, ngrok-skip-browser-warning, Accept, X-Requested-With")
-		c.Header("Access-Control-Allow-Credentials", "true")
-		c.Status(http.StatusOK)
-	})
+	// r.OPTIONS("/*path", func(c *gin.Context) {
+	// 	c.Header("Access-Control-Allow-Origin", "*")
+	// 	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	// 	c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization, ngrok-skip-browser-warning, Accept, X-Requested-With")
+	// 	c.Header("Access-Control-Allow-Credentials", "true")
+	// 	c.Status(http.StatusOK)
+	// })
 
 	router.SetupRoutes(vacancyController, userController, r)
 
@@ -158,12 +157,12 @@ func main() {
 		}
 	}()
 
-	ngrokURL, err := startNgrok()
-	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to start Ngrok")
-	}
+	// ngrokURL, err := startNgrok()
+	// if err != nil {
+	// 	log.Fatal().Err(err).Msg("Failed to start Ngrok")
+	// }
 
-	log.Info().Msgf("Ngrok tunnel established: %s", ngrokURL)
+	// log.Info().Msgf("Ngrok tunnel established: %s", ngrokURL)
 
 	select {}
 }
