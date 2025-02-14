@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(vacancyController *controllers.VacancyController, UserController *controllers.UserController, r *gin.Engine) {
+func SetupRoutes(vacancyController *controllers.VacancyController, UserController *controllers.UserController, MicroController *controllers.MicroserviceController, r *gin.Engine) {
 	auth := r.Group("/auth")
 	api := r.Group("/api")
 	admin := r.Group("/admin")
@@ -16,7 +16,11 @@ func SetupRoutes(vacancyController *controllers.VacancyController, UserControlle
 	auth.GET("/vacancy", vacancyController.GetVacancy)
 	auth.POST("/support/contact", controllers.ContactSupportHandler)
 	auth.POST("/logout", UserController.Logout)
-	auth.GET("profile", UserController.Profile)
+	auth.GET("/profile", UserController.Profile)
+	auth.POST("/createtransaction", MicroController.CreateTransaction)
+	auth.GET("/transaction")
+	auth.GET("/transactions")
+	auth.DELETE("/deletetransaction")
 	//Routes
 	api.POST("/signup", UserController.Signup)
 	api.POST("/login", UserController.Login)

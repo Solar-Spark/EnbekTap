@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make a Donation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-left">
+      <h2><a href="main.html" id="logo">EnbekTap</a></h2>
+    </div>
+    <div class="nav-right">
+      <form class="search-form">
+        <input id="search" type="text" placeholder="Search...">
+        <button id="search" type="button">Search</button>
+      </form>
+      <button id="createPost" type="button">Create a Post</button>
+      <a href="transaction.html" class="donate-link">Donate</a>
+      <a href="login.html" class="login-link">Login</a>
+      <button id="logout" type="button">Logout</button>
+    </div>
+  </nav><br>
+  <div id="page-container">
+    <div id="content-wrap">
+      <div class="container">
+        <h1>Make a Donation</h1>
+        <form id="transactionForm">
+          <div>
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" maxlength="16" required>
+          </div>
+
+          <div>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" maxlength="3" required>
+          </div>
+
+          <div>
+            <label for="cardName">Cardholder Name:</label>
+            <input type="text" id="cardName" required>
+          </div>
+
+          <div>
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" required>
+              <option value="">Select Card Type</option>
+              <option value="visa">Visa</option>
+              <option value="mastercard">Mastercard</option>
+              <option value="amex">American Express</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="amount">Amount (KZT):</label>
+            <input type="number" id="amount" min="0" required>
+          </div>
+
+          <button type="submit">Submit Payment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="transaction.js"></script>
+</body>
+
+</html>

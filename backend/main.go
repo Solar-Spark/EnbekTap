@@ -99,6 +99,7 @@ func main() {
 	userService := &services.UserService{Repo: userRepo}
 	vacancyController := &controllers.VacancyController{VacancyService: vacancyService, UserService: userService}
 	userController := &controllers.UserController{Service: userService}
+	microController := &controllers.MicroserviceController{UserService: userService}
 
 	r := gin.Default()
 
@@ -146,7 +147,7 @@ func main() {
 	// 	c.Status(http.StatusOK)
 	// })
 
-	router.SetupRoutes(vacancyController, userController, r)
+	router.SetupRoutes(vacancyController, userController, microController, r)
 
 	go func() {
 		log.Info().Msg("Server starting on port 8080")

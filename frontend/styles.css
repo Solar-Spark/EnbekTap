@@ -1,420 +1,458 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
 }
 
 #page-container {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 #content-wrap {
-    padding-bottom: 150px;
-    /* Footer height */
+  padding-bottom: 150px;
+  /* Footer height */
 }
 
 nav {
-    background-color: #333;
-    padding: 5px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    /* This spaces the left and right containers apart */
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
+  background-color: #333;
+  padding: 5px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  /* This spaces the left and right containers apart */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 .nav-left,
 .nav-right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .nav-left {
-    padding-left: 20px;
-    flex-grow: 1;
-    /* Allow this side to take up remaining space */
+  padding-left: 20px;
+  flex-grow: 1;
+  /* Allow this side to take up remaining space */
 }
 
 .nav-right {
-    justify-content: flex-end;
-    /* Align the items in the right section to the end */
-    padding-right: 20px;
+  justify-content: flex-end;
+  /* Align the items in the right section to the end */
+  padding-right: 20px;
 }
 
 nav button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 150px;
-
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px;
 }
 
 #logo {
-    color: white;
-    text-decoration: none;
-
+  color: white;
+  text-decoration: none;
 }
 
 #logo:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .search-form {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .search-form input {
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 400px;
-
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 400px;
 }
 
 .search-form button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 150px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px;
 }
 
 button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 .login-link {
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    margin-left: 40px;
-    white-space: nowrap;
-    /* Prevent text from wrapping */
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 40px;
+  white-space: nowrap;
+  /* Prevent text from wrapping */
 }
 
 .login-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .profile-link {
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    margin-left: 20px;
-    white-space: nowrap;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+  white-space: nowrap;
 }
 
 .profile-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-#login-container{
-    margin-top: 15%;
+.donate-link {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  white-space: nowrap;
 }
 
+.donate-link:hover {
+  text-decoration: underline;
+}
 
+#login-container {
+  margin-top: 15%;
+}
 
 .container {
-    margin-top: 80px;
-    /* Offset the fixed nav */
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+  margin-top: 80px;
+  /* Offset the fixed nav */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 form label {
-
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 form div input,
 form textarea {
-    width: 100%;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-
-
 
 form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-
 
 /* Styling the dropdowns */
 .filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .dropdown {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 #jobCards {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .job-cards-container {
-    display: grid;
-    /* Use grid layout */
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 equal-width columns */
-    gap: 20px;
-    /* Space between columns and rows */
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    background-color: #f4f4f4;
+  display: grid;
+  /* Use grid layout */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 equal-width columns */
+  gap: 20px;
+  /* Space between columns and rows */
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  background-color: #f4f4f4;
 }
 
 .job-card {
-    background-color: #fafafa;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow */
-    display: flex;
-    flex-direction: column;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
 }
 
 .job-card h3 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .job-card .salary {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .job-card .job-type {
-    font-style: italic;
-    color: #777;
+  font-style: italic;
+  color: #777;
 }
 
 .job-card .description {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
-
 button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 14px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .edit-btn {
-    background-color: #f0ad4e;
+  background-color: #f0ad4e;
 }
 
 .edit-btn:hover {
-    background-color: #ec971f;
+  background-color: #ec971f;
 }
 
 .delete-btn {
-    background-color: #d9534f;
+  background-color: #d9534f;
 }
 
 .delete-btn:hover {
-    background-color: #c9302c;
+  background-color: #c9302c;
 }
 
 /* Style for radio buttons on the same line */
 form .radio-group {
-    display: flex;
-    justify-content: flex-start;
-    /* Align items to the start */
-    align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  /* Align items to the start */
+  align-items: center;
 }
 
 form .radio-group label {
-    margin-right: 20px;
-    /* Optional: space between the labels */
-    display: inline-flex;
-    /* Ensures that both radio buttons and their labels are inline */
-    align-items: center;
-    white-space: nowrap;
-    /* Prevent text from wrapping to the next line */
+  margin-right: 20px;
+  /* Optional: space between the labels */
+  display: inline-flex;
+  /* Ensures that both radio buttons and their labels are inline */
+  align-items: center;
+  white-space: nowrap;
+  /* Prevent text from wrapping to the next line */
 }
 
 form .radio-group input {
-    margin-right: 5px;
-    /* Adds some space between the radio button and label */
+  margin-right: 5px;
+  /* Adds some space between the radio button and label */
 }
 
 /* Modal Styles */
 .modal {
-    display: none;
-    /* Hide the modal by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
-    z-index: 1001;
-    /* Make sure the modal is above other content */
+  display: none;
+  /* Hide the modal by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  z-index: 1001;
+  /* Make sure the modal is above other content */
 }
 
 .modal-content {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Center the modal */
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Center the modal */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Close button for the modal */
 #closeEditModal,
 #closeCreateModal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
 }
-
 
 /* Style for both dropdowns */
 .dropdown {
-    width: 100%;
-    /* Make the dropdown take up the full width of the container */
-    padding: 10px;
-    /* Add padding inside dropdown */
-    font-size: 14px;
-    /* Set font size */
-    margin-bottom: 10px;
-    /* Space between dropdowns */
+  width: 100%;
+  /* Make the dropdown take up the full width of the container */
+  padding: 10px;
+  /* Add padding inside dropdown */
+  font-size: 14px;
+  /* Set font size */
+  margin-bottom: 10px;
+  /* Space between dropdowns */
 }
 
 /* Style for the reset button */
 .reset-btn {
-    width: 100%;
-    /* Full width for the button */
-    padding: 10px;
-    /* Add padding for the button */
-    font-size: 14px;
-    /* Set font size */
-    background-color: #4CAF50;
-    /* Green background color */
-    color: white;
-    /* White text */
-    border: none;
-    /* Remove border */
-    border-radius: 4px;
-    /* Rounded corners */
-    cursor: pointer;
+  width: 100%;
+  /* Full width for the button */
+  padding: 10px;
+  /* Add padding for the button */
+  font-size: 14px;
+  /* Set font size */
+  background-color: #4caf50;
+  /* Green background color */
+  color: white;
+  /* White text */
+  border: none;
+  /* Remove border */
+  border-radius: 4px;
+  /* Rounded corners */
+  cursor: pointer;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
 }
 
 .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
 }
 
 .pagination button {
-    padding: 8px 16px;
-    border: 1px solid #ddd;
-    background-color: white;
-    cursor: pointer;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
 }
 
 .pagination button.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .pagination button:hover:not(.active) {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .support-section {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #supportForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 #supportForm select,
 #supportForm textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 #supportForm textarea {
-    min-height: 150px;
+  min-height: 150px;
+}
+
+/* Add these styles to your existing styles.css file */
+
+#transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#transactionForm input,
+#transactionForm select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#transactionForm select {
+  background-color: white;
+}
+
+#transactionForm button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#transactionForm button:hover {
+  background-color: #45a049;
 }

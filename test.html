@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #EAF2F8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #D4E6F1;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    .form h2 {
+      text-align: center;
+      color: #3E5C76;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      color: #3E5C76;
+      font-weight: bold;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #6AABD2;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #7BA7C7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #6AABD2;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <form id="registrationForm" class="form">
+      <h2>Sign Up</h2>
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <small id="emailError" class="error"></small>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <small id="passwordError" class="error"></small>
+      </div>
+      <button type="submit" class="btn">Register</button>
+      <p class="login-link">Already have an account? <a href="#">Log in</a></p>
+    </form>
+  </div>
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      let emailError = document.getElementById('emailError');
+      let passwordError = document.getElementById('passwordError');
+      let valid = true;
+
+      emailError.textContent = "";
+      passwordError.textContent = "";
+
+      if (!email.includes('@')) {
+        emailError.textContent = "Invalid email format.";
+        valid = false;
+      }
+      if (password.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters long.";
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Registration Successful!');
+        document.getElementById('registrationForm').reset();
+      }
+    });
+  </script>
+</body>
+
+</html>
