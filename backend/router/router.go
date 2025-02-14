@@ -19,8 +19,8 @@ func SetupRoutes(vacancyController *controllers.VacancyController, UserControlle
 	auth.GET("/profile", UserController.Profile)
 	auth.POST("/createtransaction", MicroController.CreateTransaction)
 	auth.GET("/transaction")
-	auth.GET("/transactions")
 	auth.DELETE("/deletetransaction")
+	auth.GET("/transactions", MicroController.GetAllTransactions)
 	//Routes
 	api.POST("/signup", UserController.Signup)
 	api.POST("/login", UserController.Login)

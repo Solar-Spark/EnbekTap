@@ -456,3 +456,42 @@ form .radio-group input {
 #transactionForm button:hover {
   background-color: #45a049;
 }
+
+.transaction-history {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+#transactionTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#transactionTable th,
+#transactionTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#transactionTable th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+#transactionTable tr:hover {
+  background-color: #f9f9f9;
+}
+
+.status-pending {
+  color: #f0ad4e;
+}
+
+.status-completed {
+  color: #5cb85c;
+}
+
+.status-failed {
+  color: #d9534f;
+}

@@ -63,7 +63,7 @@ func(c *TransactionController) CreateTransaction(ctx *gin.Context){
 		PaymentMethod: paymentmethod,
 		TotalAmount:   transaction.Amount,
 		Items: []entities.Item{
-			{Name: "Premium Subscription", UnitPrice: 5000},
+			{Name: "Donation", UnitPrice: 5000},
 		},
 	}
 
@@ -73,7 +73,7 @@ func(c *TransactionController) CreateTransaction(ctx *gin.Context){
 	}
 	attachments := []string{"receipt.pdf"}
 	enbektapUtils.SendEmailWAtt(transaction.UserEmail, message, attachments)
-	ctx.JSON(http.StatusOK, gin.H{"message": "Transaction created: " + message, "status": transaction.Status})
+	ctx.JSON(http.StatusOK, gin.H{"message": "Transaction created: " + message, "status": transaction.Status, "id": transaction.TransactionID, "amount": transaction.Amount, "payment_method": paymentmethod, "date": receipt.OrderDate})
 }
 
 func(c *TransactionController) ReadTransaction(ctx *gin.Context){
@@ -106,9 +106,9 @@ func(c *TransactionController) ReadTransactions(ctx *gin.Context){
 		ctx.JSON(http.StatusMethodNotAllowed, gin.H{"error": "Invalid request method"})
 		return
 	}
-	email := ctx.DefaultQuery("email", "")
-	if email == ""{
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+	email := ctx.Query("email")
+	if email == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Email parameter is required"})
 		return
 	}
 	transaction, err := c.TransactionService.ReadTransactions(email)
@@ -117,9 +117,14 @@ func(c *TransactionController) ReadTransactions(ctx *gin.Context){
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
-		"Transactions": transaction,
-	})
+	var transactions []gin.H
+	for _, t := range transaction {
+		transactions = append(transactions, gin.H{
+			"TransactionID": t.TransactionID,
+			"Status":        t.Status,
+		})
+	}
+	ctx.JSON(http.StatusOK, gin.H{"transactions": transactions})
 }
 
 func(c *TransactionController) DeleteTransaction(ctx *gin.Context){

@@ -34,7 +34,6 @@ func GenerateReceiptPDF(receipt entities.Receipt, filename string) error {
 	pdf.SetFont("Arial", "B", 12)
 	pdf.Cell(80, 8, "Product/Service")
 	pdf.Cell(30, 8, "Price/Unit")
-	pdf.Cell(30, 8, "Quantity")
 	pdf.Cell(30, 8, "Total")
 	pdf.Ln(8)
 

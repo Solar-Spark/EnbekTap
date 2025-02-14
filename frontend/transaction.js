@@ -58,6 +58,7 @@ document
       console.log("Success:", data);
       alert("Payment submitted successfully!");
       e.target.reset();
+      await fetchTransactionHistory();
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to process payment. Please try again.");
@@ -73,3 +74,46 @@ document.getElementById("cardNumber").addEventListener("input", function (e) {
 document.getElementById("cvv").addEventListener("input", function (e) {
   this.value = this.value.replace(/[^\d]/g, "");
 });
+
+// Add this function after your existing code
+
+async function fetchTransactionHistory() {
+  try {
+    const token = localStorage.getItem("access_token");
+    const response = await fetch(`http://localhost:8080/auth/transactions`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const transactions = await response.json();
+    displayTransactions(transactions);
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+  }
+}
+
+function displayTransactions(transactions) {
+  const tableBody = document.getElementById("transactionTableBody");
+  tableBody.innerHTML = ""; // Clear existing rows
+
+  transactions.forEach((transaction) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+            <td>${transaction.transaction_id}</td>
+            <td class="status-${transaction.status.toLowerCase()}">${
+      transaction.status
+    }</td>
+        `;
+    tableBody.appendChild(row);
+  });
+}
+
+// Call this function when the page loads
+document.addEventListener("DOMContentLoaded", fetchTransactionHistory);
